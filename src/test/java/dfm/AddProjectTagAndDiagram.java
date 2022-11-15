@@ -5,26 +5,15 @@ import org.junit.Test;
 
 import org.junit.Before;
 import org.junit.After;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsNot.not;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
 import java.util.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 
 public class AddProjectTagAndDiagram {
@@ -54,7 +43,7 @@ public class AddProjectTagAndDiagram {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("test_claim2@gmail.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -62,7 +51,7 @@ public class AddProjectTagAndDiagram {
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(15000);
-		
+
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
@@ -94,7 +83,7 @@ public class AddProjectTagAndDiagram {
 //    }
 
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id=\'name\']/quill-editor/div[2]/div"))
-				.sendKeys("Test dummy 23");
+				.sendKeys("Test dummy 26");
 
 		// 15 | click | css=.ql-blank > p |
 		driver.findElement(By.cssSelector(".ql-blank > p")).click();
@@ -115,18 +104,17 @@ public class AddProjectTagAndDiagram {
 		driver.findElement(By.xpath("//nb-radio[@id=\'item-enableSimpleBranching\']/label/span[2]")).click();
 		// 18 | click | xpath=//button[contains(.,'Add Project')] |
 		driver.findElement(By.xpath("//button[contains(.,\'Add Project\')]")).click();
-		
-		
-		//Add Tag
-		
+
+		// Add Tag
+
 		Thread.sleep(5000);
 		// 10 | click | id=search-ip |
 		driver.findElement(By.id("search-ip")).click();
 		// 11 | type | id=search-ip | dummy
-		driver.findElement(By.id("search-ip")).sendKeys("Test dummy 23");
+		driver.findElement(By.id("search-ip")).sendKeys("Test dummy 26");
 
 		// identify element
-		WebElement l = driver.findElement(By.xpath("//span[normalize-space()='Test dummy 23 (main)']"));
+		WebElement l = driver.findElement(By.xpath("//span[normalize-space()='Test dummy 26 (main)']"));
 		// Actions class with moveToElement() and contextClick()
 		Actions a = new Actions(driver);
 		a.moveToElement(l).contextClick().build().perform();
@@ -159,39 +147,37 @@ public class AddProjectTagAndDiagram {
 		// 17 | click | css=.btn-block |
 		driver.findElement(By.xpath("//button[contains(.,'Add Tag')]")).click();
 		Thread.sleep(5000);
-		
+
 		driver.findElement(By.xpath("//span[@class='wj-node-text has-text']")).click();
-		
-		
+
 		// identify element
-				WebElement tag = driver.findElement(By.xpath("//span[normalize-space()='Test Tag']"));
-				// Actions class with moveToElement() and contextClick()
-				Actions a1 = new Actions(driver);
-				a1.moveToElement(tag).contextClick().build().perform();
-				Thread.sleep(2000);
+		WebElement tag = driver.findElement(By.xpath("//span[normalize-space()='Test Tag']"));
+		// Actions class with moveToElement() and contextClick()
+		Actions a1 = new Actions(driver);
+		a1.moveToElement(tag).contextClick().build().perform();
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//div[contains(text(),'Create DRD')]")).click();
 		Thread.sleep(2000);
-		
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='diagramName']//p")).sendKeys("Test Diagram10");
-		
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='diagramDescription']//p")).sendKeys("Oct-22");
-		
+
+		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='diagramName']//p"))
+				.sendKeys("Test Diagram13");
+
+		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='diagramDescription']//p"))
+				.sendKeys("Oct-22");
+
 		driver.findElement(By.xpath("//button[normalize-space()='Add Diagram']")).click();
 		Thread.sleep(5000);
-		
+
 		driver.findElement(By.xpath("//i[@class='eva eva-settings-2-outline']")).click();
 		Thread.sleep(12000);
 
 		Actions act = new Actions(driver);
 
-		WebElement src = driver.findElement(By.xpath(
-				"//div[@class='add-object-palette']//canvas"));
+		WebElement src = driver.findElement(By.xpath("//div[@class='add-object-palette']//canvas"));
 
-		WebElement LINKS = driver.findElement(By.xpath(
-				"//div[@class='links-palette']"));
+		WebElement LINKS = driver.findElement(By.xpath("//div[@class='links-palette']"));
 
-		WebElement target = driver.findElement(By.xpath(
-				"//div[@class='diagramDiv']//canvas"));
+		WebElement target = driver.findElement(By.xpath("//div[@class='diagramDiv']//canvas"));
 
 		// Knowledge Source data 1
 //		act.moveToElement(src, 58, 5);
@@ -296,8 +282,7 @@ public class AddProjectTagAndDiagram {
 		// update Knowledge Source data 1
 		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
 		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]"))
-				.sendKeys("Knowledge name Updated");
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys("Knowledge name Updated");
 		Thread.sleep(2000);
 
 		// click Input Source data 1
@@ -308,8 +293,7 @@ public class AddProjectTagAndDiagram {
 		// update Input Source data 1
 		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
 		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]"))
-				.sendKeys("Input name Updated");
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys("Input name Updated");
 		Thread.sleep(2000);
 
 		// click Decision Source data 1
@@ -320,14 +304,13 @@ public class AddProjectTagAndDiagram {
 		// update Decision Source data 1
 		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
 		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]"))
-				.sendKeys("Decision name Updated");
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys("Decision name Updated");
 		Thread.sleep(2000);
-		
+
 		act.moveToElement(LINKS, -14, 120);
 		act.contextClick().perform();
 
 		System.out.println("<<<Diagram created>>>");
-		
+
 	}
 }

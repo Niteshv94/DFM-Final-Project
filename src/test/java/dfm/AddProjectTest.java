@@ -5,26 +5,13 @@ import org.junit.Test;
 
 import org.junit.Before;
 import org.junit.After;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.core.IsNot.not;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
 import java.util.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Duration;
 
 public class AddProjectTest {
@@ -94,7 +81,7 @@ public class AddProjectTest {
 //    }
 
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id=\'name\']/quill-editor/div[2]/div"))
-				.sendKeys("Test dummy5");
+				.sendKeys("Test dummy8");
 
 		// 15 | click | css=.ql-blank > p |
 		driver.findElement(By.cssSelector(".ql-blank > p")).click();
