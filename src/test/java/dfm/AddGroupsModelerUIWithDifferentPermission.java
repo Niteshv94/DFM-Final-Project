@@ -34,7 +34,7 @@ public class AddGroupsModelerUIWithDifferentPermission {
 	public static void main(String[] args) throws Exception {
 		setUp();
 		addGroupsModelerUI01();
-		//dataReadTest();
+		// dataReadTest();
 	}
 
 	// @Before
@@ -48,34 +48,20 @@ public class AddGroupsModelerUIWithDifferentPermission {
 		// driver.quit();
 	}
 
-//	public static void dataReadTest() throws Exception {
-//
-//		File src = new File("./Test Data/TestData.xlsx");
-//		FileInputStream fis = new FileInputStream(src);
-//		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-//		
-//		XSSFSheet sheet = workbook.getSheetAt(0);
-//		
-//		String ProjectAdministrator = sheet.getRow(1).getCell(1).getStringCellValue();	
-//		int n1 = Integer.parseInt(ProjectAdministrator);
-//		
-//	}
-
 	// @Test
 	public static void addGroupsModelerUI01() throws InterruptedException, IOException {
-		
-		
+
 		File src = new File("./Test Data/TestData.xlsx");
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-		
-		XSSFSheet sheet = workbook.getSheetAt(0);
-		
-		//Get the xpath of permissions form Excel Sheet
-		String Permissions = sheet.getRow(3).getCell(1).getStringCellValue();	
-		//int n1 = Integer.parseInt(ProjectAdministrator);
-		
-		
+
+		XSSFSheet sheet = workbook.getSheet("AddGroupsModelerUIWithDifferent");
+
+		// Get the xpath of permissions form Excel Sheet
+		String Permissions = sheet.getRow(1).getCell(1).getStringCellValue();
+		String groupName = sheet.getRow(1).getCell(2).getStringCellValue();
+		String description = sheet.getRow(1).getCell(3).getStringCellValue();
+
 		// Test name: AddGroupsModelerUI_01
 		// Step # | name | target | value
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
@@ -110,22 +96,21 @@ public class AddGroupsModelerUIWithDifferentPermission {
 		// 11 | click | css=.title-icon > .eva |
 		driver.findElement(By.cssSelector(".title-icon > .eva")).click();
 		Thread.sleep(2000);
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//p")).sendKeys("Test 1");
+		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//p")).sendKeys(groupName);
 
 		// 14 | click | css=.ql-blank > p |
 		driver.findElement(By.cssSelector(".ql-blank > p")).click();
 
 		// Enter description
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='description']//p")).sendKeys("test group");
+		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='description']//p")).sendKeys(description);
 
 		// Select Permissions
-		//String ProjectAdministrator = sheet
 		driver.findElement(By.xpath(Permissions)).click();
 
-		 driver.findElement(By.xpath("//button[normalize-space()='Add Group']")).click();
+		driver.findElement(By.xpath("//button[normalize-space()='Add Group']")).click();
 
 		System.out.println("<<<<<Groups added Successfully>>>>>");
-		
+
 		workbook.close();
 
 	}

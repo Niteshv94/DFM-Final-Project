@@ -4,6 +4,8 @@ package dfm;
 
 import org.junit.Test;
 import org.junit.Before;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +16,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.Duration;
 
 public class AddTagTest {
@@ -29,11 +35,11 @@ public class AddTagTest {
 
 	@After
 	public void tearDown() {
-		 //driver.quit();
+		// driver.quit();
 	}
 
 	@Test
-	public void addTag() throws InterruptedException {
+	public void addTag() throws InterruptedException, IOException {
 		// Test name: Add Tag
 		// Step # | name | target | value
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
@@ -44,14 +50,14 @@ public class AddTagTest {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("test_claim2@gmail.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | css=.ng-untouched | defaultUserPass@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
-		Thread.sleep(15000);
+		Thread.sleep(12000);
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
@@ -63,13 +69,27 @@ public class AddTagTest {
 		// 10 | click | xpath=//span[contains(.,'Tag Explorer')] |
 		driver.findElement(By.xpath("//span[@class='item-text'][normalize-space()='Tag Explorer']")).click();
 		Thread.sleep(5000);
+
 		// 10 | click | id=search-ip |
 		driver.findElement(By.id("search-ip")).click();
+
+		// Get the xpath and Tag data form Excel Sheet
+		File src = new File("./Test Data/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+		XSSFSheet sheet = workbook.getSheet("AddTagTest");
+
+		String searchProject = sheet.getRow(1).getCell(0).getStringCellValue();
+		String projectName = sheet.getRow(1).getCell(1).getStringCellValue();
+		String tagName = sheet.getRow(1).getCell(2).getStringCellValue();
+		String tagDescription = sheet.getRow(1).getCell(3).getStringCellValue();
+
 		// 11 | type | id=search-ip | dummy
-		driver.findElement(By.id("search-ip")).sendKeys("dummy");
+		driver.findElement(By.id("search-ip")).sendKeys(searchProject);
 
 		// identify element
-		WebElement l = driver.findElement(By.xpath("//span[normalize-space()='test dummy (main)']"));
+		WebElement l = driver.findElement(By.xpath(projectName));
 		// Actions class with moveToElement() and contextClick()
 		Actions a = new Actions(driver);
 		a.moveToElement(l).contextClick().build().perform();
@@ -78,28 +98,17 @@ public class AddTagTest {
 		// 13 | click | css=.rich-text-editor-focus p |
 		driver.findElement(By.xpath("//div[contains(text(),'Add Tag')]")).click();
 
-		// 14 | editContent | css=.rich-text-editor-focus > .ql-editor | <p>test tag</p>
-//    {
-//      WebElement element = driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor"));
-//      js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<p>test tag</p>'}", element);
-//    }
-
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//div[@class='ql-editor ql-blank']"))
-				.sendKeys("Test Tag");
-
-		// 15 | click | css=.ql-blank > p |
-//    driver.findElement(By.cssSelector(".ql-blank > p")).click();
-		// 16 | editContent | css=.rich-text-editor-focus > .ql-editor | <p>tag</p>
-//    {
-//      WebElement element = driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor"));
-//      js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<p>tag</p>'}", element);
-//    }
+				.sendKeys(tagName);
 
 		driver.findElement(
 				By.xpath("//core-edit-multiple-lines-control[@id='description']//div[@class='ql-editor ql-blank']"))
-				.sendKeys("Oct-22");
+				.sendKeys(tagDescription);
 
 		// 17 | click | css=.btn-block |
 		driver.findElement(By.xpath("//button[contains(.,'Add Tag')]")).click();
+
+		System.out.println("<<<<<Tag added successfully>>>>>");
+		workbook.close();
 	}
 }

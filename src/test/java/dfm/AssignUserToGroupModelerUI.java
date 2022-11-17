@@ -6,6 +6,8 @@ package dfm;
 
 import org.junit.Test;
 import org.junit.Before;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,16 +20,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
-public class AddUserToGroupModelerUI {
+public class AssignUserToGroupModelerUI {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	static JavascriptExecutor js;
 
 	// @Before
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		setUp();
 		editUserModelerUI();
 	}
@@ -41,10 +46,9 @@ public class AddUserToGroupModelerUI {
 	public void tearDown() {
 		// driver.quit();
 	}
-	
 
 	// @Test
-	public static void editUserModelerUI() throws InterruptedException {
+	public static void editUserModelerUI() throws InterruptedException, IOException {
 
 		// Test name: EditUserModelerUI
 		// Step # | name | target | value
@@ -73,23 +77,35 @@ public class AddUserToGroupModelerUI {
 		// 9 | click | css=.item:nth-child(10) > .item-text |
 		driver.findElement(By.cssSelector(".item:nth-child(10) > .item-text")).click();
 
+		// Get the xpath and user data of permissions form Excel Sheet
+		File src = new File("./Test Data/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+		XSSFSheet sheet = workbook.getSheet("AssignUserToGroupModelerUI");
+
+		String editUserXpath = sheet.getRow(1).getCell(0).getStringCellValue();
+		String groups = sheet.getRow(1).getCell(1).getStringCellValue();
+
 		Thread.sleep(4000);
-		WebElement l = driver.findElement(By.xpath("//div[contains(text(),'Test Undelete')]"));
+		WebElement l = driver.findElement(By.xpath(editUserXpath));
 		Actions a = new Actions(driver);
 		a.moveToElement(l).contextClick().build().perform();
 
 		Thread.sleep(2000);
-		//Click on Edit User option
+		// Click on Edit User option
 		driver.findElement(By.xpath("//div[contains(text(),'Edit User')]")).click();
 		Thread.sleep(2000);
 
 		// Select Group that need to add the user
-		driver.findElement(By.xpath("//div[normalize-space()='Test Group']")).click();
+		driver.findElement(By.xpath(groups)).click();
 
-		//Click on Save button
+		// Click on Save button
 		driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
 		Thread.sleep(2000);
 
 		System.out.println("<<<<<User added to the group successfully>>>>>");
+
+		workbook.close();
 	}
 }
