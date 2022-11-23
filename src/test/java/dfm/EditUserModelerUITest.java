@@ -105,5 +105,6 @@ public class EditUserModelerUITest {
 		Thread.sleep(2000);
 
 		System.out.println("<<<<<User Name Updated Successfully>>>>>");
+		workbook.close();
 	}
 }
