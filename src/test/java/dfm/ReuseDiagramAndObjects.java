@@ -24,7 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 
-public class AddDiagramWithObjectsAndLinks {
+public class ReuseDiagramAndObjects {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
@@ -52,20 +52,14 @@ public class AddDiagramWithObjectsAndLinks {
 	public static void addProject() throws InterruptedException, IOException {
 		// Test name: Add Project
 		// Step # | name | target | value
-		
-		//For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
-		
-		// For Openshift Environment
-				driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
-				
 		// 2 | setWindowSize | 1126x602 |
 		driver.manage().window().maximize();
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@dummy.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -78,15 +72,6 @@ public class AddDiagramWithObjectsAndLinks {
 		{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
-		}
-		
-		WebElement close_option_tab	= driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
-		if (close_option_tab.isDisplayed()) {
-			close_option_tab.click();
-			
-		} else {
-			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
-
 		}
 
 		// 9 | click | css=.sidebar-control-button |
@@ -423,15 +408,6 @@ public class AddDiagramWithObjectsAndLinks {
 		act.perform();
 		Thread.sleep(3000);
 
-		// Decision Source data 4
-		act.moveToElement(src1, decisionNumber1, decisionNumber2);
-		act.clickAndHold().moveByOffset(decisionNumber1, decisionNumber2);
-		act.moveToElement(src1, canvasValue11, canvasValue12);
-		act.moveToElement(target, canvasValue11, canvasValue12);
-		act.release();
-		act.perform();
-		Thread.sleep(3000);
-
 		// Knowledge Source data 1
 		act.moveToElement(src1, knowledgeNumber1, knowledgeNumber2);
 		act.clickAndHold().moveByOffset(knowledgeNumber1, knowledgeNumber2);
@@ -440,25 +416,6 @@ public class AddDiagramWithObjectsAndLinks {
 		act.release();
 		act.perform();
 		Thread.sleep(4000);
-
-		// Group Item Source data 1
-		act.moveToElement(src1, groupNumber1, groupNumber2);
-		act.clickAndHold().moveByOffset(groupNumber1, groupNumber2);
-		act.moveToElement(src1, canvasValue15, canvasValue16);
-		act.moveToElement(target, canvasValue15, canvasValue16);
-		act.release();
-		act.perform();
-		Thread.sleep(3000);
-
-		// Annotation Source data 1
-		act.moveToElement(src1, annotationNumber1, annotationNumber2);
-		act.clickAndHold().moveByOffset(annotationNumber1, annotationNumber2);
-		act.moveToElement(src1, canvasValue17, canvasValue18);
-		act.moveToElement(target, canvasValue17, canvasValue18);
-		act.release();
-		act.perform();
-		Thread.sleep(3000);
-//				
 
 		// click Information Links
 		act.moveToElement(LINKS, informationLinkNumber1, informationLinkNumber2);
@@ -491,33 +448,6 @@ public class AddDiagramWithObjectsAndLinks {
 		act.perform();
 		Thread.sleep(2000);
 
-		// creating the connection with links between Decision Source 3 & Decision
-		// Source 4
-		act.moveToElement(target, -100, -100);
-		act.clickAndHold().moveByOffset(-100, -100);
-		act.moveByOffset(50, -100);
-		act.release();
-		act.perform();
-		Thread.sleep(2000);
-
-		// creating the connection with links between Decision Source 2 & Decision
-		// Source 4
-		act.moveToElement(target, 105, -100);
-		act.clickAndHold().moveByOffset(105, -100);
-		act.moveByOffset(-300, -100);
-		act.release();
-		act.perform();
-		Thread.sleep(2000);
-
-		// creating the connection with links between Decision Source 1 & Decision
-		// Source 4
-		act.moveToElement(target, -200, -150);
-		act.clickAndHold().moveByOffset(-200, -150);
-		act.moveByOffset(300, -100);
-		act.release();
-		act.perform();
-		Thread.sleep(2000);
-
 		// click Authority Links
 		act.moveToElement(LINKS, authorityLinkNumber1, authorityLinkNumber2);
 		act.click().build().perform();
@@ -532,45 +462,105 @@ public class AddDiagramWithObjectsAndLinks {
 		Thread.sleep(2000);
 
 		// click Annotation link
-		act.moveToElement(LINKS, annotationLinkNumber1, annotationLinkNumber2);
+		/*
+		 * act.moveToElement(LINKS, annotationLinkNumber1, annotationLinkNumber2);
+		 * act.click().build().perform(); Thread.sleep(3000);
+		 */
+
+		// click Input Source data 1
+		act.moveToElement(target, 5, 5);
 		act.click().build().perform();
 		Thread.sleep(3000);
-//				
-		// creating the connection with links between annotation Source 1 & Decision
-		// Source 1
-		act.moveToElement(target, 70, 100);
-		act.clickAndHold().moveByOffset(70, 100);
-		act.moveByOffset(250, -150);
-		act.release();
-		act.perform();
+		// update Input Source data 1
+		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
 		Thread.sleep(2000);
-
+		
+		
+		// click Input Source data 2
+		act.moveToElement(target, -95, 5);
+		act.click().build().perform();
+		Thread.sleep(3000);
+		// update Input Source data 2
+		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
+		Thread.sleep(2000);
+		
+		// click Decision Source data 1
+		act.moveToElement(target, 255, -145);
+		act.click().build().perform();
+		Thread.sleep(3000);
+		// update Decision Source data 1
+		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
+		Thread.sleep(2000);
+		
+		
+		// click Decision Source data 2
+		act.moveToElement(target, 55, -145);
+		act.click().build().perform();
+		Thread.sleep(3000);
+		// update Decision Source data 2
+		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
+		Thread.sleep(2000);
+		
+		
+		// click Decision Source data 3
+		act.moveToElement(target, -125, -145);
+		act.click().build().perform();
+		Thread.sleep(3000);
+		// update Decision Source data 3
+		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
+		Thread.sleep(2000);
+		
+		
+		// click Knowledge Source data 1
+		act.moveToElement(target, 305, -255);
+		act.click().build().perform();
+		Thread.sleep(3000);
 		// update Knowledge Source data 1
+		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
+		Thread.sleep(2000);
+		
+
+		Thread.sleep(7000);
+
+		// act.moveToElement(LINKS, -14, 120); act.contextClick().perform();
+
 		/*
-		 * driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
-		 * clear(); Thread.sleep(1000);
-		 * driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
-		 * sendKeys(knowledgeName); Thread.sleep(2000);
+		 * driver.findElement(By.
+		 * xpath("//div[@class='tab-text-container']//span[contains(text(),'Tag Explorer')]"
+		 * )).click();
 		 * 
-		 * // click Input Source data 1 act.moveToElement(target, 305, -45);
-		 * act.click().build().perform(); Thread.sleep(3000);
+		 * // identify element WebElement tag1 = driver.findElement(By.xpath(tagXpath));
+		 * // Actions class with moveToElement() and contextClick() Actions a2 = new
+		 * Actions(driver); a2.moveToElement(tag1).contextClick().build().perform();
+		 * Thread.sleep(2000);
+		 * driver.findElement(By.xpath("//div[contains(text(),'Create DRD')]")).click();
+		 * Thread.sleep(2000);
 		 * 
-		 * // update Input Source data 1
-		 * driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
-		 * clear(); Thread.sleep(1000);
-		 * driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
-		 * sendKeys(inputName); Thread.sleep(2000);
+		 * driver.findElement(By.xpath(
+		 * "//core-edit-multiple-lines-control[@id='diagramName']//p")).sendKeys(
+		 * diagramName);
 		 * 
-		 * // click Decision Source data 1 act.moveToElement(target, 155, 75);
-		 * act.click().build().perform(); Thread.sleep(3000);
+		 * driver.findElement(By.xpath(
+		 * "//core-edit-multiple-lines-control[@id='diagramDescription']//p"))
+		 * .sendKeys(diagramDescription);
 		 * 
-		 * // update Decision Source data 1
-		 * driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
-		 * clear(); Thread.sleep(1000);
-		 * driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
-		 * sendKeys(decisionName); Thread.sleep(2000);
+		 * driver.findElement(By.xpath("//button[normalize-space()='Add Diagram']")).
+		 * click(); Thread.sleep(5000);
 		 * 
-		 * act.moveToElement(LINKS, -14, 120); act.contextClick().perform();
+		 * driver.findElement(By.xpath("//i[@class='eva eva-settings-2-outline']")).
+		 * click(); Thread.sleep(4000);
 		 */
 
 		System.out.println("<<<Diagram created>>>");

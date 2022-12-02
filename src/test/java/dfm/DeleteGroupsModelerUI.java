@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
 
-public class AddGroupsModelerUI01Test {
+public class DeleteGroupsModelerUI {
 	private static WebDriver driver;
 	// private Map<String, Object> vars;
 	JavascriptExecutor js;
@@ -108,12 +108,13 @@ public class AddGroupsModelerUI01Test {
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-		XSSFSheet sheet = workbook.getSheet("AddGroupsModelerUI01Test");
+		XSSFSheet sheet = workbook.getSheet("DeleteGroupsModelerUI");
 
 		// Get the data of Add Group form Excel Sheet
 		String groupName = sheet.getRow(1).getCell(0).getStringCellValue();
 		String description = sheet.getRow(1).getCell(1).getStringCellValue();
 		String permissions = sheet.getRow(1).getCell(2).getStringCellValue();
+		String deleteGroup = sheet.getRow(1).getCell(3).getStringCellValue();
 
 		// Thread.sleep(2000);
 		// Enter Group Name
@@ -133,8 +134,18 @@ public class AddGroupsModelerUI01Test {
 		// 23 | click | css=div:nth-child(3) > .btn |
 		// driver.findElement(By.cssSelector("div:nth-child(3) > .btn")).click();
 		driver.findElement(By.xpath("//button[normalize-space()='Add Group']")).click();
+		Thread.sleep(4000);
 
-		System.out.println("<<<<<Groups added Successfully>>>>>");
+		Actions actions = new Actions(driver);
+		WebElement delete = driver.findElement(By.xpath(deleteGroup));
+		actions.contextClick(delete).build().perform();
+
+		driver.findElement(By.xpath("//div[normalize-space()='Delete Group']")).click();
+
+//		String message = driver.findElement(By.xpath("//div[@class='message']")).getText();
+//		System.out.println("Success message after deletion of group : " + message);
+
+		System.out.println("<<<<<Groups deleted Successfully>>>>>");
 		workbook.close();
 	}
 }

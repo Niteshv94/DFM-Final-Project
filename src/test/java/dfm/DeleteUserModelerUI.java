@@ -17,6 +17,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.beust.jcommander.JCommander.Builder;
+
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.io.File;
@@ -25,13 +28,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 
-public class AddUserModelerUI01Test {
-	private WebDriver driver;
+public class DeleteUserModelerUI {
+	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	@Before
-	public void setUp() {
+	public static void main(String[] args) throws InterruptedException, IOException {
+		setUp();
+		addUserModelerUI01();
+	}
+
+	// @Before
+	public static void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
 
@@ -39,13 +47,13 @@ public class AddUserModelerUI01Test {
 		// driver=new EdgeDriver();
 	}
 
-	@After
+	// @After
 	public void tearDown() {
 		// driver.quit();
 	}
 
-	@Test
-	public void addUserModelerUI01() throws InterruptedException, IOException {
+	// @Test
+	public static void addUserModelerUI01() throws InterruptedException, IOException {
 
 		// int n1 = Integer.parseInt(ProjectAdministrator);
 		// Test name: AddUserModelerUI_01
@@ -53,15 +61,15 @@ public class AddUserModelerUI01Test {
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
-		// driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		//driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// For Openshift Environment
-		driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		 driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1289x602 |
 		driver.manage().window().maximize();
-		
+
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
@@ -77,7 +85,7 @@ public class AddUserModelerUI01Test {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
-		
+
 		WebElement close_option_tab	= driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
 		if (close_option_tab.isDisplayed()) {
 			close_option_tab.click();
@@ -86,7 +94,7 @@ public class AddUserModelerUI01Test {
 			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
 
 		}
-		
+
 		// 9 | mouseOver | css=.btn |
 		{
 			WebElement element = driver.findElement(By.cssSelector(".btn"));
@@ -111,13 +119,14 @@ public class AddUserModelerUI01Test {
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-		XSSFSheet sheet = workbook.getSheet("AddUserModelerUI01Test");
+		XSSFSheet sheet = workbook.getSheet("DeleteUserModelerUI");
 
 		// Get the xpath of permissions form Excel Sheet
 		String firstName = sheet.getRow(1).getCell(0).getStringCellValue();
 		String lastName = sheet.getRow(1).getCell(1).getStringCellValue();
 		String email = sheet.getRow(1).getCell(2).getStringCellValue();
 		String type = sheet.getRow(2).getCell(3).getStringCellValue();
+		String deleteUser = sheet.getRow(1).getCell(4).getStringCellValue();
 
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='firstName']//p")).sendKeys(firstName);
 
@@ -138,7 +147,16 @@ public class AddUserModelerUI01Test {
 		userType.click();
 		// 21 | click | css=.btn-block |
 		driver.findElement(By.cssSelector(".btn-block")).click();
-		System.out.println("<<<<<<<User created successfully>>>>>>>");
+		Thread.sleep(5000);
+
+		Actions actions = new Actions(driver);
+		WebElement delete = driver.findElement(By.xpath(deleteUser));
+		actions.contextClick(delete).build().perform();
+
+		driver.findElement(By.xpath("//div[normalize-space()='Delete User']")).click();
+		// Thread.sleep(4000);
+		String message = driver.findElement(By.xpath("//div[@class='message']")).getText();
+		System.out.println("Sucess message after deletion of user : " + message);
 
 		workbook.close();
 	}

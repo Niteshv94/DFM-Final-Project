@@ -13,6 +13,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.Dimension;
@@ -44,6 +45,9 @@ public class AddTagsToGroupTest {
 	public static void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
+
+//		System.setProperty("webdriver.edge.driver", "./Driver/msedgedriver.exe");
+//		driver = new EdgeDriver();
 	}
 
 	// @After
@@ -55,14 +59,20 @@ public class AddTagsToGroupTest {
 	public static void addTagsToGroup() throws Exception {
 		// Test name: AddTagsToGroup
 		// Step # | name | target | value
+		
+		//QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
-		driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		//driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		
+		// For Openshift
+		driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		
 		// 2 | setWindowSize | 1074x602 |
 		driver.manage().window().maximize();
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@dummy.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -76,6 +86,16 @@ public class AddTagsToGroupTest {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
+		
+		WebElement close_option_tab	= driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
+		if (close_option_tab.isDisplayed()) {
+			close_option_tab.click();
+			
+		} else {
+			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
+
+		}
+		
 		// 10 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
 		// 11 | click | css=.item:nth-child(10) > .item-text |

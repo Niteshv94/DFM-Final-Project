@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-public class DragAndDrop {
+public class ReuseObjects {
 
 	public static void main(String[] args) throws InterruptedException {
 
@@ -47,39 +47,6 @@ public class DragAndDrop {
 		
 		WebElement reuse_objects = driver.findElement(By.xpath(
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[3]/dfm-go-js-existing-objects-palette/div/div/canvas"));
-
-		// Knowledge Source data 1
-//		act.moveToElement(src, 58, 5);
-//		act.clickAndHold().moveByOffset(58, 5);
-//		act.moveToElement(src, 250, 70);
-//		act.moveToElement(target, 250, 70);
-//		act.release();
-//		act.perform();
-//		Thread.sleep(4000);
-
-		// Knowledge Source data 2
-
-		// Decision data 1
-//		act.moveToElement(src, -56, 5);
-//		act.clickAndHold().moveByOffset(-56, 5);
-//		act.moveToElement(src, 100, -50);
-//		act.moveToElement(target, 100, -50);
-//		act.release();
-//		act.perform();
-//		Thread.sleep(3000);
-
-		// click Authority Links
-//		act.moveToElement(LINKS, 10, 20);
-//		act.click().build().perform();
-//		Thread.sleep(2000);
-
-		// creating the connection with links between Knowledge Source
-//		act.moveToElement(target, 155, 75);
-//		act.clickAndHold().moveByOffset(155, 75);
-//		act.moveByOffset(105, -45);
-//		act.release();
-//		act.perform();
-//		Thread.sleep(2000);
 
 
 		// Input Source data 1
@@ -128,13 +95,13 @@ public class DragAndDrop {
 		Thread.sleep(3000);
 
 		// Decision Source data 4
-		/*act.moveToElement(src, -56, 5);
-		act.clickAndHold().moveByOffset(-56, 5);
-		act.moveToElement(src, 50, -300);
-		act.moveToElement(target, 50, -300);
-		act.release();
-		act.perform();
-		Thread.sleep(3000);
+//		act.moveToElement(src, -56, 5);
+//		act.clickAndHold().moveByOffset(-56, 5);
+//		act.moveToElement(src, 50, -300);
+//		act.moveToElement(target, 50, -300);
+//		act.release();
+//		act.perform();
+//		Thread.sleep(3000);
 
 		// Knowledge Source data 1
 		act.moveToElement(src, 15, 5);
@@ -161,7 +128,7 @@ public class DragAndDrop {
 		act.moveToElement(target, 300, 150);
 		act.release();
 		act.perform();
-		Thread.sleep(3000); */
+		Thread.sleep(3000); 
 		
 		
 		// click Information Links
@@ -201,23 +168,23 @@ public class DragAndDrop {
 		act.moveByOffset(50, -100);
 		act.release();
 		act.perform();
-		Thread.sleep(2000);
+		Thread.sleep(2000);*/
 		
 		// creating the connection with links between Decision Source 2 & Decision Source 4
-		act.moveToElement(target, 105, -100);
-		act.clickAndHold().moveByOffset(105, -100);
-		act.moveByOffset(-300, -100);
-		act.release();
-		act.perform();
-		Thread.sleep(2000);
+//		act.moveToElement(target, 105, -100);
+//		act.clickAndHold().moveByOffset(105, -100);
+//		act.moveByOffset(-300, -100);
+//		act.release();
+//		act.perform();
+//		Thread.sleep(2000);
 
 		// creating the connection with links between Decision Source 1 & Decision Source 4
-		act.moveToElement(target, -200, -150);
+		/*act.moveToElement(target, -200, -150);
 		act.clickAndHold().moveByOffset(-200, -150);
 		act.moveByOffset(300, -100);
 		act.release();
 		act.perform();
-		Thread.sleep(2000); 
+		Thread.sleep(2000); */
 		
 		// click Authority Links
 		act.moveToElement(LINKS, 10, 20);
@@ -238,7 +205,7 @@ public class DragAndDrop {
 		Thread.sleep(3000);
 //		
 		// creating the connection with links between annotation Source 1 & Decision Source 1
-		    act.moveToElement(target, 70,100);
+		  /*  act.moveToElement(target, 70,100);
 			act.clickAndHold().moveByOffset(70,100);
 			act.moveByOffset(250, -150);
 			act.release();
@@ -256,28 +223,11 @@ public class DragAndDrop {
 //		Thread.sleep(3000);
 		
 		
-		act.moveToElement(target, 253, -150);
-		act.click();
-		act.keyDown(Keys.DELETE);
-		act.keyUp(Keys.DELETE).build().perform();
-		Thread.sleep(3000);
-		
-		act.moveToElement(target, 10, 5);
-		act.click();
-		act.keyDown(Keys.DELETE);
-		act.keyUp(Keys.DELETE).build().perform();
-		Thread.sleep(3000);
-		
-		act.moveToElement(target, -200, -150);
-		act.click();
-		act.keyDown(Keys.DELETE);
-		act.keyUp(Keys.DELETE).build().perform();
-		Thread.sleep(3000); 
 		
 		
 		
 		// resue Source data 1
-				act.moveToElement(reuse_objects, -30, 5);
+				/*act.moveToElement(reuse_objects, -30, 5);
 				act.clickAndHold().moveByOffset(-30, 5);
 				act.moveToElement(reuse_objects, 1, 1);
 				act.moveToElement(target, 1, 1);
@@ -292,38 +242,8 @@ public class DragAndDrop {
 				act.moveToElement(target, 50, -100);
 				act.release();
 				act.perform();
-				Thread.sleep(3000);
+				Thread.sleep(3000);*/
 		
-//		act.moveToElement(target, 10, 5);
-//		act.click().build().perform();
-//		act.keyDown(Keys.DELETE);
-//		act.keyUp(Keys.DELETE).build().perform();
-//		Thread.sleep(3000); 
-		
-//		act.moveToElement(target, -5,32);
-//		act.click();
-//		act.keyDown(Keys.DELETE);
-//		act.keyUp(Keys.DELETE).build().perform();
-//		Thread.sleep(3000);
-		
-		//new Actions(driver).moveToElement(target, -5, 31).moveByOffset(0,(255/6)*3).click().build().perform();
-		
-		//act.moveByOffset(10,5).click().build().perform();
-//		Thread.sleep(2000);
-//		act.moveByOffset(-100, -100).click().build().perform();
-		
-		
-		
-		// find the SoftwareTestingMaterial logo using linkText Locator
-//		WebElement element = driver.findElement(By.xpath("//div[@class='links-palette']"));
-//		//Used points class to get x and y coordinates of element.
-//		Point point = element.getLocation();
-//		int xcord = point.getX();
-//		System.out.println("Position of the webelement from left side is "+xcord +" pixels");
-//		int ycord = point.getY();
-//		System.out.println("Position of the webelement from top side is "+ycord +" pixels");
-//		
-//		act.moveToElement(element, xcord, ycord).click().build().perform();
 
 		// update Knowledge Source data 1
 //		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
