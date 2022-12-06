@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.awt.AWTException;
@@ -58,10 +59,10 @@ public class DeleteCustomer {
 	public static void deleteCustomer() throws InterruptedException, IOException, Exception {
 
 		// For QA environment
-		//driver.get("https://qa.admin.decisionsfirst.com/login");
+		driver.get("https://qa.admin.decisionsfirst.com/login");
 
 		// For Openshift
-		 driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com");
+		// driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com");
 
 		driver.manage().window().maximize();
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
@@ -100,6 +101,7 @@ public class DeleteCustomer {
 		String numberOfUsersValue = dataFormatter.formatCellValue(sheet.getRow(1).getCell(1));
 		String domains = sheet.getRow(1).getCell(2).getStringCellValue();
 		String customerDelete = sheet.getRow(1).getCell(0).getStringCellValue();
+		String verifyCustomer = sheet.getRow(1).getCell(3).getStringCellValue();
 
 		driver.findElement(By.xpath("//div[@class='ql-editor ql-blank']")).sendKeys(customerName);
 
@@ -133,9 +135,22 @@ public class DeleteCustomer {
 		driver.findElement(By.xpath("//i[@class='eva eva-trash-2-outline remove-item icon-gray-color']")).click();
 		Thread.sleep(5000);
 		driver.findElement(By.xpath("//i[@class='btn btn-info eva eva-search-outline search-icon']")).click();
+		driver.navigate().refresh();
+		Thread.sleep(8000);
+
+		//Verify the Customer is present or not
+		List<WebElement> verify_customer_inList = driver.findElements(By.xpath(verifyCustomer));
+		if (verify_customer_inList.size() > 0) {
+			System.out.println("The Customer is not deleted... Please try again later");
+
+		} else {
+			System.out.println("Congratulations, The Customer is deleted from the Account...");
+
+		}
 
 		System.out.println("<<<<Customer deleted successfully>>>>");
 		workbook.close();
 
 	}
+
 }

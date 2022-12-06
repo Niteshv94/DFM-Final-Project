@@ -197,6 +197,9 @@ public class ReuseDiagramAndObjects {
 		WebElement LINKS = driver.findElement(By.xpath("//div[@class='links-palette']"));
 
 		WebElement target = driver.findElement(By.xpath("//div[@class='diagramDiv']//canvas"));
+		
+		WebElement reuse_objects = driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[3]/dfm-go-js-existing-objects-palette/div/div/canvas"));
 
 		XSSFSheet sheet1 = workbook.getSheet("AddDiagramWithObjectsAndLinks");
 
@@ -563,6 +566,17 @@ public class ReuseDiagramAndObjects {
 		 * click(); Thread.sleep(4000);
 		 */
 
+		driver.findElement(By.xpath("//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']")).sendKeys("span");
+		Thread.sleep(4000);
+		
+		act.moveToElement(reuse_objects, -30, 5);
+		act.clickAndHold().moveByOffset(-30, 5);
+		act.moveToElement(reuse_objects, 1, 1);
+		act.moveToElement(target, 1, 1);
+		act.release();
+		act.perform();
+		Thread.sleep(3000);
+		
 		System.out.println("<<<Diagram created>>>");
 		workbook.close();
 

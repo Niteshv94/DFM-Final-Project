@@ -58,17 +58,17 @@ public class DeleteGroupsModelerUI {
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
-		//driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// For Openshift Environment
-		 driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		// 2 | setWindowSize | 1936x1048 |
 		driver.manage().window().maximize();
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@dummy.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -83,14 +83,14 @@ public class DeleteGroupsModelerUI {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
 
-		WebElement close_option_tab = driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
-		if (close_option_tab.isDisplayed()) {
-			close_option_tab.click();
-
-		} else {
-			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
-
-		}
+//		WebElement close_option_tab = driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
+//		if (close_option_tab.isDisplayed()) {
+//			close_option_tab.click();
+//
+//		} else {
+//			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
+//
+//		}
 
 		// 8 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
@@ -141,10 +141,20 @@ public class DeleteGroupsModelerUI {
 		actions.contextClick(delete).build().perform();
 
 		driver.findElement(By.xpath("//div[normalize-space()='Delete Group']")).click();
+		Thread.sleep(4000);
 
 //		String message = driver.findElement(By.xpath("//div[@class='message']")).getText();
 //		System.out.println("Success message after deletion of group : " + message);
 
+		List<WebElement> verify_group_inList = driver.findElements(By.xpath(deleteGroup));
+		if (verify_group_inList.size() > 0) {
+			System.out.println("The Group is not deleted...Please try again later");
+		
+		} else {
+			System.out.println("Congratulations, The Group is deleted from the Account...");
+
+		}
+		
 		System.out.println("<<<<<Groups deleted Successfully>>>>>");
 		workbook.close();
 	}

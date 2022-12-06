@@ -61,10 +61,10 @@ public class DeleteUserModelerUI {
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
-		//driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		 driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// For Openshift Environment
-		 driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		//driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1289x602 |
@@ -73,7 +73,7 @@ public class DeleteUserModelerUI {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@dummy.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -86,14 +86,14 @@ public class DeleteUserModelerUI {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
 
-		WebElement close_option_tab	= driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
-		if (close_option_tab.isDisplayed()) {
-			close_option_tab.click();
-			
-		} else {
-			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
-
-		}
+//		WebElement close_option_tab = driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
+//		if (close_option_tab.isDisplayed()) {
+//			close_option_tab.click();
+//
+//		} else {
+//			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
+//
+//		}
 
 		// 9 | mouseOver | css=.btn |
 		{
@@ -125,7 +125,7 @@ public class DeleteUserModelerUI {
 		String firstName = sheet.getRow(1).getCell(0).getStringCellValue();
 		String lastName = sheet.getRow(1).getCell(1).getStringCellValue();
 		String email = sheet.getRow(1).getCell(2).getStringCellValue();
-		String type = sheet.getRow(2).getCell(3).getStringCellValue();
+		String type = sheet.getRow(1).getCell(3).getStringCellValue();
 		String deleteUser = sheet.getRow(1).getCell(4).getStringCellValue();
 
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='firstName']//p")).sendKeys(firstName);
@@ -157,6 +157,31 @@ public class DeleteUserModelerUI {
 		// Thread.sleep(4000);
 		String message = driver.findElement(By.xpath("//div[@class='message']")).getText();
 		System.out.println("Sucess message after deletion of user : " + message);
+
+		driver.findElement(By.xpath("//i[@class='sidebar-control-button nb-menu sidebar-toggle icon-gray-color']"))
+				.click();
+        // 11 | click | xpath=//span[contains(.,'Log Out')] |
+		driver.findElement(By.xpath("//span[contains(.,\'Log Out\')]")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys(email);
+		// 5 | click | css=.ng-untouched |
+		driver.findElement(By.cssSelector(".ng-untouched")).click();
+		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
+		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
+		// 7 | click | css=.btn |
+		driver.findElement(By.cssSelector(".btn")).click();
+		Thread.sleep(4000);
+
+		String error_message = driver.findElement(By.xpath("//nb-alert[contains(text(),' You have entered an incorrect email address')]")).getText();
+		System.out.println("The message displayed after deletion of User is :  " + error_message);
+		
+//		if (driver.findElement(By.xpath("//nb-alert[contains(text(),' You have entered an incorrect email address')]")).isDisplayed()) {
+//			
+//			System.out.println("The User is deleted successfully");
+//		} else {
+//
+//			System.out.println("The User is able to login successfully");
+//		}
 
 		workbook.close();
 	}

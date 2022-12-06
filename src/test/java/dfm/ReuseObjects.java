@@ -46,11 +46,11 @@ public class ReuseObjects {
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/div/dfm-go-js-display-diagram/div/div"));
 		
 		WebElement reuse_objects = driver.findElement(By.xpath(
-				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[3]/dfm-go-js-existing-objects-palette/div/div/canvas"));
+				"//div[@class='paletteDiv mb-2']//canvas"));
 
 
 		// Input Source data 1
-		act.moveToElement(src, -30, 5);
+	/*	act.moveToElement(src, -30, 5);
 		act.clickAndHold().moveByOffset(-30, 5);
 		act.moveToElement(src, 1, 1);
 		act.moveToElement(target, 1, 1);
@@ -110,10 +110,10 @@ public class ReuseObjects {
 		act.moveToElement(target, 300, -300);
 		act.release();
 		act.perform();
-		Thread.sleep(4000);
+		Thread.sleep(4000); */
 
 		// Group Item Source data 1
-	    act.moveToElement(src, 50, 5);
+	    /*act.moveToElement(src, 50, 5);
 		act.clickAndHold().moveByOffset(50, 5);
 		act.moveToElement(src, 50, 100);
 		act.moveToElement(target, 50, 100);
@@ -128,18 +128,18 @@ public class ReuseObjects {
 		act.moveToElement(target, 300, 150);
 		act.release();
 		act.perform();
-		Thread.sleep(3000); 
+		Thread.sleep(3000); */
 		
 		
 		// click Information Links
-		act.moveToElement(LINKS, -43, 20);
+		/*act.moveToElement(LINKS, -43, 20);
 		act.click().build().perform();
-		Thread.sleep(2000);
+		Thread.sleep(2000);*/
 		
 
 		//Link with the Objects
 		// creating the connection with links between Input Source 1 & Decision Source 2
-		act.moveToElement(target, 15, 5);
+		/*act.moveToElement(target, 15, 5);
 		act.clickAndHold().moveByOffset(15, 5);
 		act.moveByOffset(50, -150);
 		act.release();
@@ -160,7 +160,7 @@ public class ReuseObjects {
 		act.moveByOffset(-200, -150);
 		act.release();
 		act.perform();
-		Thread.sleep(2000); 
+		Thread.sleep(2000); */
 		
 		// creating the connection with links between Decision Source 3 & Decision Source 4
 		/*act.moveToElement(target, -100, -100);
@@ -187,7 +187,7 @@ public class ReuseObjects {
 		Thread.sleep(2000); */
 		
 		// click Authority Links
-		act.moveToElement(LINKS, 10, 20);
+		/*act.moveToElement(LINKS, 10, 20);
 		act.click().build().perform();
 		Thread.sleep(2000); 
 
@@ -202,7 +202,7 @@ public class ReuseObjects {
 		// click Annotation link
 		act.moveToElement(LINKS, 43,20);
 		act.click().build().perform();
-		Thread.sleep(3000);
+		Thread.sleep(3000);*/
 //		
 		// creating the connection with links between annotation Source 1 & Decision Source 1
 		  /*  act.moveToElement(target, 70,100);
@@ -214,9 +214,9 @@ public class ReuseObjects {
 		
 		
 		// remove link between input and decision
-		act.moveToElement(target, 100, -100);
+		/*act.moveToElement(target, 100, -100);
 		act.click().build().perform();
-		Thread.sleep(3000);
+		Thread.sleep(3000); */
 //		
 //		act.moveToElement(target, 10, 5);
 //		act.click().build().perform();
@@ -278,6 +278,46 @@ public class ReuseObjects {
 		
 //		act.moveToElement(LINKS, -14, 120);
 //		act.contextClick().perform();
+		
+		//driver.findElement(By.xpath("//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']")).sendKeys("span");
+		Thread.sleep(4000);
+		
+//		act.moveToElement(reuse_objects, 47, 50);
+//		act.clickAndHold().moveByOffset(47, 50);
+//		act.moveToElement(reuse_objects, 50, -100);
+//		act.moveToElement(target, 50, -100);
+//		act.release();
+//		act.perform();
+//		Thread.sleep(3000);
+		
+		act.moveToElement(reuse_objects, 61, 40);
+		act.clickAndHold().moveByOffset(61, 40);
+		act.moveToElement(reuse_objects, 50, -100);
+		act.moveToElement(target, 50, -100);
+		act.release();
+		act.perform();
+		Thread.sleep(3000);
+		
+		WebElement ele= driver.findElement(By.xpath("//div[@class='paletteDiv mb-2']//canvas"));
+		Point point = ele.getLocation();
+		int xcord = point.getX();
+		int ycord = point.getY();
+		System.out.println(xcord);
+		System.out.println(ycord);
+		
+
+		
+		//driver.findElement(By.xpath("//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']")).clear();
+		//driver.findElement(By.xpath("//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']")).sendKeys("delete");
+		Thread.sleep(4000);
+		
+		act.moveToElement(reuse_objects, -45, -2);
+		act.clickAndHold().moveByOffset(-45, -2);
+		act.moveToElement(reuse_objects, 50, -100);
+		act.moveToElement(target, 50, -100);
+		act.release();
+		act.perform();
+		Thread.sleep(3000);
 
 		System.out.println("<<<Diagram created>>>");
 
