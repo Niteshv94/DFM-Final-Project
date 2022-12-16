@@ -4,45 +4,65 @@
 
 package dfm;
 
-import org.junit.Test;
-import org.junit.Before;
+
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.base.BaseClass;
+import com.dfm.utility.Helper;
+
 import org.openqa.selenium.JavascriptExecutor;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.*;
 
-public class DeleteCustomer {
+public class DeleteCustomer extends BaseClass {
 	public static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
+	FileInputStream fis;
+	
+	ExtentSparkReporter sparkReporter;
+	ExtentReports reports;
+	ExtentTest extentTest;
+	Reporter report = new Reporter();
 
-	public static void main(String[] args) throws InterruptedException, IOException, Exception {
-		setUp();
-		deleteCustomer();
+//	public static void main(String[] args) throws InterruptedException, IOException, Exception {
+//		setUp();
+//		deleteCustomer();
+//	}
+	
+	@BeforeSuite
+	public void setUpReport() {
+
+		// start reporters
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")+"./Reports/Delete/DFM_Delete_"+Helper.getCurrentDateTime()+".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
+
 	}
 
-	// @Before
-	public static void setUp() {
+	@BeforeClass
+	public void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
 
@@ -50,14 +70,31 @@ public class DeleteCustomer {
 //		driver=new EdgeDriver();
 	}
 
-	// @After
+	@AfterClass
 	public void tearDown() {
-		// driver.quit();
+		driver.quit();
+	}
+	
+	@AfterSuite
+	public void tearDownReoport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
 	}
 
-	// @Test
-	public static void deleteCustomer() throws InterruptedException, IOException, Exception {
+	@Test(priority =0)
+	public void logInToApplciation() throws InterruptedException, IOException, Exception {
 
+		Reporter.log("Test Case for Login");
+		extentTest = reports.createTest("Delete Customer", "Login to Application");
+		// log with snapshot
+//		extentTest.pass("Details",
+//				MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		// test with snapshot
+		extentTest.addScreenCaptureFromPath("screenshot.png");
+
+		// log(Status, details)
+		extentTest.log(Status.INFO, "Starting Test Case");
 		// For QA environment
 		driver.get("https://qa.admin.decisionsfirst.com/login");
 
@@ -86,9 +123,19 @@ public class DeleteCustomer {
 		driver.findElement(By.cssSelector(".add-customer-link > .item-text")).click();
 		driver.findElement(By.cssSelector("p")).click();
 
+	}
+	@Test (priority =1)
+	public void deleteCustomer() throws IOException, InterruptedException
+	{
+		Reporter.log("Test Case to Delete Customer");
 		// Get the Customer data form Excel Sheet
 		File src = new File("./Test Data/TestData.xlsx");
-		FileInputStream fis = new FileInputStream(src);
+		try {
+			fis = new FileInputStream(src);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
 		XSSFSheet sheet = workbook.getSheet("DeleteCustomer");
@@ -148,7 +195,6 @@ public class DeleteCustomer {
 
 		}
 
-		System.out.println("<<<<Customer deleted successfully>>>>");
 		workbook.close();
 
 	}

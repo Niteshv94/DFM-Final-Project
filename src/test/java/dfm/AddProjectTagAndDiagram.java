@@ -34,11 +34,11 @@ public class AddProjectTagAndDiagram {
 
 	@Before
 	public void setUp() {
-//		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
-//		driver = new ChromeDriver();
+		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver = new ChromeDriver();
 
-		System.setProperty("webdriver.edge.driver", "./Driver/msedgedriver.exe");
-		driver = new EdgeDriver();
+//		System.setProperty("webdriver.edge.driver", "./Driver/msedgedriver.exe");
+//		driver = new EdgeDriver();
 	}
 
 	@After

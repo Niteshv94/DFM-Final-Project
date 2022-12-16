@@ -18,6 +18,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.awt.AWTException;
@@ -35,7 +37,7 @@ public class AddCustomer {
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	@Before
+	@BeforeClass
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
@@ -44,13 +46,13 @@ public class AddCustomer {
 //		driver=new EdgeDriver();
 	}
 
-	@After
+	@AfterClass
 	public void tearDown() {
 		// driver.quit();
 	}
 
-	@Test
-	public void tC04() throws InterruptedException, IOException, Exception {
+	@org.testng.annotations.Test
+	public void AddCustomerModeler() throws InterruptedException, IOException, Exception {
 
 		// For QA environment
 		// driver.get("https://qa.admin.decisionsfirst.com/login");
@@ -121,7 +123,7 @@ public class AddCustomer {
 		Thread.sleep(5000);
 
 		driver.findElement(By.cssSelector(".form-control")).click();
-		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys("Test dummy");
+		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys("Test Random");
 		Thread.sleep(4000);
 		driver.findElement(By.cssSelector("span > .item-name")).click();
 

@@ -2,6 +2,8 @@ package dfm;
 
 import java.time.Duration;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -279,31 +281,48 @@ public class ReuseObjects {
 //		act.moveToElement(LINKS, -14, 120);
 //		act.contextClick().perform();
 		
-		//driver.findElement(By.xpath("//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']")).sendKeys("span");
+		driver.findElement(By.xpath("//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']")).sendKeys("decision delete");
 		Thread.sleep(4000);
 		
-//		act.moveToElement(reuse_objects, 47, 50);
-//		act.clickAndHold().moveByOffset(47, 50);
+//		act.moveToElement(reuse_objects, 17, 100);
+//		act.clickAndHold().moveByOffset(17, 100);
 //		act.moveToElement(reuse_objects, 50, -100);
 //		act.moveToElement(target, 50, -100);
 //		act.release();
 //		act.perform();
 //		Thread.sleep(3000);
 		
-		act.moveToElement(reuse_objects, 61, 40);
-		act.clickAndHold().moveByOffset(61, 40);
-		act.moveToElement(reuse_objects, 50, -100);
-		act.moveToElement(target, 50, -100);
+		act.moveToElement(reuse_objects, 100, 20);
+		act.clickAndHold().moveByOffset(100, 200);
+		//act.moveToElement(reuse_objects, 50, -100);
+		//act.moveToElement(target, 50, -100);
 		act.release();
 		act.perform();
 		Thread.sleep(3000);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("arguments [0].setAttribute('style', 'background : yellow;'); ", reuse_objects);
+		
+//		act.moveToElement(reuse_objects, 50, 100);
+//		act.clickAndHold().moveByOffset(50, 100);
+//		act.moveToElement(reuse_objects, 50, -100);
+//		act.moveToElement(target, 50, -100);
+//		act.release();
+//		act.perform();
+//		Thread.sleep(3000);
 		
 		WebElement ele= driver.findElement(By.xpath("//div[@class='paletteDiv mb-2']//canvas"));
-		Point point = ele.getLocation();
-		int xcord = point.getX();
-		int ycord = point.getY();
-		System.out.println(xcord);
-		System.out.println(ycord);
+//		Point point = ele.getLocation();
+//		int xcord = point.getX();
+//		int ycord = point.getY();
+//		System.out.println(xcord);
+//		System.out.println(ycord);
+		
+		//Calculate position canvas button
+        Dimension canvas_dimensions = ele.getSize();
+        int canvas_center_x = canvas_dimensions.getWidth() / 2;
+        int canvas_center_y = canvas_dimensions.getHeight() / 2;
+        int button_x = (canvas_center_x / 3) * 2;
+        int button_y = (canvas_center_y / 3) * 2;
 		
 
 		
@@ -311,8 +330,8 @@ public class ReuseObjects {
 		//driver.findElement(By.xpath("//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']")).sendKeys("delete");
 		Thread.sleep(4000);
 		
-		act.moveToElement(reuse_objects, -45, -2);
-		act.clickAndHold().moveByOffset(-45, -2);
+		act.moveToElement(reuse_objects, -45, -160);
+		act.clickAndHold().moveByOffset(-45, -160);
 		act.moveToElement(reuse_objects, 50, -100);
 		act.moveToElement(target, 50, -100);
 		act.release();

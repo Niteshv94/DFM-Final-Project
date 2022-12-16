@@ -4,45 +4,79 @@
 
 package dfm;
 
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.JavascriptExecutor;
-import java.util.*;
+import java.io.File;
 import java.time.Duration;
+import java.util.Map;
 
-public class LoginAdmin_01 {
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.base.BaseClass;
+import com.dfm.utility.Helper;
+
+public class LoginAdmin_01 extends BaseClass {
 	private WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	@Before
+	ExtentSparkReporter sparkReporter;
+	ExtentReports reports;
+	ExtentTest extentTest;
+	
+	Reporter report = new Reporter();
+
+	@BeforeSuite
 	public void setUp() {
-//		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
-//		driver = new ChromeDriver();
 
-    System.setProperty("webdriver.edge.driver", "./Driver/msedgedriver.exe");
-	driver=new EdgeDriver();
+		// start reporters
+		//sparkReporter = new ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")+"./Reports/Login/DFM_Login_"+Helper.getCurrentDateTime()+".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
 
 	}
 
-	@After
-	public void tearDown() {
-		//driver.quit();
+	@BeforeClass
+	public void setUpTest() {
+		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver = new ChromeDriver();
+
+//    System.setProperty("webdriver.edge.driver", "./Driver/msedgedriver.exe");
+//	driver=new EdgeDriver();
 	}
 
-	@Test
-	public void tC02() {
-		// Test name: TC _02
-		// Step # | name | target | value
+	@Test(priority = 0)
+	public void LoginToAdminAccount() {
+
+		Reporter.log("Test Case for Login");
+		 extentTest = reports.createTest("Login", "Login to DFM Application");
+		// log with snapshot
+//		extentTest.pass("Details",
+//				MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		// test with snapshot
+		extentTest.addScreenCaptureFromPath("screenshot.png");
+
+		// log(Status, details)
+		extentTest.log(Status.INFO, "Starting Test Case");
 		// 1 | open | /login |
-		driver.get("https://qa.admin.decisionsfirst.com/login");
+		// driver.get("https://qa.admin.decisionsfirst.com/login");
+		driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		extentTest.pass("Navigates to DFM URL");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
 		driver.manage().window().maximize();
 		// 2 | setWindowSize | 698x602 |
@@ -51,12 +85,15 @@ public class LoginAdmin_01 {
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | dmsadmin@dmsadmin.com
 		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("dmsadmin@dmsadmin.com");
+		extentTest.pass("Entered Admin Email Id");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | dms@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("dms@123");
+		extentTest.pass("Entered Admin Password");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
+		extentTest.pass("Pressed Login button");
 		// 8 | mouseOver | css=.btn |
 		{
 			WebElement element = driver.findElement(By.cssSelector(".btn"));
@@ -69,14 +106,41 @@ public class LoginAdmin_01 {
 			Actions builder = new Actions(driver);
 			builder.moveToElement(element, 0, 0).perform();
 		}
-		
-		//Verify Title
+
+		// Verify Title
 		String title = driver.getTitle();
-		System.out.println("<<<The title of the Application is >>> " +  title);
+		System.out.println("<<<The title of the Application is >>> " + title);
 		// 10 | click | xpath=//i |
+	}
+		@Test(priority = 1)
+		public void logOut()
+		{
+			Reporter.log("Test Case for Logout");
 		driver.findElement(By.xpath("//i[@class='sidebar-control-button nb-menu sidebar-toggle icon-gray-color']"))
 				.click();
 		// 11 | click | xpath=//span[contains(.,'Log Out')] |
 		driver.findElement(By.xpath("//span[contains(.,\'Log Out\')]")).click();
+		extentTest.pass("Clicked Logout button");
+
+		extentTest.log(Status.INFO, "Test Completed");
 	}
+
+	@AfterSuite
+	public void tearDownReport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
+	}
+
+	@AfterClass
+	public void tearDown() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.quit();
+	}
+
 }

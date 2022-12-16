@@ -11,11 +11,13 @@ import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.io.File;
@@ -38,6 +40,24 @@ public class ReuseDiagramAndObjects {
 	public static void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
+		
+		/*DevTools tools = (((ChromeDriver) driver)).getDevTools();
+		tools.createSession();
+		tools.send(org.openqa.selenium.devtools.v102.network.Network.enable(Optional.empty(), Optional.empty(), Optional.empty()));
+		
+		tools.addListener(org.openqa.selenium.devtools.v102.network.Network.responseReceived(), responseReceieved -> {
+
+            System.out.println("Response Url => " + responseReceieved.getResponse().getUrl());
+
+            System.out.println("Response Status => " + responseReceieved.getResponse().getStatus());
+
+            System.out.println("Response Headers => " + responseReceieved.getResponse().getHeaders().toString());
+
+            System.out.println("Response MIME Type => " + responseReceieved.getResponse().getMimeType().toString());
+            
+            System.out.println("------------------------------------------------------");
+
+        });*/
 
 //		System.setProperty("webdriver.edge.driver", "./Driver/msedgedriver.exe");
 //		driver = new EdgeDriver();
@@ -96,7 +116,7 @@ public class ReuseDiagramAndObjects {
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-		XSSFSheet sheet = workbook.getSheet("AddDiagramWithObjectsAndLinks");
+		XSSFSheet sheet = workbook.getSheet("ReuseDiagramAndObjects");
 
 		String projectName = sheet.getRow(1).getCell(0).getStringCellValue();
 		String description = sheet.getRow(1).getCell(1).getStringCellValue();
@@ -108,9 +128,12 @@ public class ReuseDiagramAndObjects {
 		String tagXpath = sheet.getRow(1).getCell(7).getStringCellValue();
 		String diagramName = sheet.getRow(1).getCell(8).getStringCellValue();
 		String diagramDescription = sheet.getRow(1).getCell(9).getStringCellValue();
-		String knowledgeName = sheet.getRow(1).getCell(10).getStringCellValue();
-		String inputName = sheet.getRow(1).getCell(11).getStringCellValue();
-		String decisionName = sheet.getRow(1).getCell(12).getStringCellValue();
+		String inputData1 = sheet.getRow(1).getCell(10).getStringCellValue();
+		String inputData2 = sheet.getRow(1).getCell(11).getStringCellValue();
+		String decisionData1 = sheet.getRow(1).getCell(12).getStringCellValue();
+		String decisionData2 = sheet.getRow(1).getCell(13).getStringCellValue();
+		String decisionData3 = sheet.getRow(1).getCell(14).getStringCellValue();
+		String knowledgeData1 = sheet.getRow(1).getCell(15).getStringCellValue();
 
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id=\'name\']/quill-editor/div[2]/div"))
 				.sendKeys(projectName);
@@ -192,14 +215,10 @@ public class ReuseDiagramAndObjects {
 
 		Actions act = new Actions(driver);
 
-		WebElement src1 = driver.findElement(By.xpath("//div[@class='add-object-palette']//canvas"));
-
-		WebElement LINKS = driver.findElement(By.xpath("//div[@class='links-palette']"));
-
 		WebElement target = driver.findElement(By.xpath("//div[@class='diagramDiv']//canvas"));
-		
+
 		WebElement reuse_objects = driver.findElement(By.xpath(
-				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[3]/dfm-go-js-existing-objects-palette/div/div/canvas"));
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[3]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[3]/dfm-go-js-existing-objects-palette/div/div/canvas"));
 
 		XSSFSheet sheet1 = workbook.getSheet("AddDiagramWithObjectsAndLinks");
 
@@ -249,11 +268,6 @@ public class ReuseDiagramAndObjects {
 		String canvasCoordinates10 = dataFormatter.formatCellValue(sheet1.getRow(17).getCell(1));
 		int canvasValue10 = Integer.parseInt(canvasCoordinates10);
 
-		String canvasCoordinates11 = dataFormatter.formatCellValue(sheet1.getRow(18).getCell(0));
-		int canvasValue11 = Integer.parseInt(canvasCoordinates11);
-
-		String canvasCoordinates12 = dataFormatter.formatCellValue(sheet1.getRow(18).getCell(1));
-		int canvasValue12 = Integer.parseInt(canvasCoordinates12);
 
 		// Knowledge data from excel for Input source
 		String knowledgeValue1 = dataFormatter.formatCellValue(sheet1.getRow(7).getCell(4));
@@ -267,32 +281,6 @@ public class ReuseDiagramAndObjects {
 
 		String canvasCoordinates14 = dataFormatter.formatCellValue(sheet1.getRow(19).getCell(1));
 		int canvasValue14 = Integer.parseInt(canvasCoordinates14);
-
-		// Group data from excel for Input source
-		String groupValue1 = dataFormatter.formatCellValue(sheet1.getRow(7).getCell(6));
-		int groupNumber1 = Integer.parseInt(groupValue1);
-
-		String groupValue2 = dataFormatter.formatCellValue(sheet1.getRow(7).getCell(7));
-		int groupNumber2 = Integer.parseInt(groupValue2);
-
-		String canvasCoordinates15 = dataFormatter.formatCellValue(sheet1.getRow(20).getCell(0));
-		int canvasValue15 = Integer.parseInt(canvasCoordinates15);
-
-		String canvasCoordinates16 = dataFormatter.formatCellValue(sheet1.getRow(20).getCell(1));
-		int canvasValue16 = Integer.parseInt(canvasCoordinates16);
-
-		// Annotation data from excel for Input source
-		String annotationValue1 = dataFormatter.formatCellValue(sheet1.getRow(7).getCell(8));
-		int annotationNumber1 = Integer.parseInt(annotationValue1);
-
-		String annotationValue2 = dataFormatter.formatCellValue(sheet1.getRow(7).getCell(9));
-		int annotationNumber2 = Integer.parseInt(annotationValue2);
-
-		String canvasCoordinates17 = dataFormatter.formatCellValue(sheet1.getRow(21).getCell(0));
-		int canvasValue17 = Integer.parseInt(canvasCoordinates17);
-
-		String canvasCoordinates18 = dataFormatter.formatCellValue(sheet1.getRow(21).getCell(1));
-		int canvasValue18 = Integer.parseInt(canvasCoordinates18);
 
 		// information link data from excel
 		String informationLinkValue1 = dataFormatter.formatCellValue(sheet1.getRow(10).getCell(0));
@@ -308,66 +296,9 @@ public class ReuseDiagramAndObjects {
 		String authorityLinkValue2 = dataFormatter.formatCellValue(sheet1.getRow(10).getCell(4));
 		int authorityLinkNumber2 = Integer.parseInt(authorityLinkValue2);
 
-		// Annotation link data from excel
-		String annotationLinkValue1 = dataFormatter.formatCellValue(sheet1.getRow(10).getCell(6));
-		int annotationLinkNumber1 = Integer.parseInt(annotationLinkValue1);
-
-		String annotationLinkValue2 = dataFormatter.formatCellValue(sheet1.getRow(10).getCell(7));
-		int annotationLinkNumber2 = Integer.parseInt(annotationLinkValue2);
-
-		/*
-		 * // Input data from excel for connection between objects /*String
-		 * connectionValue1 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(10).getCell(0)); int
-		 * connectionNumber1 = Integer.parseInt(connectionValue1);
-		 * 
-		 * String connectionValue2 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(10).getCell(1)); int
-		 * connectionNumber2 = Integer.parseInt(connectionValue2);
-		 * 
-		 * String connectionValue3 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(11).getCell(0)); int
-		 * connectionNumber3 = Integer.parseInt(connectionValue3);
-		 * 
-		 * String connectionValue4 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(11).getCell(1)); int
-		 * connectionNumber4 = Integer.parseInt(connectionValue4);
-		 * 
-		 * String connectionValue5 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(12).getCell(0)); int
-		 * connectionNumber5 = Integer.parseInt(connectionValue5);
-		 * 
-		 * String connectionValue6 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(12).getCell(1)); int
-		 * connectionNumber6 = Integer.parseInt(connectionValue6);
-		 * 
-		 * String connectionValue7 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(13).getCell(0)); int
-		 * connectionNumber7 = Integer.parseInt(connectionValue7);
-		 * 
-		 * String connectionValue8 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(13).getCell(1)); int
-		 * connectionNumber8 = Integer.parseInt(connectionValue8);
-		 * 
-		 * String connectionValue9 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(14).getCell(0)); int
-		 * connectionNumber9 = Integer.parseInt(connectionValue9);
-		 * 
-		 * String connectionValue10 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(14).getCell(1)); int
-		 * connectionNumber10 = Integer.parseInt(connectionValue10);
-		 * 
-		 * String connectionValue11 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(15).getCell(0)); int
-		 * connectionNumber11 = Integer.parseInt(connectionValue11);
-		 * 
-		 * String connectionValue12 =
-		 * dataFormatter.formatCellValue(sheet1.getRow(15).getCell(1)); int
-		 * connectionNumber12 = Integer.parseInt(connectionValue12);
-		 */
 
 		// Input Source data 1
-		act.moveToElement(src1, inputNumber1, inputNumber2);
+		/*act.moveToElement(src1, inputNumber1, inputNumber2);
 		act.clickAndHold().moveByOffset(inputNumber1, inputNumber2);
 		act.moveToElement(src1, canvasValue1, canvasValue2);
 		act.moveToElement(target, canvasValue1, canvasValue2);
@@ -425,8 +356,8 @@ public class ReuseDiagramAndObjects {
 		act.click().build().perform();
 		Thread.sleep(2000);
 
-		// Link with the Objects
-		// creating the connection with links between Input Source 1 & Decision Source 2
+		// Link with the Objects // creating the connection with links between Input
+		// Source 1 & Decision Source 2
 		act.moveToElement(target, 15, 5);
 		act.clickAndHold().moveByOffset(15, 5);
 		act.moveByOffset(50, -150);
@@ -443,7 +374,7 @@ public class ReuseDiagramAndObjects {
 		Thread.sleep(2000);
 
 		// creating the connection with links between Input Source 2 & Decision Source 1
-		// ok
+		// // ok
 		act.moveToElement(target, 10, 5);
 		act.clickAndHold().moveByOffset(10, 5);
 		act.moveByOffset(-200, -150);
@@ -462,120 +393,312 @@ public class ReuseDiagramAndObjects {
 		act.moveByOffset(200, -150);
 		act.release();
 		act.perform();
-		Thread.sleep(2000);
+		Thread.sleep(2000);*/
 
-		// click Annotation link
-		/*
-		 * act.moveToElement(LINKS, annotationLinkNumber1, annotationLinkNumber2);
-		 * act.click().build().perform(); Thread.sleep(3000);
-		 */
 
 		// click Input Source data 1
-		act.moveToElement(target, 5, 5);
-		act.click().build().perform();
-		Thread.sleep(3000);
-		// update Input Source data 1
-		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
-		Thread.sleep(2000);
-		
-		
-		// click Input Source data 2
-		act.moveToElement(target, -95, 5);
-		act.click().build().perform();
-		Thread.sleep(3000);
-		// update Input Source data 2
-		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
-		Thread.sleep(2000);
-		
-		// click Decision Source data 1
-		act.moveToElement(target, 255, -145);
-		act.click().build().perform();
-		Thread.sleep(3000);
-		// update Decision Source data 1
-		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
-		Thread.sleep(2000);
-		
-		
-		// click Decision Source data 2
-		act.moveToElement(target, 55, -145);
-		act.click().build().perform();
-		Thread.sleep(3000);
-		// update Decision Source data 2
-		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
-		Thread.sleep(2000);
-		
-		
-		// click Decision Source data 3
-		act.moveToElement(target, -125, -145);
-		act.click().build().perform();
-		Thread.sleep(3000);
-		// update Decision Source data 3
-		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
-		Thread.sleep(2000);
-		
-		
-		// click Knowledge Source data 1
-		act.moveToElement(target, 305, -255);
-		act.click().build().perform();
-		Thread.sleep(3000);
-		// update Knowledge Source data 1
-		/*driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).clear();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(knowledgeName);*/
-		Thread.sleep(2000);
-		
-
-		Thread.sleep(7000);
-
-		// act.moveToElement(LINKS, -14, 120); act.contextClick().perform();
-
 		/*
-		 * driver.findElement(By.
-		 * xpath("//div[@class='tab-text-container']//span[contains(text(),'Tag Explorer')]"
-		 * )).click();
+		 * act.moveToElement(target, 5, 5); act.click().build().perform();
+		 * Thread.sleep(3000); // update Input Source data 1
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * clear(); //Thread.sleep(1000);
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * sendKeys(knowledgeName); Thread.sleep(2000);
 		 * 
-		 * // identify element WebElement tag1 = driver.findElement(By.xpath(tagXpath));
-		 * // Actions class with moveToElement() and contextClick() Actions a2 = new
-		 * Actions(driver); a2.moveToElement(tag1).contextClick().build().perform();
-		 * Thread.sleep(2000);
-		 * driver.findElement(By.xpath("//div[contains(text(),'Create DRD')]")).click();
-		 * Thread.sleep(2000);
 		 * 
-		 * driver.findElement(By.xpath(
-		 * "//core-edit-multiple-lines-control[@id='diagramName']//p")).sendKeys(
-		 * diagramName);
+		 * // click Input Source data 2 act.moveToElement(target, -95, 5);
+		 * act.click().build().perform(); Thread.sleep(3000); // update Input Source
+		 * data 2
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * clear(); //Thread.sleep(1000);
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * sendKeys(knowledgeName); Thread.sleep(2000);
 		 * 
-		 * driver.findElement(By.xpath(
-		 * "//core-edit-multiple-lines-control[@id='diagramDescription']//p"))
-		 * .sendKeys(diagramDescription);
+		 * // click Decision Source data 1 act.moveToElement(target, 255, -145);
+		 * act.click().build().perform(); Thread.sleep(3000); // update Decision Source
+		 * data 1
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * clear(); //Thread.sleep(1000);
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * sendKeys(knowledgeName); Thread.sleep(2000);
 		 * 
-		 * driver.findElement(By.xpath("//button[normalize-space()='Add Diagram']")).
-		 * click(); Thread.sleep(5000);
 		 * 
-		 * driver.findElement(By.xpath("//i[@class='eva eva-settings-2-outline']")).
-		 * click(); Thread.sleep(4000);
+		 * // click Decision Source data 2 act.moveToElement(target, 55, -145);
+		 * act.click().build().perform(); Thread.sleep(3000); // update Decision Source
+		 * data 2
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * clear(); //Thread.sleep(1000);
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * sendKeys(knowledgeName); Thread.sleep(2000);
+		 * 
+		 * 
+		 * // click Decision Source data 3 act.moveToElement(target, -125, -145);
+		 * act.click().build().perform(); Thread.sleep(3000); // update Decision Source
+		 * data 3
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * clear(); //Thread.sleep(1000);
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * sendKeys(knowledgeName); Thread.sleep(2000);
+		 * 
+		 * 
+		 * // click Knowledge Source data 1 act.moveToElement(target, 305, -255);
+		 * act.click().build().perform(); Thread.sleep(3000); // update Knowledge Source
+		 * data 1
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * clear(); //Thread.sleep(1000);
+		 * //driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).
+		 * sendKeys(knowledgeName); //Thread.sleep(2000);
 		 */
 
-		driver.findElement(By.xpath("//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']")).sendKeys("span");
-		Thread.sleep(4000);
+
+		//Close the current diagram tab
+//		driver.findElement(By.xpath(
+//				"/html[1]/body[1]/dfm-root[1]/dfm-main-container[1]/nb-layout[1]/div[1]/div[1]/div[1]/div[1]/div[1]/nb-layout-column[1]/dfm-tabs-container[1]/div[1]/ul[1]/li[3]/div[1]/i[1]"))
+//				.click();
+//		Thread.sleep(4000);
+
+		//Click on the Tag Explorer
+//		driver.findElement(By.xpath("//div[@class='tab-text-container']//span[contains(text(),'Tag Explorer')]"))
+//				.click();
+
 		
-		act.moveToElement(reuse_objects, -30, 5);
-		act.clickAndHold().moveByOffset(-30, 5);
-		act.moveToElement(reuse_objects, 1, 1);
-		act.moveToElement(target, 1, 1);
-		act.release();
-		act.perform();
-		Thread.sleep(3000);
+//		  // identify element 
+		//WebElement tag1 = driver.findElement(By.xpath(tagXpath));
+		// Actions class with moveToElement() and contextClick()
+//		Actions a2 = new Actions(driver);
+//		a2.moveToElement(tag1).contextClick().build().perform();
+//		Thread.sleep(2000);
+//		driver.findElement(By.xpath("//div[contains(text(),'Create DRD')]")).click();
+//		Thread.sleep(2000);
+//
+//		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='diagramName']//p")).sendKeys(diagramName);
+//
+//		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='diagramDescription']//p"))
+//				.sendKeys(diagramDescription);
+//
+//		driver.findElement(By.xpath("//button[normalize-space()='Add Diagram']")).click();
+//		Thread.sleep(5000);
+
+//		  {
+//				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+//				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html[1]/body[1]/dfm-root[1]/dfm-main-container[1]/nb-layout[1]/div[1]/div[1]/div[1]/div[1]/div[1]/nb-layout-column[1]/dfm-tabs-container[1]/div[1]/div[1]/div[3]/dfm-view-diagram-container[1]/div[1]/dfm-diagram-sidebar[1]/div[1]/div[1]/dfm-diagram-tabs-container[1]/div[1]/div[1]/div[2]/div[2]")));
+//			}
+
+//		driver.findElement(By.xpath("//i[@class='eva eva-settings-2-outline']")).click();
+//		Thread.sleep(4000);
+
+		// driver.navigate().refresh();
+		// Thread.sleep(8000);
+		// driver.findElement(By.xpath("//i[@class='eva
+		// eva-settings-2-outline']")).click();
+		Thread.sleep(2000);
+
+		
+		// 1st input object
+		driver.findElement(By.xpath(
+				"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+				.sendKeys(inputData1);
+		Thread.sleep(2000);
+
+		try {
+			act.moveToElement(reuse_objects, -45, -160);
+			act.clickAndHold().moveByOffset(-45, -160);
+			act.moveToElement(reuse_objects, 1, 80);
+			act.moveToElement(target, 1, 80);
+			act.release();
+			act.perform();
+			Thread.sleep(5000);
+			
+			// Click Outside
+			act.moveToElement(target, 5, 5);
+			act.click().build().perform();
+			Thread.sleep(3000);
+			
+			
+			// Input data source 1
+			act.moveToElement(target, 5, 85);
+			act.click().build().perform();
+			Thread.sleep(2000);
+			String expected_value1 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
+			System.out.println(expected_value1);
+			Assert.assertEquals(inputData1, expected_value1);
+			
+
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.clear();
+			Thread.sleep(5000);
+//2nd input object
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.sendKeys(inputData2);
+			Thread.sleep(2000);
+			act.moveToElement(reuse_objects, -45, -160);
+			act.clickAndHold().moveByOffset(-45, -160);
+			act.moveToElement(reuse_objects, -100, 80);
+			act.moveToElement(target, -100, 80);
+			act.release();
+			act.perform();
+			Thread.sleep(5000);
+			
+			
+			// Click Outside
+			act.moveToElement(target, 50, -50);
+			act.click().build().perform();
+			Thread.sleep(3000);
+			// Input data source 2
+			act.moveToElement(target, -105, 80);
+			act.click().build().perform();
+			Thread.sleep(2000);
+			String expected_value2 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
+			System.out.println(expected_value2);
+			Assert.assertEquals(inputData2, expected_value2);
+			
+
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.clear();
+			Thread.sleep(3000);
+//1st decision object
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.sendKeys(decisionData1);
+			Thread.sleep(2000);
+			act.moveToElement(reuse_objects, -45, -160);
+			act.clickAndHold().moveByOffset(-45, -160);
+			act.moveToElement(reuse_objects, 20, 180);
+			act.moveToElement(target, 20, 180);
+			act.release();
+			act.perform();
+			Thread.sleep(5000);
+			
+			
+			// Click Outside
+			act.moveToElement(target, 50, -50);
+			act.click().build().perform();
+			Thread.sleep(2000);			
+			// Decision data source 1
+			act.moveToElement(target, 25, 185);
+			act.click().build().perform();
+			Thread.sleep(2000);
+			
+			String expected_value3 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
+			System.out.println(expected_value3);
+			Assert.assertEquals(decisionData1, expected_value3);
+
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.clear();
+			Thread.sleep(5000);
+			
+           //2nd decision object
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.sendKeys(decisionData2);
+			Thread.sleep(2000);
+			act.moveToElement(reuse_objects, -45, -160);
+			act.clickAndHold().moveByOffset(-45, -160);
+			act.moveToElement(reuse_objects, 100, -50);
+			act.moveToElement(target, 100, -50);
+			act.release();
+			act.perform();
+			Thread.sleep(5000);
+			
+			
+			// Click Outside
+			act.moveToElement(target, 25, -15);
+			act.click().build().perform();
+			Thread.sleep(1000);
+			// Decision data source 2
+			act.moveToElement(target, 55, -45);
+			act.click().build().perform();
+			Thread.sleep(2000);
+			
+			String expected_value4 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
+			System.out.println(expected_value4);
+			Assert.assertEquals(decisionData2, expected_value4);
+			
+
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.clear();
+			Thread.sleep(5000);
+
+           // 3rd decision object
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.sendKeys(decisionData3);
+			Thread.sleep(2000);
+			act.moveToElement(reuse_objects, -45, -160);
+			act.clickAndHold().moveByOffset(-45, -160);
+			act.moveToElement(reuse_objects, -110, -50);
+			act.moveToElement(target, -110, -50);
+			act.release();
+			act.perform();
+			Thread.sleep(5000);
+			
+			// Click Outside
+			act.moveToElement(target, 55, -45);
+			act.click().build().perform();
+			Thread.sleep(3000);
+			// Decision data source 3
+			act.moveToElement(target, -165, -45);
+			act.click().build().perform();
+			Thread.sleep(2000);
+			
+			String expected_value5 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
+			System.out.println(expected_value5);
+			Assert.assertEquals(decisionData3, expected_value5);
+			
+			
+			
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.clear();
+			Thread.sleep(7000);
+// 1st knowledge source object
+			driver.findElement(By.xpath(
+					"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForDiagrammi']//input[@placeholder='Search']"))
+					.sendKeys(knowledgeData1);
+			Thread.sleep(2000);
+			act.moveToElement(reuse_objects, -45, -160);
+			act.clickAndHold().moveByOffset(-45, -160);
+			act.moveToElement(reuse_objects, 110, -180);
+			act.moveToElement(target, 110, -180);
+			act.release();
+			act.perform();
+			Thread.sleep(5000);
+			
+			// Click Outside
+			act.moveToElement(target, 5, 5);
+			act.click().build().perform();
+			Thread.sleep(1000);
+			
+			// knowledge data source 1
+			act.moveToElement(target, 115, -175);
+			act.click().build().perform();
+			Thread.sleep(2000);
+			
+			String expected_value6 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
+			System.out.println(expected_value6);
+			Assert.assertEquals(knowledgeData1, expected_value6);
+			
+		} catch (org.openqa.selenium.StaleElementReferenceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	
+
+
+
+
+
+
+		// Click Outside
+//		act.moveToElement(target, 11, 10);
+//		act.click().build().perform();
+//		Thread.sleep(3000);
 		
 		System.out.println("<<<Diagram created>>>");
 		workbook.close();
