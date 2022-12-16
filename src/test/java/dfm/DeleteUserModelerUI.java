@@ -3,28 +3,32 @@
 //Test Script to add the user from Admin account
 package dfm;
 
-import org.junit.Test;
-import org.junit.Before;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.After;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 
-import com.beust.jcommander.JCommander.Builder;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.dfm.utility.Helper;
 
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -32,13 +36,27 @@ public class DeleteUserModelerUI {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
+	ExtentSparkReporter sparkReporter;
+	ExtentReports reports;
+	ExtentTest extentTest;
+	Reporter report = new Reporter();
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		setUp();
-		addUserModelerUI01();
+//	public static void main(String[] args) throws InterruptedException, IOException {
+//		setUp();
+//		addUserModelerUI01();
+//	}
+	
+	@BeforeSuite
+	public void setUpReport() {
+
+		// start reporters
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")+"./Reports/Delete/DFM_DeleteUser"+Helper.getCurrentDateTime()+".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
+
 	}
 
-	// @Before
+	@BeforeClass
 	public static void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
@@ -47,24 +65,41 @@ public class DeleteUserModelerUI {
 		// driver=new EdgeDriver();
 	}
 
-	// @After
+	@AfterClass
 	public void tearDown() {
-		// driver.quit();
+		driver.quit();
+	}
+	
+	@AfterSuite
+	public void tearDownReoport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
 	}
 
-	// @Test
-	public static void addUserModelerUI01() throws InterruptedException, IOException {
+	@Test(priority = 0)
+	public void loginAction() throws InterruptedException, IOException {
 
+		Reporter.log("Test Case for Delete User");
+		extentTest = reports.createTest("Delete User", "Login to DFM Application");
+		// log with snapshot
+//		extentTest.pass("Details",
+//				MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		// test with snapshot
+		extentTest.addScreenCaptureFromPath("screenshot.png");
+
+		// log(Status, details)
+		extentTest.log(Status.INFO, "Starting Test Case");
 		// int n1 = Integer.parseInt(ProjectAdministrator);
 		// Test name: AddUserModelerUI_01
 		// Step # | name | target | value
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
-		 driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// For Openshift Environment
-		//driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1289x602 |
@@ -85,6 +120,10 @@ public class DeleteUserModelerUI {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
+	}
+
+	@Test(priority = 1)
+	public void navigateUserSection() throws InterruptedException, IOException {
 
 //		WebElement close_option_tab = driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
 //		if (close_option_tab.isDisplayed()) {
@@ -114,6 +153,10 @@ public class DeleteUserModelerUI {
 		// 13 | click | css=.plus-icon > .eva |
 		driver.findElement(By.cssSelector(".plus-icon > .eva")).click();
 		Thread.sleep(3000);
+	}
+
+	@Test(priority = 2)
+	public void deleteUserAndValidate() throws InterruptedException, IOException {
 
 		File src = new File("./Test Data/TestData.xlsx");
 		FileInputStream fis = new FileInputStream(src);
@@ -160,7 +203,7 @@ public class DeleteUserModelerUI {
 
 		driver.findElement(By.xpath("//i[@class='sidebar-control-button nb-menu sidebar-toggle icon-gray-color']"))
 				.click();
-        // 11 | click | xpath=//span[contains(.,'Log Out')] |
+		// 11 | click | xpath=//span[contains(.,'Log Out')] |
 		driver.findElement(By.xpath("//span[contains(.,\'Log Out\')]")).click();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys(email);
@@ -172,9 +215,11 @@ public class DeleteUserModelerUI {
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(4000);
 
-		String error_message = driver.findElement(By.xpath("//nb-alert[contains(text(),' You have entered an incorrect email address')]")).getText();
+		String error_message = driver
+				.findElement(By.xpath("//nb-alert[contains(text(),' You have entered an incorrect email address')]"))
+				.getText();
 		System.out.println("The message displayed after deletion of User is :  " + error_message);
-		
+
 //		if (driver.findElement(By.xpath("//nb-alert[contains(text(),' You have entered an incorrect email address')]")).isDisplayed()) {
 //			
 //			System.out.println("The User is deleted successfully");
@@ -182,6 +227,7 @@ public class DeleteUserModelerUI {
 //
 //			System.out.println("The User is able to login successfully");
 //		}
+		extentTest.log(Status.INFO, "Test Completed");
 
 		workbook.close();
 	}

@@ -55,7 +55,7 @@ public class DeleteCustomer extends BaseClass {
 	public void setUpReport() {
 
 		// start reporters
-		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")+"./Reports/Delete/DFM_Delete_"+Helper.getCurrentDateTime()+".html"));
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")+"./Reports/Delete/DFM_DeleteCustomer_"+Helper.getCurrentDateTime()+".html"));
 		reports = new ExtentReports();
 		reports.attachReporter(sparkReporter);
 
@@ -83,7 +83,7 @@ public class DeleteCustomer extends BaseClass {
 	}
 
 	@Test(priority =0)
-	public void logInToApplciation() throws InterruptedException, IOException, Exception {
+	public void logInToApplication() throws InterruptedException, IOException, Exception {
 
 		Reporter.log("Test Case for Login");
 		extentTest = reports.createTest("Delete Customer", "Login to Application");
@@ -97,6 +97,7 @@ public class DeleteCustomer extends BaseClass {
 		extentTest.log(Status.INFO, "Starting Test Case");
 		// For QA environment
 		driver.get("https://qa.admin.decisionsfirst.com/login");
+		extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift
 		// driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com");
@@ -108,6 +109,7 @@ public class DeleteCustomer extends BaseClass {
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("dms@123");
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(8000);
+		extentTest.pass("Login Successfull");
 
 		{
 			WebElement element = driver.findElement(By.cssSelector(".btn"));
@@ -174,6 +176,7 @@ public class DeleteCustomer extends BaseClass {
 		driver.findElement(By.id("domains")).sendKeys(domains);
 		driver.findElement(By.cssSelector(".btn:nth-child(5)")).click();
 		Thread.sleep(5000);
+		extentTest.pass("Customer added successfully");
 
 		driver.findElement(By.cssSelector(".form-control")).click();
 		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(customerDelete);
@@ -183,6 +186,7 @@ public class DeleteCustomer extends BaseClass {
 		Thread.sleep(5000);
 		driver.findElement(By.xpath("//i[@class='btn btn-info eva eva-search-outline search-icon']")).click();
 		driver.navigate().refresh();
+		extentTest.pass("Customer deleted successfully");
 		Thread.sleep(8000);
 
 		//Verify the Customer is present or not
@@ -194,6 +198,7 @@ public class DeleteCustomer extends BaseClass {
 			System.out.println("Congratulations, The Customer is deleted from the Account...");
 
 		}
+		extentTest.log(Status.INFO, "Test Completed");
 
 		workbook.close();
 
