@@ -3,17 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.ReuseDiagramAndObjects">
+      <class name="dfm.DeleteCustomer">
         <methods>
-          <include name="setUpReport"/>
-          <include name="addProject"/>
-          <include name="diagramWithReuseObjects"/>
-          <include name="tearDownReport"/>
-          <include name="setUp"/>
-          <include name="addTag"/>
           <include name="tearDown"/>
+          <include name="setUpSuite"/>
+          <include name="setUpReport"/>
+          <include name="tearDownReoport"/>
+          <include name="setUp"/>
+          <include name="deleteCustomer"/>
         </methods>
-      </class> <!-- dfm.ReuseDiagramAndObjects -->
+      </class> <!-- dfm.DeleteCustomer -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

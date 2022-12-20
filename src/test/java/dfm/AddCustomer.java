@@ -4,38 +4,59 @@
 
 package dfm;
 
-import org.junit.Test;
-import org.junit.Before;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.dfm.utility.Helper;
+
 import org.openqa.selenium.JavascriptExecutor;
 
-import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.*;
 
 public class AddCustomer {
-	public WebDriver driver;
+	public static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
+
+	ExtentSparkReporter sparkReporter;
+	ExtentReports reports;
+	ExtentTest extentTest;
+
+	Reporter report = new Reporter();
+
+	@BeforeSuite
+	public void setUpReport() {
+
+		// start reporters
+		// sparkReporter = new
+		// ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+				+ "./Reports/Customer/DFM_AddCustomer_" + Helper.getCurrentDateTime() + ".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
+	}
 
 	@BeforeClass
 	public void setUp() {
@@ -51,14 +72,21 @@ public class AddCustomer {
 		// driver.quit();
 	}
 
-	@org.testng.annotations.Test
+	@Test(priority = 1)
 	public void AddCustomerModeler() throws InterruptedException, IOException, Exception {
 
-		// For QA environment
-		// driver.get("https://qa.admin.decisionsfirst.com/login");
+		Reporter.log("Test Case for Add Customer");
+		extentTest = reports.createTest("Login", "Login to DFM Application");
 
+		extentTest.addScreenCaptureFromPath("screenshot.png");
+
+		// log(Status, details)
+		extentTest.log(Status.INFO, "Starting Test Case");
+		// For QA environment
+		driver.get("https://qa.admin.decisionsfirst.com/login");
+		extentTest.pass("Navigates to DFM URL");
 		// For Openshift
-		driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com");
+		// driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com");
 
 		driver.manage().window().maximize();
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
@@ -67,6 +95,7 @@ public class AddCustomer {
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("dms@123");
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(8000);
+		extentTest.pass("Login Successfull");
 
 		{
 			WebElement element = driver.findElement(By.cssSelector(".btn"));
@@ -121,6 +150,7 @@ public class AddCustomer {
 		driver.findElement(By.id("domains")).sendKeys(domains);
 		driver.findElement(By.cssSelector(".btn:nth-child(5)")).click();
 		Thread.sleep(5000);
+		extentTest.pass("Customer Added");
 
 		driver.findElement(By.cssSelector(".form-control")).click();
 		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys("Test Random");
@@ -149,6 +179,7 @@ public class AddCustomer {
 		}
 		driver.findElement(By.cssSelector(".btn:nth-child(5)")).click();
 		driver.findElement(By.xpath("//button[@type='button'][normalize-space()='Add User']")).click();
+		extentTest.pass("Added User One");
 
 		Thread.sleep(5000);
 		// Get all the User1 data from Excel Sheet
@@ -172,21 +203,22 @@ public class AddCustomer {
 		driver.findElement(By.cssSelector(".btn:nth-child(5)")).click();
 		driver.findElement(By.xpath("//button[@type='button'][normalize-space()='Add User']")).click();
 		Thread.sleep(5000);
+		extentTest.pass("Added User Two");
 		driver.navigate().refresh();
 		Thread.sleep(5000);
 
-		//Find element by xpath and store in variable "Element"        		
-        //WebElement Element = driver.findElement(By.xpath("//button[normalize-space()='Add Group']"));
+		// Find element by xpath and store in variable "Element"
+		// WebElement Element =
+		// driver.findElement(By.xpath("//button[normalize-space()='Add Group']"));
 
-        //This will scroll the page till the element is found		
-        //js.executeScript("arguments[0].scrollIntoView();", Element);
-		
+		// This will scroll the page till the element is found
+		// js.executeScript("arguments[0].scrollIntoView();", Element);
+
 		// js.executeScript("window.scrollTo(1000, document.body.scrollHeight)");
-		
+
 //		JavascriptExecutor js = (JavascriptExecutor) driver;
 //		js.executeScript("window.scrollBy(0,1000)");
-		
-		
+
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_END);
@@ -196,5 +228,39 @@ public class AddCustomer {
 		System.out.println("<<<<Customer added successfully>>>>");
 		workbook.close();
 
+	}
+
+	@Test(priority = 2)
+	public void validateCustomer() throws InterruptedException, IOException {
+
+		// Get the Customer data form Excel Sheet
+		File src = new File("./Test Data/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+		XSSFSheet sheet = workbook.getSheet("AddCustomer");
+
+		String customerName1 = sheet.getRow(1).getCell(0).getStringCellValue();
+
+		driver.findElement(
+				By.xpath("//div[@class='nav-link nav-link-default active-default']//i[@class='nb-close icon']"))
+				.click();
+		driver.navigate().refresh();
+		Thread.sleep(8000);
+		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(customerName1);
+		Thread.sleep(4000);
+		extentTest.pass("Customer added and validated successfully");
+
+		extentTest.log(Status.INFO, "Test Completed");
+
+		// extentTest.pass("Customer deleted successfully");
+
+	}
+
+	@AfterSuite
+	public void tearDownReport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
 	}
 }

@@ -4,9 +4,8 @@
   <test thread-count="5" name="DFM Test">
     <classes>
       <class name="dfm.LoginAdmin_01"/>
+      <class name="dfm.AddCustomer"/>
       <class name="dfm.DeleteCustomer"/>
-      <class name="dfm.DeleteUserModelerUI"/>
-      <class name="dfm.ReuseDiagramAndObjects"/>
     </classes>
   </test> <!-- DFM Test -->
 </suite> <!-- DFM Suite -->

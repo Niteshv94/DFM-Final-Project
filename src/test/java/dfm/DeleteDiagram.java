@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.io.File;
@@ -22,8 +23,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-public class AddTagTest {
-	private WebDriver driver;
+public class DeleteDiagram {
+	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
@@ -39,10 +40,30 @@ public class AddTagTest {
 	@AfterClass
 	public void tearDown() {
 		// driver.quit();
+		// workbook.close();
 	}
 
-	@org.testng.annotations.Test
-	public void addTag() throws InterruptedException, IOException {
+	@Test(priority = 1)
+	public void loginToApplication() throws InterruptedException, IOException {
+		login();
+		searchDiagram();
+	}
+
+	@Test(priority = 2)
+	public void deleteDiagram() throws InterruptedException, IOException {
+
+		deleteSearchDiagram();
+	}
+
+	@Test(priority = 3)
+	public void validateDiagram() throws InterruptedException, IOException {
+		//Thread.sleep(7000);
+		driver.navigate().refresh();
+		Thread.sleep(5000);
+		searchDiagram();
+	}
+
+	public static void login() throws InterruptedException, IOException {
 		// Test name: Add Tag
 		// Step # | name | target | value
 
@@ -51,7 +72,7 @@ public class AddTagTest {
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// For Openshift Environment
-		//driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1183x602 |
@@ -72,62 +93,47 @@ public class AddTagTest {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
-		
-		/*WebElement close_option_tab	= driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
-		if (close_option_tab.isDisplayed()) {
-			close_option_tab.click();
-			
-		} else {
-			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
 
-		}*/
-		
-		// 9 | click | css=.sidebar-control-button |
-		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
-		Thread.sleep(3000);
-		// 10 | click | xpath=//span[contains(.,'Tag Explorer')] |
-		driver.findElement(By.xpath("//span[@class='item-text'][normalize-space()='Tag Explorer']")).click();
-		Thread.sleep(5000);
+		/*
+		 * WebElement close_option_tab =
+		 * driver.findElement(By.xpath("//button[normalize-space()='CLOSE']")); if
+		 * (close_option_tab.isDisplayed()) { close_option_tab.click();
+		 * 
+		 * } else {
+		 * System.out.println("Wijmo Evaluation Version (5.20213.824) is not available"
+		 * );
+		 * 
+		 * }
+		 */
 
-		// 10 | click | id=search-ip |
-		driver.findElement(By.id("search-ip")).click();
+	}
+
+	public static void searchDiagram() throws InterruptedException, IOException {
+
 
 		// Get the xpath and Tag data form Excel Sheet
 		File src = new File("./Test Data/TestData.xlsx");
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-		XSSFSheet sheet = workbook.getSheet("AddTagTest");
+		XSSFSheet sheet = workbook.getSheet("DeleteDiagram");
 
-		String searchProject = sheet.getRow(1).getCell(0).getStringCellValue();
-		String projectName = sheet.getRow(1).getCell(1).getStringCellValue();
-		String tagName = sheet.getRow(1).getCell(2).getStringCellValue();
-		String tagDescription = sheet.getRow(1).getCell(3).getStringCellValue();
+		String searchDiagram = sheet.getRow(1).getCell(0).getStringCellValue();
 
 		// 11 | type | id=search-ip | dummy
-		driver.findElement(By.id("search-ip")).sendKeys(searchProject);
-
-		// identify element
-		WebElement l = driver.findElement(By.xpath(projectName));
-		// Actions class with moveToElement() and contextClick()
-		Actions a = new Actions(driver);
-		a.moveToElement(l).contextClick().build().perform();
-		Thread.sleep(2000);
-
-		// 13 | click | css=.rich-text-editor-focus p |
-		driver.findElement(By.xpath("//div[contains(text(),'Add Tag')]")).click();
-
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//div[@class='ql-editor ql-blank']"))
-				.sendKeys(tagName);
-
-		driver.findElement(
-				By.xpath("//core-edit-multiple-lines-control[@id='description']//div[@class='ql-editor ql-blank']"))
-				.sendKeys(tagDescription);
-
-		// 17 | click | css=.btn-block |
-		driver.findElement(By.xpath("//button[contains(.,'Add Tag')]")).click();
-
-		System.out.println("<<<<<Tag added successfully>>>>>");
-		workbook.close();
+		driver.findElement(By.xpath(
+				"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForHomeSearc']//input[@placeholder='Search']"))
+				.sendKeys(searchDiagram);
 	}
+
+	public static void deleteSearchDiagram() throws InterruptedException, IOException {
+
+		driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/button")).click();
+		
+//		String delete_message = driver.findElement(By.xpath("//span[@class='title subtitle']")).getText();
+//		System.out.println("Message after deletion of diagram is : " + delete_message);
+		Thread.sleep(8000);
+
+	}
+
 }

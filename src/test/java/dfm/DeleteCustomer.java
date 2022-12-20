@@ -46,10 +46,6 @@ public class DeleteCustomer extends BaseClass {
 	ExtentTest extentTest;
 	Reporter report = new Reporter();
 
-//	public static void main(String[] args) throws InterruptedException, IOException, Exception {
-//		setUp();
-//		deleteCustomer();
-//	}
 	
 	@BeforeSuite
 	public void setUpReport() {
@@ -72,7 +68,7 @@ public class DeleteCustomer extends BaseClass {
 
 	@AfterClass
 	public void tearDown() {
-		driver.quit();
+		//driver.quit();
 	}
 	
 	@AfterSuite
@@ -111,20 +107,6 @@ public class DeleteCustomer extends BaseClass {
 		Thread.sleep(8000);
 		extentTest.pass("Login Successfull");
 
-		{
-			WebElement element = driver.findElement(By.cssSelector(".btn"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).perform();
-		}
-		{
-			WebElement element = driver.findElement(By.tagName("body"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element, 0, 0).perform();
-		}
-		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
-		driver.findElement(By.cssSelector(".add-customer-link > .item-text")).click();
-		driver.findElement(By.cssSelector("p")).click();
-
 	}
 	@Test (priority =1)
 	public void deleteCustomer() throws IOException, InterruptedException
@@ -140,54 +122,28 @@ public class DeleteCustomer extends BaseClass {
 		}
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
+		//Pass the same data present in AddCustomer sheet"
 		XSSFSheet sheet = workbook.getSheet("DeleteCustomer");
 
-		String customerName = sheet.getRow(1).getCell(0).getStringCellValue();
+		
 
 		DataFormatter dataFormatter = new DataFormatter();
 
 		// Input data from excel for number of Users
-		String numberOfUsersValue = dataFormatter.formatCellValue(sheet.getRow(1).getCell(1));
-		String domains = sheet.getRow(1).getCell(2).getStringCellValue();
-		String customerDelete = sheet.getRow(1).getCell(0).getStringCellValue();
-		String verifyCustomer = sheet.getRow(1).getCell(3).getStringCellValue();
+		String customerName = sheet.getRow(1).getCell(0).getStringCellValue();
+		String verifyCustomer = sheet.getRow(1).getCell(1).getStringCellValue();
 
-		driver.findElement(By.xpath("//div[@class='ql-editor ql-blank']")).sendKeys(customerName);
-
-		{
-			WebElement element = driver.findElement(By.id("numberOfUsers"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).clickAndHold().perform();
-		}
-		{
-			WebElement element = driver.findElement(By.id("numberOfUsers"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).perform();
-		}
-		{
-			WebElement element = driver.findElement(By.id("numberOfUsers"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).release().perform();
-		}
-		driver.findElement(By.id("numberOfUsers")).click();
-		driver.findElement(By.id("numberOfUsers")).clear();
-		driver.findElement(By.id("numberOfUsers")).sendKeys(numberOfUsersValue);
-		driver.findElement(By.id("domains")).click();
-		driver.findElement(By.id("domains")).sendKeys(domains);
-		driver.findElement(By.cssSelector(".btn:nth-child(5)")).click();
-		Thread.sleep(5000);
-		extentTest.pass("Customer added successfully");
-
-		driver.findElement(By.cssSelector(".form-control")).click();
-		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(customerDelete);
+		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(customerName);
 		Thread.sleep(4000);
 		// driver.findElement(By.cssSelector("span > .item-name")).click();
 		driver.findElement(By.xpath("//i[@class='eva eva-trash-2-outline remove-item icon-gray-color']")).click();
 		Thread.sleep(5000);
 		driver.findElement(By.xpath("//i[@class='btn btn-info eva eva-search-outline search-icon']")).click();
 		driver.navigate().refresh();
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(customerName);
 		extentTest.pass("Customer deleted successfully");
-		Thread.sleep(8000);
+		
 
 		//Verify the Customer is present or not
 		List<WebElement> verify_customer_inList = driver.findElements(By.xpath(verifyCustomer));

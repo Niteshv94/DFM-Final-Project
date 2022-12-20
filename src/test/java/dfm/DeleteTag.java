@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.io.File;
@@ -22,8 +23,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-public class AddTagTest {
-	private WebDriver driver;
+public class DeleteTag {
+	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
@@ -39,10 +40,33 @@ public class AddTagTest {
 	@AfterClass
 	public void tearDown() {
 		// driver.quit();
+		// workbook.close();
 	}
 
-	@org.testng.annotations.Test
-	public void addTag() throws InterruptedException, IOException {
+	@Test(priority = 1)
+	public void loginToApplication() throws InterruptedException, IOException {
+		login();
+		searchTag();
+
+	}
+
+	@Test(priority = 2)
+	public void deleteTag() throws InterruptedException, IOException {
+
+		deleteSearchTag();
+
+	}
+
+	@Test(priority = 3)
+	public void validateDeleteTag() throws InterruptedException, IOException {
+
+		driver.navigate().refresh();
+		Thread.sleep(5000);
+		searchTag();
+
+	}
+
+	public static void login() throws InterruptedException, IOException {
 		// Test name: Add Tag
 		// Step # | name | target | value
 
@@ -51,7 +75,7 @@ public class AddTagTest {
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// For Openshift Environment
-		//driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1183x602 |
@@ -72,22 +96,29 @@ public class AddTagTest {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
-		
-		/*WebElement close_option_tab	= driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
-		if (close_option_tab.isDisplayed()) {
-			close_option_tab.click();
-			
-		} else {
-			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
 
-		}*/
-		
+		/*
+		 * WebElement close_option_tab =
+		 * driver.findElement(By.xpath("//button[normalize-space()='CLOSE']")); if
+		 * (close_option_tab.isDisplayed()) { close_option_tab.click();
+		 * 
+		 * } else {
+		 * System.out.println("Wijmo Evaluation Version (5.20213.824) is not available"
+		 * );
+		 * 
+		 * }
+		 */
+
 		// 9 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
 		Thread.sleep(3000);
 		// 10 | click | xpath=//span[contains(.,'Tag Explorer')] |
 		driver.findElement(By.xpath("//span[@class='item-text'][normalize-space()='Tag Explorer']")).click();
 		Thread.sleep(5000);
+
+	}
+
+	public static void searchTag() throws InterruptedException, IOException {
 
 		// 10 | click | id=search-ip |
 		driver.findElement(By.id("search-ip")).click();
@@ -97,7 +128,7 @@ public class AddTagTest {
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-		XSSFSheet sheet = workbook.getSheet("AddTagTest");
+		XSSFSheet sheet = workbook.getSheet("DeleteTagTest");
 
 		String searchProject = sheet.getRow(1).getCell(0).getStringCellValue();
 		String projectName = sheet.getRow(1).getCell(1).getStringCellValue();
@@ -105,29 +136,41 @@ public class AddTagTest {
 		String tagDescription = sheet.getRow(1).getCell(3).getStringCellValue();
 
 		// 11 | type | id=search-ip | dummy
-		driver.findElement(By.id("search-ip")).sendKeys(searchProject);
+		driver.findElement(By.id("search-ip")).sendKeys(tagName);
+	}
 
-		// identify element
-		WebElement l = driver.findElement(By.xpath(projectName));
+	public static void deleteSearchTag() throws InterruptedException, IOException {
+		// Get the xpath and Tag data form Excel Sheet
+		File src = new File("./Test Data/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		XSSFWorkbook workbook1 = new XSSFWorkbook(fis);
+
+		XSSFSheet sheet = workbook1.getSheet("DeleteTagTest");
+		String tagXpath = sheet.getRow(1).getCell(4).getStringCellValue();
+		// identify project
+		// WebElement l = driver.findElement(By.xpath(projectName));
+		WebElement l1 = driver.findElement(By.xpath(tagXpath));
+
 		// Actions class with moveToElement() and contextClick()
 		Actions a = new Actions(driver);
-		a.moveToElement(l).contextClick().build().perform();
+		a.moveToElement(l1).contextClick().build().perform();
 		Thread.sleep(2000);
 
-		// 13 | click | css=.rich-text-editor-focus p |
-		driver.findElement(By.xpath("//div[contains(text(),'Add Tag')]")).click();
+		driver.findElement(By.xpath("//div[contains(text(),'Delete Tag')]")).click();
 
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//div[@class='ql-editor ql-blank']"))
-				.sendKeys(tagName);
+//		for(int r=2; r<100; r++)
+//		{
+//			String xpath = "/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[5]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[2]/wj-tree-view/div/div[" + r + "]";
+//			String a1 = driver.findElement(By.xpath(xpath)).getText();
+//			
+//			if(a1.contains(tagName))
+//			{
+//				Thread.sleep(2000);
+//				String xpath1 = "/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[5]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[2]/wj-tree-view/div/div[2]/div[" + r + "]";
+//				driver.findElement(By.xpath(xpath1)).click();
+//			}
+//		}
 
-		driver.findElement(
-				By.xpath("//core-edit-multiple-lines-control[@id='description']//div[@class='ql-editor ql-blank']"))
-				.sendKeys(tagDescription);
-
-		// 17 | click | css=.btn-block |
-		driver.findElement(By.xpath("//button[contains(.,'Add Tag')]")).click();
-
-		System.out.println("<<<<<Tag added successfully>>>>>");
-		workbook.close();
 	}
+
 }

@@ -74,8 +74,8 @@ public class LoginAdmin_01 extends BaseClass {
 		// log(Status, details)
 		extentTest.log(Status.INFO, "Starting Test Case");
 		// 1 | open | /login |
-		// driver.get("https://qa.admin.decisionsfirst.com/login");
-		driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		 driver.get("https://qa.admin.decisionsfirst.com/login");
+		//driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 		extentTest.pass("Navigates to DFM URL");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
 		driver.manage().window().maximize();
