@@ -4,7 +4,7 @@
 
 package dfm;
 
-import org.junit.Test;
+
 import org.junit.Before;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,6 +18,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.File;
@@ -32,12 +35,8 @@ public class DeleteGroupsModelerUI {
 	// private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		setUp();
-		addGroupsModelerUI01();
-	}
 
-	// @Before
+	@BeforeClass
 	public static void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
@@ -46,12 +45,12 @@ public class DeleteGroupsModelerUI {
 		// driver=new EdgeDriver();
 	}
 
-	// @After
+	@AfterClass
 	public void tearDown() {
 		driver.quit();
 	}
 
-	// @Test
+	@Test (priority = 1)
 	public static void addGroupsModelerUI01() throws InterruptedException, IOException {
 		// Test name: AddGroupsModelerUI_01
 		// Step # | name | target | value
@@ -82,6 +81,9 @@ public class DeleteGroupsModelerUI {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
+	}
+	@Test (priority = 2)
+	public static void deleteGroupsModeler() throws InterruptedException, IOException {
 
 //		WebElement close_option_tab = driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
 //		if (close_option_tab.isDisplayed()) {
@@ -100,7 +102,7 @@ public class DeleteGroupsModelerUI {
 		Thread.sleep(4000);
 		driver.findElement(By.cssSelector(".nav-link-group > .tab-text-container")).click();
 		// 11 | click | css=.title-icon > .eva |
-		driver.findElement(By.cssSelector(".title-icon > .eva")).click();
+		//driver.findElement(By.cssSelector(".title-icon > .eva")).click();
 		// 12 | click | css=.rich-text-editor-focus p |
 		Thread.sleep(2000);
 
@@ -118,22 +120,22 @@ public class DeleteGroupsModelerUI {
 
 		// Thread.sleep(2000);
 		// Enter Group Name
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//p")).sendKeys(groupName);
+		//driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//p")).sendKeys(groupName);
 
 		// 14 | click | css=.ql-blank > p |
-		driver.findElement(By.cssSelector(".ql-blank > p")).click();
+		//driver.findElement(By.cssSelector(".ql-blank > p")).click();
 
 		// Enter Description
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='description']//p")).sendKeys(description);
+		//driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='description']//p")).sendKeys(description);
 
 		// Thread.sleep(2000);
-		WebElement fieldData = driver.findElement(By.xpath(permissions));
-		fieldData.click();
+		//WebElement fieldData = driver.findElement(By.xpath(permissions));
+		//fieldData.click();
 		// driver.findElement(By.xpath("//td[@class='fieldData']//label[1]")).click();
 
 		// 23 | click | css=div:nth-child(3) > .btn |
 		// driver.findElement(By.cssSelector("div:nth-child(3) > .btn")).click();
-		driver.findElement(By.xpath("//button[normalize-space()='Add Group']")).click();
+		//driver.findElement(By.xpath("//button[normalize-space()='Add Group']")).click();
 		Thread.sleep(4000);
 
 		Actions actions = new Actions(driver);

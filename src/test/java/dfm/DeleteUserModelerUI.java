@@ -41,16 +41,12 @@ public class DeleteUserModelerUI {
 	ExtentTest extentTest;
 	Reporter report = new Reporter();
 
-//	public static void main(String[] args) throws InterruptedException, IOException {
-//		setUp();
-//		addUserModelerUI01();
-//	}
-	
 	@BeforeSuite
 	public void setUpReport() {
 
 		// start reporters
-		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")+"./Reports/Delete/DFM_DeleteUser"+Helper.getCurrentDateTime()+".html"));
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+				+ "./Reports/Delete/DFM_DeleteUser" + Helper.getCurrentDateTime() + ".html"));
 		reports = new ExtentReports();
 		reports.attachReporter(sparkReporter);
 
@@ -69,7 +65,7 @@ public class DeleteUserModelerUI {
 	public void tearDown() {
 		driver.quit();
 	}
-	
+
 	@AfterSuite
 	public void tearDownReoport() {
 
@@ -90,9 +86,6 @@ public class DeleteUserModelerUI {
 
 		// log(Status, details)
 		extentTest.log(Status.INFO, "Starting Test Case");
-		// int n1 = Integer.parseInt(ProjectAdministrator);
-		// Test name: AddUserModelerUI_01
-		// Step # | name | target | value
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
@@ -150,8 +143,7 @@ public class DeleteUserModelerUI {
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
 		// 12 | click | css=.item:nth-child(10) > .item-text |
 		driver.findElement(By.cssSelector(".item:nth-child(10) > .item-text")).click();
-		// 13 | click | css=.plus-icon > .eva |
-		driver.findElement(By.cssSelector(".plus-icon > .eva")).click();
+		
 		Thread.sleep(3000);
 	}
 
@@ -162,39 +154,21 @@ public class DeleteUserModelerUI {
 		FileInputStream fis = new FileInputStream(src);
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-		XSSFSheet sheet = workbook.getSheet("DeleteUserModelerUI");
+		XSSFSheet sheet = workbook.getSheet("AddUserModelerUI01Test");
 
-		// Get the xpath of permissions form Excel Sheet
-		String firstName = sheet.getRow(1).getCell(0).getStringCellValue();
-		String lastName = sheet.getRow(1).getCell(1).getStringCellValue();
+		// Get the xpath of delete user form Excel Sheet
+		String deleteUser = sheet.getRow(1).getCell(5).getStringCellValue();
 		String email = sheet.getRow(1).getCell(2).getStringCellValue();
-		String type = sheet.getRow(1).getCell(3).getStringCellValue();
-		String deleteUser = sheet.getRow(1).getCell(4).getStringCellValue();
+		String password = sheet.getRow(1).getCell(4).getStringCellValue();
 
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='firstName']//p")).sendKeys(firstName);
-
-		// 16 | click | css=.rich-text-editor-focus p |
-		driver.findElement(By.cssSelector(".rich-text-editor-focus p")).click();
-		// 17 | editContent | css=.rich-text-editor-focus > .ql-editor | <p>Standard</p>
-
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='lastName']//p")).sendKeys(lastName);
-
-		// 18 | click | css=.ql-blank > p |
-		driver.findElement(By.cssSelector(".ql-blank > p")).click();
-
-		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='email']//p")).sendKeys(email);
-
-		// 20 | click | css=.form-control:nth-child(2) |
-		WebElement userType = driver.findElement(By.cssSelector(".form-control:nth-child(2)"));
-		userType.sendKeys(type);
-		userType.click();
 		// 21 | click | css=.btn-block |
-		driver.findElement(By.cssSelector(".btn-block")).click();
+		// driver.findElement(By.cssSelector(".btn-block")).click();
 		Thread.sleep(5000);
 
 		Actions actions = new Actions(driver);
 		WebElement delete = driver.findElement(By.xpath(deleteUser));
 		actions.contextClick(delete).build().perform();
+		Thread.sleep(1000);
 
 		driver.findElement(By.xpath("//div[normalize-space()='Delete User']")).click();
 		// Thread.sleep(4000);
@@ -210,7 +184,7 @@ public class DeleteUserModelerUI {
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
-		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
+		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys(password);
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(4000);

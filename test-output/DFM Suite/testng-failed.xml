@@ -3,9 +3,22 @@
 <suite name="Failed suite [DFM Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="DFM Test(failed)">
     <classes>
+      <class name="dfm.LoginAdmin_01">
+        <methods>
+          <include name="tearDownReport"/>
+          <include name="setUp"/>
+          <include name="setupBrowser"/>
+          <include name="logOut"/>
+          <include name="setUpSuite"/>
+          <include name="tearDown"/>
+          <include name="setUpTest"/>
+          <include name="LoginToAdminAccount"/>
+        </methods>
+      </class> <!-- dfm.LoginAdmin_01 -->
       <class name="dfm.DeleteCustomer">
         <methods>
           <include name="tearDown"/>
+          <include name="logInToApplication"/>
           <include name="setUpSuite"/>
           <include name="setUpReport"/>
           <include name="tearDownReoport"/>
@@ -13,6 +26,16 @@
           <include name="deleteCustomer"/>
         </methods>
       </class> <!-- dfm.DeleteCustomer -->
+      <class name="dfm.AddCustomer">
+        <methods>
+          <include name="tearDownReport"/>
+          <include name="setUp"/>
+          <include name="validateCustomer"/>
+          <include name="setUpReport"/>
+          <include name="AddCustomerModeler"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- dfm.AddCustomer -->
     </classes>
   </test> <!-- DFM Test(failed) -->
 </suite> <!-- Failed suite [DFM Suite] -->

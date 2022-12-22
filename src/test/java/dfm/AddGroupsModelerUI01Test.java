@@ -4,40 +4,30 @@
 
 package dfm;
 
-import org.junit.Test;
-import org.junit.Before;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.*;
 
 public class AddGroupsModelerUI01Test {
 	private static WebDriver driver;
 	// private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		setUp();
-		addGroupsModelerUI01();
-	}
-
-	// @Before
+	@BeforeClass
 	public static void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
@@ -46,29 +36,29 @@ public class AddGroupsModelerUI01Test {
 		// driver=new EdgeDriver();
 	}
 
-	// @After
+	@AfterClass
 	public void tearDown() {
-		driver.quit();
+		// driver.quit();
 	}
 
-	// @Test
-	public static void addGroupsModelerUI01() throws InterruptedException, IOException {
+	@Test(priority = 1)
+	public static void loginAction() throws InterruptedException, IOException {
 		// Test name: AddGroupsModelerUI_01
 		// Step # | name | target | value
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
-		//driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// For Openshift Environment
-		 driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		// 2 | setWindowSize | 1936x1048 |
 		driver.manage().window().maximize();
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@dummy.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -83,14 +73,17 @@ public class AddGroupsModelerUI01Test {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
 
-		WebElement close_option_tab = driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
-		if (close_option_tab.isDisplayed()) {
-			close_option_tab.click();
-
-		} else {
-			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
-
-		}
+		/*
+		 * WebElement close_option_tab =
+		 * driver.findElement(By.xpath("//button[normalize-space()='CLOSE']")); if
+		 * (close_option_tab.isDisplayed()) { close_option_tab.click();
+		 * 
+		 * } else {
+		 * System.out.println("Wijmo Evaluation Version (5.20213.824) is not available"
+		 * );
+		 * 
+		 * }
+		 */
 
 		// 8 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
@@ -98,9 +91,14 @@ public class AddGroupsModelerUI01Test {
 		driver.findElement(By.cssSelector(".item:nth-child(10) > .item-text")).click();
 		// 10 | click | css=.nav-link-group > .tab-text-container |
 		Thread.sleep(4000);
-		driver.findElement(By.cssSelector(".nav-link-group > .tab-text-container")).click();
+	}
+
+	@Test(priority = 2)
+	public static void addGroups() throws InterruptedException, IOException {
+		driver.findElement(By.xpath("//div[contains(text(),'Groups')]")).click();
 		// 11 | click | css=.title-icon > .eva |
-		driver.findElement(By.cssSelector(".title-icon > .eva")).click();
+		//driver.findElement(By.cssSelector(".title-icon > .eva")).click();
+		driver.findElement(By.xpath("//div[@class='title-icon']//i[@class='eva eva-plus-circle-outline']")).click();
 		// 12 | click | css=.rich-text-editor-focus p |
 		Thread.sleep(2000);
 
@@ -136,5 +134,12 @@ public class AddGroupsModelerUI01Test {
 
 		System.out.println("<<<<<Groups added Successfully>>>>>");
 		workbook.close();
+	}
+	
+	@Test(priority = 3)
+	public static void ValidateGroups() throws InterruptedException, IOException {
+		
+		Thread.sleep(4000);
+		addGroups();
 	}
 }

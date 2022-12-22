@@ -3,16 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.DeleteCustomer">
+      <class name="dfm.DeleteGroupsModelerUI">
         <methods>
-          <include name="tearDown"/>
-          <include name="setUpSuite"/>
-          <include name="setUpReport"/>
-          <include name="tearDownReoport"/>
+          <include name="deleteGroupsModeler"/>
           <include name="setUp"/>
-          <include name="deleteCustomer"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- dfm.DeleteCustomer -->
+      </class> <!-- dfm.DeleteGroupsModelerUI -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

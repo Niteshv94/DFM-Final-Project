@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="DFM Suite">
-  <test thread-count="5" name="DFM Test">
+<suite name="Suite">
+  <test thread-count="5" name="Test">
     <classes>
-      <class name="dfm.LoginAdmin_01"/>
-      <class name="dfm.AddCustomer"/>
-      <class name="dfm.DeleteCustomer"/>
+      <class name="dfm.AddUserModelerUI01Test"/>
+      <class name="dfm.DeleteUserModelerUI"/>
     </classes>
-  </test> <!-- DFM Test -->
-</suite> <!-- DFM Suite -->
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
