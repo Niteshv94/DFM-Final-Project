@@ -4,7 +4,6 @@
 
 package dfm;
 
-
 import org.junit.Before;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,9 +17,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.dfm.utility.Helper;
+
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.File;
@@ -35,6 +44,19 @@ public class DeleteGroupsModelerUI {
 	// private Map<String, Object> vars;
 	JavascriptExecutor js;
 
+	ExtentSparkReporter sparkReporter;
+	public static ExtentReports reports;
+	static ExtentTest extentTest;
+
+	@BeforeSuite(alwaysRun = true)
+	public void setUpReport() {
+
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+				+ "./Reports/Groups/DFM_DeleteGroup_" + Helper.getCurrentDateTime() + ".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
+
+	}
 
 	@BeforeClass
 	public static void setUp() {
@@ -50,14 +72,25 @@ public class DeleteGroupsModelerUI {
 		driver.quit();
 	}
 
-	@Test (priority = 1)
+	@Test(priority = 1)
 	public static void addGroupsModelerUI01() throws InterruptedException, IOException {
-		// Test name: AddGroupsModelerUI_01
-		// Step # | name | target | value
+
+		// reports.createTest("Login");
+		Reporter.log("Test Case for Delete Group");
+		extentTest = reports.createTest("Login", "Login to DFM Application");
+		// log with snapshot
+//		extentTest.pass("Details",
+//				MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		// test with snapshot
+		extentTest.addScreenCaptureFromPath("screenshot.png");
+
+		// log(Status, details)
+		extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift Environment
 		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
@@ -81,8 +114,10 @@ public class DeleteGroupsModelerUI {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
+		extentTest.pass("Login Successfull");
 	}
-	@Test (priority = 2)
+
+	@Test(priority = 2)
 	public static void deleteGroupsModeler() throws InterruptedException, IOException {
 
 //		WebElement close_option_tab = driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
@@ -101,9 +136,7 @@ public class DeleteGroupsModelerUI {
 		// 10 | click | css=.nav-link-group > .tab-text-container |
 		Thread.sleep(4000);
 		driver.findElement(By.cssSelector(".nav-link-group > .tab-text-container")).click();
-		// 11 | click | css=.title-icon > .eva |
-		//driver.findElement(By.cssSelector(".title-icon > .eva")).click();
-		// 12 | click | css=.rich-text-editor-focus p |
+		extentTest.pass("Clicked on Group Tab");
 		Thread.sleep(2000);
 
 		File src = new File("./Test Data/TestData.xlsx");
@@ -113,29 +146,8 @@ public class DeleteGroupsModelerUI {
 		XSSFSheet sheet = workbook.getSheet("DeleteGroupsModelerUI");
 
 		// Get the data of Add Group form Excel Sheet
-		String groupName = sheet.getRow(1).getCell(0).getStringCellValue();
-		String description = sheet.getRow(1).getCell(1).getStringCellValue();
-		String permissions = sheet.getRow(1).getCell(2).getStringCellValue();
 		String deleteGroup = sheet.getRow(1).getCell(3).getStringCellValue();
 
-		// Thread.sleep(2000);
-		// Enter Group Name
-		//driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//p")).sendKeys(groupName);
-
-		// 14 | click | css=.ql-blank > p |
-		//driver.findElement(By.cssSelector(".ql-blank > p")).click();
-
-		// Enter Description
-		//driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='description']//p")).sendKeys(description);
-
-		// Thread.sleep(2000);
-		//WebElement fieldData = driver.findElement(By.xpath(permissions));
-		//fieldData.click();
-		// driver.findElement(By.xpath("//td[@class='fieldData']//label[1]")).click();
-
-		// 23 | click | css=div:nth-child(3) > .btn |
-		// driver.findElement(By.cssSelector("div:nth-child(3) > .btn")).click();
-		//driver.findElement(By.xpath("//button[normalize-space()='Add Group']")).click();
 		Thread.sleep(4000);
 
 		Actions actions = new Actions(driver);
@@ -144,6 +156,7 @@ public class DeleteGroupsModelerUI {
 
 		driver.findElement(By.xpath("//div[normalize-space()='Delete Group']")).click();
 		Thread.sleep(4000);
+		extentTest.pass("Clicked on Delete Group button");
 
 //		String message = driver.findElement(By.xpath("//div[@class='message']")).getText();
 //		System.out.println("Success message after deletion of group : " + message);
@@ -151,13 +164,22 @@ public class DeleteGroupsModelerUI {
 		List<WebElement> verify_group_inList = driver.findElements(By.xpath(deleteGroup));
 		if (verify_group_inList.size() > 0) {
 			System.out.println("The Group is not deleted...Please try again later");
-		
+
 		} else {
 			System.out.println("Congratulations, The Group is deleted from the Account...");
 
 		}
-		
+
 		System.out.println("<<<<<Groups deleted Successfully>>>>>");
+		extentTest.pass("Group Validated");
+		extentTest.log(Status.INFO, "Test Completed");
 		workbook.close();
+	}
+
+	@AfterSuite(alwaysRun = true)
+	public void tearDownReport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
 	}
 }

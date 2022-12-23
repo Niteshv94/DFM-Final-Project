@@ -12,9 +12,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.dfm.utility.Helper;
+
 import org.openqa.selenium.JavascriptExecutor;
 
 import java.io.File;
@@ -26,6 +36,23 @@ public class AddGroupsModelerUI01Test {
 	private static WebDriver driver;
 	// private Map<String, Object> vars;
 	JavascriptExecutor js;
+	
+	ExtentSparkReporter sparkReporter;
+	public static ExtentReports reports;
+	static ExtentTest extentTest;
+
+	Reporter report = new Reporter();
+	
+	@BeforeSuite(alwaysRun = true)
+	public void setUpReport() {
+
+		
+		sparkReporter = new ExtentSparkReporter(new File(
+				System.getProperty("user.dir") + "./Reports/Groups/DFM_AddGroup_" + Helper.getCurrentDateTime() + ".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
+
+	}
 
 	@BeforeClass
 	public static void setUp() {
@@ -43,12 +70,23 @@ public class AddGroupsModelerUI01Test {
 
 	@Test(priority = 1)
 	public static void loginAction() throws InterruptedException, IOException {
-		// Test name: AddGroupsModelerUI_01
-		// Step # | name | target | value
+		
+		// reports.createTest("Login");
+				Reporter.log("Test Case for Add Group");
+				extentTest = reports.createTest("Login", "Login to DFM Application");
+				// log with snapshot
+//				extentTest.pass("Details",
+//						MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+				// test with snapshot
+				extentTest.addScreenCaptureFromPath("screenshot.png");
+
+				// log(Status, details)
+				extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift Environment
 		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
@@ -65,6 +103,7 @@ public class AddGroupsModelerUI01Test {
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
+		extentTest.pass("Login Sucessfull");
 
 		Thread.sleep(15000);
 
@@ -96,6 +135,7 @@ public class AddGroupsModelerUI01Test {
 	@Test(priority = 2)
 	public static void addGroups() throws InterruptedException, IOException {
 		driver.findElement(By.xpath("//div[contains(text(),'Groups')]")).click();
+		extentTest.pass("Clicked on Groups Tab");
 		// 11 | click | css=.title-icon > .eva |
 		//driver.findElement(By.cssSelector(".title-icon > .eva")).click();
 		driver.findElement(By.xpath("//div[@class='title-icon']//i[@class='eva eva-plus-circle-outline']")).click();
@@ -116,21 +156,25 @@ public class AddGroupsModelerUI01Test {
 		// Thread.sleep(2000);
 		// Enter Group Name
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//p")).sendKeys(groupName);
+		extentTest.pass("Entered Group Name");
 
 		// 14 | click | css=.ql-blank > p |
 		driver.findElement(By.cssSelector(".ql-blank > p")).click();
 
 		// Enter Description
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='description']//p")).sendKeys(description);
+		extentTest.pass("Entered Group Description");
 
 		// Thread.sleep(2000);
 		WebElement fieldData = driver.findElement(By.xpath(permissions));
 		fieldData.click();
+		extentTest.pass("Selected Group Permission");
 		// driver.findElement(By.xpath("//td[@class='fieldData']//label[1]")).click();
 
 		// 23 | click | css=div:nth-child(3) > .btn |
 		// driver.findElement(By.cssSelector("div:nth-child(3) > .btn")).click();
 		driver.findElement(By.xpath("//button[normalize-space()='Add Group']")).click();
+		extentTest.pass("Clicked on Add Group button");
 
 		System.out.println("<<<<<Groups added Successfully>>>>>");
 		workbook.close();
@@ -141,5 +185,16 @@ public class AddGroupsModelerUI01Test {
 		
 		Thread.sleep(4000);
 		addGroups();
+		
+		extentTest.pass("Validated Group Name");
+
+		extentTest.log(Status.INFO, "Test Completed");
+	}
+	
+	@AfterSuite(alwaysRun = true)
+	public void tearDownReport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
 	}
 }

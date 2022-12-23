@@ -13,20 +13,38 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.dfm.utility.Helper;
+
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+
 import java.util.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-public class DeleteDiagram {
+public class DeleteObjects {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
+
+	ExtentSparkReporter sparkReporter;
+	public static ExtentReports reports;
+	static ExtentTest extentTest;
+
+	Reporter report = new Reporter();
 
 	@BeforeClass
 	public void setUp() {
@@ -35,6 +53,19 @@ public class DeleteDiagram {
 
 //		System.setProperty("webdriver.edge.driver", "./Driver/msedgedriver.exe");
 //		driver = new EdgeDriver();
+	}
+
+	@BeforeSuite(alwaysRun = true)
+	public void setUpReport() {
+
+		// start reporters
+		// sparkReporter = new
+		// ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+				+ "./Reports/Delete/DFM_DeleteObjects_" + Helper.getCurrentDateTime() + ".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
+
 	}
 
 	@AfterClass
@@ -50,26 +81,41 @@ public class DeleteDiagram {
 	}
 
 	@Test(priority = 2)
-	public void deleteDiagram() throws InterruptedException, IOException {
+	public void sarchDiagram() throws InterruptedException, IOException {
 
 		deleteSearchDiagram();
 	}
 
 	@Test(priority = 3)
 	public void validateDiagram() throws InterruptedException, IOException {
-		//Thread.sleep(7000);
-		driver.navigate().refresh();
+		navigateToSearchDiagram();
 		Thread.sleep(5000);
-		searchDiagram();
+		// searchDiagram();
+	}
+
+	@Test(priority = 4)
+	public void deleteDiagram() throws InterruptedException, IOException {
+		deleteSearchDiagram();
 	}
 
 	public static void login() throws InterruptedException, IOException {
-		// Test name: Add Tag
-		// Step # | name | target | value
+
+		// reports.createTest("Login");
+		Reporter.log("Test Case for Delete Objects");
+		extentTest = reports.createTest("Login", "Login to DFM Application");
+		// log with snapshot
+//				extentTest.pass("Details",
+//						MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		// test with snapshot
+		extentTest.addScreenCaptureFromPath("screenshot.png");
+
+		// log(Status, details)
+		extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For A Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift Environment
 		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
@@ -105,11 +151,11 @@ public class DeleteDiagram {
 		 * 
 		 * }
 		 */
+		extentTest.pass("Login Successfull");
 
 	}
 
 	public static void searchDiagram() throws InterruptedException, IOException {
-
 
 		// Get the xpath and Tag data form Excel Sheet
 		File src = new File("./Test Data/TestData.xlsx");
@@ -124,17 +170,55 @@ public class DeleteDiagram {
 		driver.findElement(By.xpath(
 				"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForHomeSearc']//input[@placeholder='Search']"))
 				.sendKeys(searchDiagram);
+		extentTest.pass("Entered Search Diagram");
+	}
+
+	public static void navigateToSearchDiagram() throws InterruptedException, IOException {
+
+		Thread.sleep(4000);
+		driver.findElement(By.xpath("//span[@class='item-name full-type-item-name']")).click();
+
+//		String delete_message = driver.findElement(By.xpath("//span[@class='title subtitle']")).getText();
+//		System.out.println("Message after deletion of diagram is : " + delete_message);
+		Thread.sleep(5000);
+		driver.findElement(By.xpath(
+				"//dfm-diagram-sidebar[@ng-reflect-diagram='[object Object]']//i[@class='eva eva-settings-2-outline']"))
+				.click();
+		extentTest.pass("Navigate to Canvas Successfull");
+
 	}
 
 	public static void deleteSearchDiagram() throws InterruptedException, IOException {
 
-		
-		driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/button")).click();
-		
-//		String delete_message = driver.findElement(By.xpath("//span[@class='title subtitle']")).getText();
-//		System.out.println("Message after deletion of diagram is : " + delete_message);
-		Thread.sleep(8000);
+		Thread.sleep(1000);
 
+		WebElement target = driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/div/dfm-go-js-display-diagram/div/div"));
+
+		// Remove the diagram permanently
+		Actions act = new Actions(driver);
+		act.moveToElement(target);
+		act.click().build().perform();
+		act.keyDown(Keys.CONTROL).sendKeys("a");
+		act.keyUp(Keys.CONTROL).build().perform();
+		Thread.sleep(3000);
+		extentTest.pass("Selected Diagram");
+
+		act.moveToElement(target, 5, 5);
+		act.contextClick().build().perform();
+		Thread.sleep(5000);
+
+		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
+
+		extentTest.pass("Deleted Diagram");
+		extentTest.log(Status.INFO, "Test Completed");
+
+	}
+
+	@AfterSuite(alwaysRun = true)
+	public void tearDownReport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
 	}
 
 }
