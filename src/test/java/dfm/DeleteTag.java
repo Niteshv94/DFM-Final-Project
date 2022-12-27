@@ -13,9 +13,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.dfm.utility.Helper;
+
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.io.File;
@@ -27,6 +37,32 @@ public class DeleteTag {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
+
+	ExtentSparkReporter sparkReporter;
+	public static ExtentReports reports;
+	static ExtentTest extentTest;
+
+	Reporter report = new Reporter();
+
+	@BeforeSuite(alwaysRun = true)
+	public void setUpReport() {
+
+		// start reporters
+		// sparkReporter = new
+		// ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
+		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+				+ "./Reports/Delete/DFM_DeleteTag_" + Helper.getCurrentDateTime() + ".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
+
+	}
+
+	@AfterSuite(alwaysRun = true)
+	public void tearDownReport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
+	}
 
 	@BeforeClass
 	public void setUp() {
@@ -40,7 +76,7 @@ public class DeleteTag {
 	@AfterClass
 	public void tearDown() {
 		// driver.quit();
-		// workbook.close();
+
 	}
 
 	@Test(priority = 1)
@@ -67,12 +103,22 @@ public class DeleteTag {
 	}
 
 	public static void login() throws InterruptedException, IOException {
-		// Test name: Add Tag
-		// Step # | name | target | value
+		// reports.createTest("Login");
+		Reporter.log("Test Case for Delete Tag");
+		extentTest = reports.createTest("Login", "Login to DFM Application");
+		// log with snapshot
+//				extentTest.pass("Details",
+//						MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		// test with snapshot
+		extentTest.addScreenCaptureFromPath("screenshot.png");
+
+		// log(Status, details)
+		extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For A Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift Environment
 		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
@@ -84,10 +130,12 @@ public class DeleteTag {
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | test_claim2@gmail.com
 		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		extentTest.pass("Entered Email Id");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | css=.ng-untouched | defaultUserPass@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
+		extentTest.pass("Entered Password");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(12000);
@@ -96,6 +144,8 @@ public class DeleteTag {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
+
+		extentTest.pass("Login Successfull");
 
 		/*
 		 * WebElement close_option_tab =
@@ -114,6 +164,7 @@ public class DeleteTag {
 		Thread.sleep(3000);
 		// 10 | click | xpath=//span[contains(.,'Tag Explorer')] |
 		driver.findElement(By.xpath("//span[@class='item-text'][normalize-space()='Tag Explorer']")).click();
+		extentTest.pass("Clicked on Tag Explorer from side panel");
 		Thread.sleep(5000);
 
 	}
@@ -129,26 +180,22 @@ public class DeleteTag {
 		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
 		XSSFSheet sheet = workbook.getSheet("DeleteTagTest");
-
-		String searchProject = sheet.getRow(1).getCell(0).getStringCellValue();
-		String projectName = sheet.getRow(1).getCell(1).getStringCellValue();
-		String tagName = sheet.getRow(1).getCell(2).getStringCellValue();
-		String tagDescription = sheet.getRow(1).getCell(3).getStringCellValue();
+		String tagName = sheet.getRow(1).getCell(0).getStringCellValue();
+		workbook.close();
 
 		// 11 | type | id=search-ip | dummy
 		driver.findElement(By.id("search-ip")).sendKeys(tagName);
+		extentTest.pass("Entered Tag Name into search box");
 	}
 
 	public static void deleteSearchTag() throws InterruptedException, IOException {
 		// Get the xpath and Tag data form Excel Sheet
 		File src = new File("./Test Data/TestData.xlsx");
 		FileInputStream fis = new FileInputStream(src);
-		XSSFWorkbook workbook1 = new XSSFWorkbook(fis);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-		XSSFSheet sheet = workbook1.getSheet("DeleteTagTest");
-		String tagXpath = sheet.getRow(1).getCell(4).getStringCellValue();
-		// identify project
-		// WebElement l = driver.findElement(By.xpath(projectName));
+		XSSFSheet sheet = workbook.getSheet("DeleteTagTest");
+		String tagXpath = sheet.getRow(1).getCell(1).getStringCellValue();
 		WebElement l1 = driver.findElement(By.xpath(tagXpath));
 
 		// Actions class with moveToElement() and contextClick()
@@ -156,20 +203,23 @@ public class DeleteTag {
 		a.moveToElement(l1).contextClick().build().perform();
 		Thread.sleep(2000);
 
-		driver.findElement(By.xpath("//div[contains(text(),'Delete Tag')]")).click();
+		List<WebElement> delete_option = driver.findElements(By.xpath("//div[contains(text(),'Delete Tag')]"));
+		for (WebElement deleteTag : delete_option) {
+			if (((WebElement) deleteTag).isDisplayed()) {
+				((WebElement) deleteTag).click();
+				System.out.println("Delete Tag is available");
+				break;
 
-//		for(int r=2; r<100; r++)
-//		{
-//			String xpath = "/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[5]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[2]/wj-tree-view/div/div[" + r + "]";
-//			String a1 = driver.findElement(By.xpath(xpath)).getText();
-//			
-//			if(a1.contains(tagName))
-//			{
-//				Thread.sleep(2000);
-//				String xpath1 = "/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[5]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[2]/wj-tree-view/div/div[2]/div[" + r + "]";
-//				driver.findElement(By.xpath(xpath1)).click();
-//			}
-//		}
+			} else {
+				System.out.println("Delete Tag is not available");
+
+			}
+		}
+
+		// driver.findElement(By.xpath("//div[contains(text(),'Delete Tag')]")).click();
+		extentTest.pass("Clicked Delete Tag button");
+		extentTest.log(Status.INFO, "Test Completed");
+		workbook.close();
 
 	}
 

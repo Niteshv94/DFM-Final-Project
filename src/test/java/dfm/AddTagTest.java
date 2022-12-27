@@ -13,8 +13,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.dfm.utility.Helper;
+
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.io.File;
@@ -26,6 +37,25 @@ public class AddTagTest {
 	private WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
+
+	ExtentSparkReporter sparkReporter;
+	public static ExtentReports reports;
+	ExtentTest extentTest;
+
+	Reporter report = new Reporter();
+
+	@BeforeSuite(alwaysRun = true)
+	public void setUpReport() {
+
+		// start reporters
+		// sparkReporter = new
+		// ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
+		sparkReporter = new ExtentSparkReporter(new File(
+				System.getProperty("user.dir") + "./Reports/Tags/DFM_AddTag_" + Helper.getCurrentDateTime() + ".html"));
+		reports = new ExtentReports();
+		reports.attachReporter(sparkReporter);
+
+	}
 
 	@BeforeClass
 	public void setUp() {
@@ -41,17 +71,28 @@ public class AddTagTest {
 		// driver.quit();
 	}
 
-	@org.testng.annotations.Test
-	public void addTag() throws InterruptedException, IOException {
-		// Test name: Add Tag
-		// Step # | name | target | value
+	@Test(priority = 1)
+	public void loginToApplication() throws InterruptedException, IOException {
+
+		// reports.createTest("Login");
+		Reporter.log("Test Case for Add Tag");
+		extentTest = reports.createTest("Login", "Login to DFM Application");
+		// log with snapshot
+//				extentTest.pass("Details",
+//						MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		// test with snapshot
+		extentTest.addScreenCaptureFromPath("screenshot.png");
+
+		// log(Status, details)
+		extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For A Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift Environment
-		//driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1183x602 |
@@ -60,33 +101,44 @@ public class AddTagTest {
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | test_claim2@gmail.com
 		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		extentTest.pass("Entered Email");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | css=.ng-untouched | defaultUserPass@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
+		extentTest.pass("Entered Password");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
-		Thread.sleep(12000);
+		extentTest.pass("Login Successfull");
+		Thread.sleep(15000);
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
-		
-		/*WebElement close_option_tab	= driver.findElement(By.xpath("//button[normalize-space()='CLOSE']"));
-		if (close_option_tab.isDisplayed()) {
-			close_option_tab.click();
-			
-		} else {
-			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
+	}
 
-		}*/
-		
+	@Test(priority = 2)
+	public void addTag() throws InterruptedException, IOException {
+
+		/*
+		 * WebElement close_option_tab =
+		 * driver.findElement(By.xpath("//button[normalize-space()='CLOSE']")); if
+		 * (close_option_tab.isDisplayed()) { close_option_tab.click();
+		 * 
+		 * } else {
+		 * System.out.println("Wijmo Evaluation Version (5.20213.824) is not available"
+		 * );
+		 * 
+		 * }
+		 */
+
 		// 9 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
 		Thread.sleep(3000);
 		// 10 | click | xpath=//span[contains(.,'Tag Explorer')] |
 		driver.findElement(By.xpath("//span[@class='item-text'][normalize-space()='Tag Explorer']")).click();
+		extentTest.pass("Clicked on Tag Explorer");
 		Thread.sleep(5000);
 
 		// 10 | click | id=search-ip |
@@ -106,6 +158,7 @@ public class AddTagTest {
 
 		// 11 | type | id=search-ip | dummy
 		driver.findElement(By.id("search-ip")).sendKeys(searchProject);
+		extentTest.pass("Project Searched");
 
 		// identify element
 		WebElement l = driver.findElement(By.xpath(projectName));
@@ -116,18 +169,52 @@ public class AddTagTest {
 
 		// 13 | click | css=.rich-text-editor-focus p |
 		driver.findElement(By.xpath("//div[contains(text(),'Add Tag')]")).click();
+		extentTest.pass("Clicked on Add Tag button from side window");
 
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//div[@class='ql-editor ql-blank']"))
 				.sendKeys(tagName);
+		extentTest.pass("Entered Tag Name");
 
 		driver.findElement(
 				By.xpath("//core-edit-multiple-lines-control[@id='description']//div[@class='ql-editor ql-blank']"))
 				.sendKeys(tagDescription);
+		extentTest.pass("Entered Tag Description");
 
 		// 17 | click | css=.btn-block |
 		driver.findElement(By.xpath("//button[contains(.,'Add Tag')]")).click();
+		extentTest.pass("Clicked on Add Tag button");
+		Thread.sleep(3000);
+	}
 
-		System.out.println("<<<<<Tag added successfully>>>>>");
+	@Test(priority = 3)
+	public void validateTag() throws InterruptedException, IOException {
+
+		// Get the xpath and Tag data form Excel Sheet
+		File src = new File("./Test Data/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+		XSSFSheet sheet = workbook.getSheet("AddTagTest");
+		String verifyTag = sheet.getRow(1).getCell(2).getStringCellValue();
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[2]/wj-tree-view/div/div[1]"))
+				.click();
+		Thread.sleep(2000);
+
+		// Verify the Customer is present or not
+		driver.findElement(By.id("search-ip")).clear();
+		driver.findElement(By.id("search-ip")).sendKeys(verifyTag);
+		extentTest.pass("Entered Added Tag Name");
+		extentTest.log(Status.INFO, "Test Completed");
+
+		System.out.println("<<<<<Tag added and validated successfully>>>>>");
 		workbook.close();
+	}
+
+	@AfterSuite(alwaysRun = true)
+	public void tearDownReport() {
+
+		// calling flush writes everything to the log file
+		reports.flush();
 	}
 }
