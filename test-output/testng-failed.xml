@@ -3,17 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.DeleteTag">
+      <class name="dfm.InputDataTest">
         <methods>
-          <include name="setUpReport"/>
           <include name="tearDown"/>
-          <include name="deleteTag"/>
-          <include name="loginToApplication"/>
-          <include name="tearDownReport"/>
+          <include name="enterInputData"/>
           <include name="setUp"/>
-          <include name="validateDeleteTag"/>
+          <include name="validateInputData"/>
+          <include name="verifyInputData"/>
         </methods>
-      </class> <!-- dfm.DeleteTag -->
+      </class> <!-- dfm.InputDataTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
