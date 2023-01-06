@@ -333,14 +333,17 @@ public class InputDataTest {
 		Thread.sleep(1000);
 		
 		driver.findElement(By.cssSelector(".internal-expand-collapse-icon:nth-child(1)")).click();
+		Thread.sleep(1000);
 		
 		String verifyComplexity = driver
-				.findElement(By.id("complexity")).getText();
+				.findElement(By.xpath("/html[1]/body[1]/dfm-root[1]/dfm-main-container[1]/nb-layout[1]/div[1]/div[1]/div[1]/div[1]/div[1]/nb-layout-column[1]/dfm-tabs-container[1]/div[1]/div[1]/div[3]/dfm-edit-input-data-container[1]/nb-card[1]/div[1]/div[2]/div[1]/div[2]/dfm-edit-input-data[1]/form[1]/div[5]/div[2]/input[1]")).getText();
 		System.out.println(verifyComplexity);
 		Thread.sleep(1000);
 		
+		driver.findElement(By.xpath("//div[4]//div[1]//i[1]")).click();
+		
 		String verifyComments = driver
-				.findElement(By.xpath("//div[@class='comment-contant-container']")).getText();
+				.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[3]/dfm-edit-input-data-container/nb-card/div/div[2]/div[4]/div[2]/dfm-comments-container/div/dfm-comment-item-display/div/div[2]/div[2]/p")).getText();
 		System.out.println(verifyComments);
 		Thread.sleep(1000);
 		

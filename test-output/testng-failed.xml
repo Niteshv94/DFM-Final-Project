@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.InputDataTest">
+      <class name="dfm.ImplementationDataTest">
         <methods>
           <include name="tearDown"/>
-          <include name="enterInputData"/>
           <include name="setUp"/>
-          <include name="validateInputData"/>
-          <include name="verifyInputData"/>
+          <include name="implementationData"/>
         </methods>
-      </class> <!-- dfm.InputDataTest -->
+      </class> <!-- dfm.ImplementationDataTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
