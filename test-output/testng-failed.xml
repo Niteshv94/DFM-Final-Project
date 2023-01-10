@@ -5,9 +5,11 @@
     <classes>
       <class name="dfm.ImplementationDataTest">
         <methods>
+          <include name="enterImplementationDataDetails"/>
+          <include name="verifyImplementationDataDetails"/>
           <include name="tearDown"/>
           <include name="setUp"/>
-          <include name="implementationData"/>
+          <include name="validateImplementationDataDetails"/>
         </methods>
       </class> <!-- dfm.ImplementationDataTest -->
     </classes>

@@ -26,41 +26,49 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
 import java.util.*;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+
 public class ImplementationDataTest {
-  private WebDriver driver;
-  private Map<String, Object> vars;
-  JavascriptExecutor js;
-  @BeforeClass
-  public void setUp() {
-	  System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
-    driver = new ChromeDriver();
-    js = (JavascriptExecutor) driver;
-    vars = new HashMap<String, Object>();
-  }
-  @AfterClass
-  public void tearDown() {
-    //driver.quit();
-  }
-  public String waitForWindow(int timeout) {
-    try {
-      Thread.sleep(timeout);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    Set<String> whNow = driver.getWindowHandles();
-    Set<String> whThen = (Set<String>) vars.get("window_handles");
-    if (whNow.size() > whThen.size()) {
-      whNow.removeAll(whThen);
-    }
-    return whNow.iterator().next();
-  }
-  @Test
-  public void implementationData() throws InterruptedException {
-    
-	  driver.get("https://qa.modeler2.decisionsfirst.com/login");
+	private WebDriver driver;
+	private Map<String, Object> vars;
+	JavascriptExecutor js;
+
+	@BeforeClass
+	public void setUp() {
+		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
+		driver = new ChromeDriver();
+		js = (JavascriptExecutor) driver;
+		vars = new HashMap<String, Object>();
+	}
+
+	@AfterClass
+	public void tearDown() {
+		// driver.quit();
+	}
+
+	public String waitForWindow(int timeout) {
+		try {
+			Thread.sleep(timeout);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		Set<String> whNow = driver.getWindowHandles();
+		Set<String> whThen = (Set<String>) vars.get("window_handles");
+		if (whNow.size() > whThen.size()) {
+			whNow.removeAll(whThen);
+		}
+		return whNow.iterator().next();
+	}
+
+	@Test(priority = 1)
+	public void enterImplementationDataDetails() throws InterruptedException {
+
+		driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// 2 | setWindowSize | 1126x602 |
 		driver.manage().window().maximize();
@@ -81,10 +89,10 @@ public class ImplementationDataTest {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
-	  
-    driver.findElement(By.cssSelector(".sidebar-control-button")).click();
-    driver.findElement(By.cssSelector(".add-object-sidebar-panel")).click();
-    driver.findElement(By.id("addImplementationComponent")).click();
+
+		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
+		driver.findElement(By.cssSelector(".add-object-sidebar-panel")).click();
+		driver.findElement(By.id("addImplementationComponent")).click();
 //    driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor")).click();
 //    {
 //      WebElement element = driver.findElement(By.cssSelector(".ng-pristine .ql-italic"));
@@ -116,30 +124,31 @@ public class ImplementationDataTest {
 //      Actions builder = new Actions(driver);
 //      builder.moveToElement(element, 0, 0).perform();
 //    }
-    
+
 //    {
 //      WebElement element = driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor"));
 //      js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<p>Implementation Data</p>'}", element);
 //    }
-    driver.findElement(By.xpath("//*[@id=\"name\"]/quill-editor/div[2]/div[1]/p")).sendKeys("Implementation Data");
-    
-   // driver.findElement(By.cssSelector(".ql-blank > p")).click();
-    driver.findElement(By.xpath("//*[@id=\"description\"]/quill-editor/div[2]/div[1]/p")).sendKeys("implementation description");
-    driver.findElement(By.id("url")).click();
-    {
-      WebElement element = driver.findElement(By.cssSelector(".dropdown-toggle"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).perform();
-    }
-    {
-      WebElement element = driver.findElement(By.tagName("body"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element, 0, 0).perform();
-    }
-    driver.findElement(By.id("url")).sendKeys("google.com");
-    driver.findElement(By.cssSelector(".dropdown-toggle")).click();
-    driver.findElement(By.cssSelector(".dropdown-item:nth-child(8) > .ml-2")).click();
-    
+		driver.findElement(By.xpath("//*[@id=\"name\"]/quill-editor/div[2]/div[1]/p")).sendKeys("Implementation Data");
+
+		// driver.findElement(By.cssSelector(".ql-blank > p")).click();
+		driver.findElement(By.xpath("//*[@id=\"description\"]/quill-editor/div[2]/div[1]/p"))
+				.sendKeys("implementation description");
+		driver.findElement(By.id("url")).click();
+		{
+			WebElement element = driver.findElement(By.cssSelector(".dropdown-toggle"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).perform();
+		}
+		{
+			WebElement element = driver.findElement(By.tagName("body"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element, 0, 0).perform();
+		}
+		driver.findElement(By.id("url")).sendKeys("google.com");
+		driver.findElement(By.cssSelector(".dropdown-toggle")).click();
+		driver.findElement(By.cssSelector(".dropdown-item:nth-child(8) > .ml-2")).click();
+
 //    driver.findElement(By.cssSelector(".cdk-focused")).click();
 //    driver.findElement(By.id("nb-option-1")).click();
 //    {
@@ -152,20 +161,20 @@ public class ImplementationDataTest {
 //      Actions builder = new Actions(driver);
 //      builder.moveToElement(element, 0, 0).perform();
 //    }
-    
-    driver.findElement(By.xpath("//button[normalize-space()='Select Project']")).click();
-	{
-		WebElement dropdown = driver.findElement(By.xpath("//button[normalize-space()='Select Project']"));
-		dropdown.findElement(By.xpath("//nb-option[contains(text(),'root')]")).click();
-	}
 
-	driver.findElement(By.xpath("//button[normalize-space()='Select Folder']")).click();
-	{
-		WebElement dropdown = driver.findElement(By.xpath("//button[normalize-space()='Select Folder']"));
-		dropdown.findElement(By.xpath("//nb-option[contains(text(),'untag')]")).click();
-	}
-	driver.findElement(By.xpath("//button[normalize-space()='Add Implementation Component']")).click();
-	
+		driver.findElement(By.xpath("//button[normalize-space()='Select Project']")).click();
+		{
+			WebElement dropdown = driver.findElement(By.xpath("//button[normalize-space()='Select Project']"));
+			dropdown.findElement(By.xpath("//nb-option[contains(text(),'root')]")).click();
+		}
+
+		driver.findElement(By.xpath("//button[normalize-space()='Select Folder']")).click();
+		{
+			WebElement dropdown = driver.findElement(By.xpath("//button[normalize-space()='Select Folder']"));
+			dropdown.findElement(By.xpath("//nb-option[contains(text(),'untag')]")).click();
+		}
+		driver.findElement(By.xpath("//button[normalize-space()='Add Implementation Component']")).click();
+
 //    driver.findElement(By.cssSelector(".placeholder")).click();
 //    driver.findElement(By.id("nb-option-345")).click();
 //    driver.findElement(By.cssSelector(".btn-block")).click();
@@ -174,15 +183,21 @@ public class ImplementationDataTest {
 //    driver.findElement(By.cssSelector(".mb-3 .btn")).click();
 //    driver.findElement(By.cssSelector(".item-name:nth-child(3)")).click();
 //    driver.findElement(By.cssSelector(".rich-text-editor-focus p")).click();
-	
-	Thread.sleep(5000);
-	driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[1]/dfm-search-control/div/div[1]/input")).sendKeys("Implementation Data");
-	Thread.sleep(2000);
-	driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[1]/dfm-search-control/div/div[1]/div/i")).click();
-	Thread.sleep(2000);
-	driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[2]/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/span/span[2]")).click();
-	Thread.sleep(5000);
-	
+
+		Thread.sleep(5000);
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[1]/dfm-search-control/div/div[1]/input"))
+				.sendKeys("Implementation Data");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[1]/dfm-search-control/div/div[1]/div/i"))
+				.click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[2]/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/span/span[2]"))
+				.click();
+		Thread.sleep(5000);
+
 //    {
 //      WebElement element = driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor"));
 //      js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<p>Implementation Data updated</p>'}", element);
@@ -192,42 +207,45 @@ public class ImplementationDataTest {
 //      WebElement element = driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor"));
 //      js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<p><span style=\"color: rgb(71, 71, 71);\">description updated</span></p>'}", element);
 //    }
-	
-	driver.findElement(By.xpath("//*[@id=\"implementationComponentName\"]/quill-editor/div[2]/div[1]")).sendKeys(" Updated");
-	Thread.sleep(5000);
-	driver.findElement(By.xpath("//*[@id=\"implementationComponentDescription\"]/quill-editor/div[2]/div[1]")).sendKeys(" Updated");
-	Thread.sleep(5000);
-	
-    vars.put("window_handles", driver.getWindowHandles());
-    driver.findElement(By.cssSelector(".btn-url")).click();
-    vars.put("win1655", waitForWindow(2000));
-    vars.put("root", driver.getWindowHandle());
-    driver.switchTo().window(vars.get("win1655").toString());
-    driver.close();
-    driver.switchTo().window(vars.get("root").toString());
-    {
-      WebElement element = driver.findElement(By.cssSelector("#implementationComponentDescription .ql-list:nth-child(6)"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).perform();
-    }
-    {
-      WebElement element = driver.findElement(By.tagName("body"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element, 0, 0).perform();
-    }
-    driver.findElement(By.cssSelector(".internal-expand-collapse-icon:nth-child(1)")).click();
-    driver.findElement(By.cssSelector(".search-control")).click();
-    driver.findElement(By.cssSelector(".add-object")).click();
-    {
-      WebElement element = driver.findElement(By.cssSelector("#decisionDescription .ql-italic > svg"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element).perform();
-    }
-    {
-      WebElement element = driver.findElement(By.tagName("body"));
-      Actions builder = new Actions(driver);
-      builder.moveToElement(element, 0, 0).perform();
-    }
+
+		driver.findElement(By.xpath("//*[@id=\"implementationComponentName\"]/quill-editor/div[2]/div[1]"))
+				.sendKeys(" Updated");
+		Thread.sleep(5000);
+		driver.findElement(By.xpath("//*[@id=\"implementationComponentDescription\"]/quill-editor/div[2]/div[1]"))
+				.sendKeys(" Updated");
+		Thread.sleep(5000);
+
+		vars.put("window_handles", driver.getWindowHandles());
+		driver.findElement(By.cssSelector(".btn-url")).click();
+		vars.put("win1655", waitForWindow(2000));
+		vars.put("root", driver.getWindowHandle());
+		driver.switchTo().window(vars.get("win1655").toString());
+		driver.close();
+		driver.switchTo().window(vars.get("root").toString());
+		{
+			WebElement element = driver
+					.findElement(By.cssSelector("#implementationComponentDescription .ql-list:nth-child(6)"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).perform();
+		}
+		{
+			WebElement element = driver.findElement(By.tagName("body"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element, 0, 0).perform();
+		}
+		driver.findElement(By.cssSelector(".internal-expand-collapse-icon:nth-child(1)")).click();
+		driver.findElement(By.cssSelector(".search-control")).click();
+		driver.findElement(By.cssSelector(".add-object")).click();
+		{
+			WebElement element = driver.findElement(By.cssSelector("#decisionDescription .ql-italic > svg"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element).perform();
+		}
+		{
+			WebElement element = driver.findElement(By.tagName("body"));
+			Actions builder = new Actions(driver);
+			builder.moveToElement(element, 0, 0).perform();
+		}
 //    driver.findElement(By.cssSelector(".rich-text-editor-focus p")).click();
 //    {
 //      WebElement element = driver.findElement(By.cssSelector("#decisionDescription .ql-strike"));
@@ -248,38 +266,101 @@ public class ImplementationDataTest {
 //      WebElement element = driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor"));
 //      js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<p>decision description</p>'}", element);
 //    }
-    
-    driver.findElement(By.xpath("//*[@id=\"decisionName\"]/quill-editor/div[2]/div[1]/p")).sendKeys("Decision Test remo");
-	//driver.findElement(By.cssSelector(".rich-text-editor-focus p")).click();
-	driver.findElement(By.xpath("//*[@id=\"decisionDescription\"]/quill-editor/div[2]/div[1]/p")).sendKeys("This is testing remo");
-	
-	
+
+		driver.findElement(By.xpath("//*[@id=\"decisionName\"]/quill-editor/div[2]/div[1]/p"))
+				.sendKeys("Decision Test demo");
+		// driver.findElement(By.cssSelector(".rich-text-editor-focus p")).click();
+		driver.findElement(By.xpath("//*[@id=\"decisionDescription\"]/quill-editor/div[2]/div[1]/p"))
+				.sendKeys("This is testing demo");
+
 //    driver.findElement(By.id("decisionType")).click();
 //    {
 //      WebElement dropdown = driver.findElement(By.id("decisionType"));
 //      dropdown.findElement(By.xpath("//option[. = 'Tactical']")).click();
 //    }
-	Select drpCountry = new Select(driver.findElement(By.id("decisionType")));
-	drpCountry.selectByValue("TACTICAL");
-    driver.findElement(By.id("decisionStatusLevel")).click();
-    driver.findElement(By.id("decisionUrl")).click();
-    driver.findElement(By.id("decisionUrl")).sendKeys("google.com");
+		Select drpCountry = new Select(driver.findElement(By.id("decisionType")));
+		drpCountry.selectByValue("TACTICAL");
+		driver.findElement(By.id("decisionStatusLevel")).click();
+		driver.findElement(By.id("decisionUrl")).click();
+		driver.findElement(By.id("decisionUrl")).sendKeys("google.com");
 //    driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor")).click();
 //    {
 //      WebElement element = driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor"));
 //      js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<p>is this decision questions</p>'}", element);
 //    }
-	driver.findElement(By.xpath("//*[@id=\"decisionQuestion\"]/quill-editor/div[2]/div[1]/p")).sendKeys("Is this decision questions?");
-    driver.findElement(By.cssSelector(".btn-block")).click();
-    Thread.sleep(15000);
-    driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[3]/dfm-edit-implementation-component-container/nb-card/div/div[2]/div[2]/div[1]/i[1]")).click();
-    //driver.findElement(By.cssSelector(".ql-blank > p")).click();
+		driver.findElement(By.xpath("//*[@id=\"decisionQuestion\"]/quill-editor/div[2]/div[1]/p"))
+				.sendKeys("Is this decision questions?");
+		driver.findElement(By.cssSelector(".btn-block")).click();
+		Thread.sleep(15000);
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[3]/dfm-edit-implementation-component-container/nb-card/div/div[2]/div[2]/div[1]/i[1]"))
+				.click();
+		// driver.findElement(By.cssSelector(".ql-blank > p")).click();
 //    {
 //      WebElement element = driver.findElement(By.cssSelector(".rich-text-editor-focus > .ql-editor"));
 //      js.executeScript("if(arguments[0].contentEditable === 'true') {arguments[0].innerText = '<p>test comments</p>'}", element);
 //    }
-    Thread.sleep(2000);
-    driver.findElement(By.xpath("//*[@id=\"comment\"]/quill-editor/div[2]/div[1]/p")).sendKeys("test comments");
-    driver.findElement(By.cssSelector(".mt-2")).click();
-  }
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//*[@id=\"comment\"]/quill-editor/div[2]/div[1]/p")).sendKeys("Test comments");
+		driver.findElement(By.cssSelector(".mt-2")).click();
+	}
+
+	@Test(priority = 2)
+	public void verifyImplementationDataDetails() throws InterruptedException, AWTException {
+
+		Thread.sleep(5000);
+		// close the open tab
+		driver.findElement(By.xpath("//*[@id=\"tab-container\"]/li[3]/div/i")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[2]/div[1]/dfm-search-control/div/div[1]/input"))
+				.clear();
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[2]/div[1]/dfm-search-control/div/div[1]/input"))
+				.sendKeys("Implementation Data Updated");
+		Thread.sleep(2000);
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+		robot.delay(200);
+		Thread.sleep(4000);
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[2]/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/span/span[2]"))
+				.click();
+		Thread.sleep(2000);
+	}
+
+	@Test(priority = 3)
+	public void validateImplementationDataDetails() throws InterruptedException {
+
+		String verifyName = driver
+				.findElement(By.xpath("//*[@id=\"implementationComponentName\"]/quill-editor/div[2]/div[1]")).getText();
+		System.out.println(verifyName);
+		Thread.sleep(1000);
+
+		String verifyDescription = driver
+				.findElement(By.xpath("//*[@id=\"implementationComponentDescription\"]/quill-editor/div[2]/div[1]"))
+				.getText();
+		System.out.println(verifyDescription);
+		Thread.sleep(1000);
+
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[3]/dfm-edit-implementation-component-container/nb-card/div/div[2]/div[1]/div[2]/div[1]/i[1]"))
+				.click();
+		Thread.sleep(1000);
+
+		String verifyUrl = driver.findElement(By.xpath("//*[@id=\"url\"]")).getText();
+		System.out.println(verifyUrl);
+		Thread.sleep(1000);
+
+		driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[3]/dfm-edit-implementation-component-container/nb-card/div/div[2]/div[2]/div[1]/i[1]"))
+				.click();
+
+		String verifyComments = driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[3]/dfm-edit-implementation-component-container/nb-card/div/div[2]/div[2]/div[2]/dfm-comments-container/div/dfm-comment-item-display/div/div[2]/div[2]"))
+				.getText();
+		System.out.println(verifyComments);
+		Thread.sleep(1000);
+	}
 }

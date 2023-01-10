@@ -17,7 +17,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.time.Duration;
 
-public class AutomateDecisionTest {
+public class DecisionDataTest {
 	private WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
