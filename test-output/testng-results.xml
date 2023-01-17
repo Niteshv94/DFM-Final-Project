@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2023-01-10T17:11:47 IST" name="Default suite" finished-at="2023-01-10T17:12:20 IST" duration-ms="33049">
+  <suite started-at="2023-01-17T17:24:41 IST" name="Default suite" finished-at="2023-01-17T17:25:17 IST" duration-ms="35647">
     <groups>
     </groups>
-    <test started-at="2023-01-10T17:11:47 IST" name="Default test" finished-at="2023-01-10T17:12:20 IST" duration-ms="33049">
-      <class name="dfm.SearchFunctionality">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.SearchFunctionality@54e1c68b]" started-at="2023-01-10T17:11:47 IST" name="setUp" finished-at="2023-01-10T17:11:51 IST" duration-ms="3147" status="PASS">
+    <test started-at="2023-01-17T17:24:41 IST" name="Default test" finished-at="2023-01-17T17:25:17 IST" duration-ms="35647">
+      <class name="dfm.DiagramSearch">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.DiagramSearch@52b1beb6]" started-at="2023-01-17T17:24:41 IST" name="setUp" finished-at="2023-01-17T17:24:44 IST" duration-ms="2372" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="loginToApplication()[pri:1, instance:dfm.SearchFunctionality@54e1c68b]" started-at="2023-01-10T17:11:51 IST" name="loginToApplication" finished-at="2023-01-10T17:12:13 IST" duration-ms="22479" status="PASS">
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.DiagramSearch@52b1beb6]" started-at="2023-01-17T17:24:44 IST" name="loginToApplication" finished-at="2023-01-17T17:25:04 IST" duration-ms="20451" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginToApplication -->
-        <test-method signature="deleteAndValidateObjectProperties()[pri:2, instance:dfm.SearchFunctionality@54e1c68b]" started-at="2023-01-10T17:12:13 IST" name="deleteAndValidateObjectProperties" finished-at="2023-01-10T17:12:20 IST" duration-ms="7334" status="PASS">
+        <test-method signature="printListOfElements()[pri:2, instance:dfm.DiagramSearch@52b1beb6]" started-at="2023-01-17T17:25:04 IST" name="printListOfElements" finished-at="2023-01-17T17:25:12 IST" duration-ms="7534" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- deleteAndValidateObjectProperties -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.SearchFunctionality@54e1c68b]" started-at="2023-01-10T17:12:20 IST" name="tearDown" finished-at="2023-01-10T17:12:20 IST" duration-ms="0" status="PASS">
+        </test-method> <!-- printListOfElements -->
+        <test-method signature="printListOfDecisionElements()[pri:3, instance:dfm.DiagramSearch@52b1beb6]" started-at="2023-01-17T17:25:12 IST" name="printListOfDecisionElements" finished-at="2023-01-17T17:25:17 IST" duration-ms="5217" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- printListOfDecisionElements -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.DiagramSearch@52b1beb6]" started-at="2023-01-17T17:25:17 IST" name="tearDown" finished-at="2023-01-17T17:25:17 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- dfm.SearchFunctionality -->
+      </class> <!-- dfm.DiagramSearch -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

@@ -57,7 +57,7 @@ public class ExcelDataInput {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 
-		driver.findElement(By.xpath("//input[@placeholder='Username']")).sendKeys("test_claim2@gmail.com");
+		driver.findElement(By.xpath("//input[@placeholder='Username']")).sendKeys("nitesh@rxw.com");
 		driver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys("defaultUserPass@123");
 		driver.findElement(By.xpath("//button[@class='btn form-control btn-info mr-2 login-btn']")).click();
 		// Thread.sleep(8000);

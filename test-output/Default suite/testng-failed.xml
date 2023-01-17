@@ -3,15 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.ImplementationDataTest">
+      <class name="dfm.MultiUserWithObjects02">
         <methods>
-          <include name="enterImplementationDataDetails"/>
-          <include name="verifyImplementationDataDetails"/>
-          <include name="tearDown"/>
+          <include name="navigateToObjects"/>
           <include name="setUp"/>
-          <include name="validateImplementationDataDetails"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- dfm.ImplementationDataTest -->
+      </class> <!-- dfm.MultiUserWithObjects02 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

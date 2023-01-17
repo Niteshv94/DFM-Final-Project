@@ -24,7 +24,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-public class SearchFunctionality {
+public class DiagramSearch {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
@@ -63,9 +63,16 @@ public class SearchFunctionality {
 	}
 
 	@Test(priority = 2)
-	public void deleteAndValidateObjectProperties() throws InterruptedException, IOException, AWTException {
+	public void printListOfElements() throws InterruptedException, IOException, AWTException {
 		Thread.sleep(4000);
 		selectProjectDropdown();
+		
+	}
+	
+	@Test(priority = 3)
+	public void printListOfDecisionElements() throws InterruptedException, IOException, AWTException {
+		Thread.sleep(2000);
+		SearchDiagram();
 		
 	}
 
@@ -117,16 +124,22 @@ public class SearchFunctionality {
 		Select drpCountry = new Select(driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[1]/dfm-search-filter/div/div/div[1]/div/select")));
 		drpCountry.selectByValue("290c240c-2df0-4905-8080-4541856c0dc9");
 		Thread.sleep(3000);
-		List<WebElement> allElements=driver.findElements(By.xpath("//dfm-infinite-search-list[@ng-reflect-has-sort='true']//nb-list[@role='list']"));
+		List<WebElement> allElements=driver.findElements(By.xpath("//div[@class='item-name full-type-item-name']"));
+		//System.out.println(allElements.size());
+		Iterator<WebElement> itr = allElements.iterator();
+		while(itr.hasNext()) {
+		    System.out.println(itr.next().getText());
+		}
 
-		
-        System.out.println("Size of List: "+allElements.size());
-//		for(WebElement ele :allElements) {
-//		   // System.out.println("Name + Number===>"+ele.getText());
-//		    String s=ele.getText();
-//		    s=s.substring(s.indexOf("(")+1, s.indexOf(")"));
-//		    System.out.println("Number==>"+s);
+//		for(int r=1; r<10; r++)
+//		{
+//			String xpath = "/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[2]/div[2]/dfm-infinite-search-list/nb-list/nb-list-item[" + r + "]/dfm-preview-container/div/dfm-search-list-item/div/div";
+//			String a = driver.findElement(By.xpath(xpath)).getText();
+//			System.out.println(a);
+//			
 //		}
+		
+		
 	}
 
 	public static void deleteSearchDiagram() throws InterruptedException {
@@ -139,6 +152,18 @@ public class SearchFunctionality {
 		Thread.sleep(10000);
 
 		driver.findElement(By.xpath("//i[@class='nb-close icon']")).click();
+
+		// driver.navigate().refresh();
+	}
+	
+	public static void SearchDiagram() throws InterruptedException {
+		Thread.sleep(3000);
+
+		driver.findElement(By.xpath("//div[@class='wj-node']//input[@type='checkbox']")).click();
+
+		//Thread.sleep(10000);
+
+		//driver.findElement(By.xpath("//i[@class='nb-close icon']")).click();
 
 		// driver.navigate().refresh();
 	}
