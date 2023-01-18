@@ -24,7 +24,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-public class DiagramSearch {
+public class LanguageSortSearch {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
@@ -159,27 +159,15 @@ public class DiagramSearch {
 	public static void SearchDiagram() throws InterruptedException {
 		Thread.sleep(3000);
 
+		driver.findElement(By.xpath("//div[@class='wj-node']//input[@type='checkbox']")).click();
+
 		System.out.println("=====================================");
-		driver.findElement(By.xpath("//i[@class='eva eva-arrow-ios-upward-outline ico-up']")).click();
 		Thread.sleep(3000);
-		List<WebElement> allElementsDown=driver.findElements(By.xpath("//div[@class='item-name full-type-item-name']"));
+		List<WebElement> allElements=driver.findElements(By.xpath("//div[@class='item-name full-type-item-name']"));
 		//System.out.println(allElements.size());
-		Iterator<WebElement> itr = allElementsDown.iterator();
+		Iterator<WebElement> itr = allElements.iterator();
 		while(itr.hasNext()) {
 		    System.out.println(itr.next().getText());
 		}
-		
-		System.out.println("=====================================");
-		
-		Thread.sleep(3000);
-		driver.findElement(By.xpath("//i[@class='eva eva-arrow-ios-downward-outline ico-down']")).click();
-		Thread.sleep(3000);
-		List<WebElement> allElementsUp=driver.findElements(By.xpath("//div[@class='item-name full-type-item-name']"));
-		//System.out.println(allElements.size());
-		Iterator<WebElement> itr1 = allElementsUp.iterator();
-		while(itr1.hasNext()) {
-		    System.out.println(itr1.next().getText());
-		}
-		
 	}
 }

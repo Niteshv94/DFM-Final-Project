@@ -2,8 +2,6 @@
 
 package dfm;
 
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,14 +15,10 @@ import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-public class DiagramSearch {
+public class DecisionSearch {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
@@ -70,9 +64,9 @@ public class DiagramSearch {
 	}
 	
 	@Test(priority = 3)
-	public void printListOfDiagramElements() throws InterruptedException, IOException, AWTException {
+	public void printListOfDecisionElements() throws InterruptedException, IOException, AWTException {
 		Thread.sleep(2000);
-		SearchDiagram();
+		SearchDecision();
 		
 	}
 
@@ -156,30 +150,18 @@ public class DiagramSearch {
 		// driver.navigate().refresh();
 	}
 	
-	public static void SearchDiagram() throws InterruptedException {
+	public static void SearchDecision() throws InterruptedException {
 		Thread.sleep(3000);
 
+		driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[1]/dfm-search-filter/div/div/div[2]/wj-tree-view/div/div[3]/input")).click();
+
 		System.out.println("=====================================");
-		driver.findElement(By.xpath("//i[@class='eva eva-arrow-ios-upward-outline ico-up']")).click();
 		Thread.sleep(3000);
-		List<WebElement> allElementsDown=driver.findElements(By.xpath("//div[@class='item-name full-type-item-name']"));
+		List<WebElement> allElements=driver.findElements(By.xpath("//div[@class='item-name full-type-item-name']"));
 		//System.out.println(allElements.size());
-		Iterator<WebElement> itr = allElementsDown.iterator();
+		Iterator<WebElement> itr = allElements.iterator();
 		while(itr.hasNext()) {
 		    System.out.println(itr.next().getText());
 		}
-		
-		System.out.println("=====================================");
-		
-		Thread.sleep(3000);
-		driver.findElement(By.xpath("//i[@class='eva eva-arrow-ios-downward-outline ico-down']")).click();
-		Thread.sleep(3000);
-		List<WebElement> allElementsUp=driver.findElements(By.xpath("//div[@class='item-name full-type-item-name']"));
-		//System.out.println(allElements.size());
-		Iterator<WebElement> itr1 = allElementsUp.iterator();
-		while(itr1.hasNext()) {
-		    System.out.println(itr1.next().getText());
-		}
-		
 	}
 }

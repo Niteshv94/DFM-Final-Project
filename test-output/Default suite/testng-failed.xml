@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.MultiUserWithObjects02">
+      <class name="dfm.DiagramSearch">
         <methods>
-          <include name="navigateToObjects"/>
           <include name="setUp"/>
           <include name="tearDown"/>
+          <include name="printListOfDiagramElements"/>
         </methods>
-      </class> <!-- dfm.MultiUserWithObjects02 -->
+      </class> <!-- dfm.DiagramSearch -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
