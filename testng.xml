@@ -3,8 +3,8 @@
 <suite name="Suite" parallel = "tests">
   <test thread-count="5" name="Test">
     <classes>
-      <class name="dfm.MultiUser01"/>
-      <class name="dfm.MultiUser02"/>
+      <class name="dfm.MultiUserWithTag01"/>
+      <class name="dfm.MultiUserWithTag02"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

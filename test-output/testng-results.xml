@@ -1,120 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="6" passed="5" failed="1" skipped="0">
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
   <reporter-output>
+    <line>
+      <![CDATA[Test Case for Add Tag]]>
+    </line>
+    <line>
+      <![CDATA[Test Case for Add Tag]]>
+    </line>
   </reporter-output>
-  <suite started-at="2023-01-18T18:27:33 IST" name="Suite" finished-at="2023-01-18T18:30:09 IST" duration-ms="156089">
+  <suite started-at="2023-01-24T17:30:39 IST" name="Suite" finished-at="2023-01-24T17:31:52 IST" duration-ms="72588">
     <groups>
     </groups>
-    <test started-at="2023-01-18T18:27:33 IST" name="Test" finished-at="2023-01-18T18:30:09 IST" duration-ms="156089">
-      <class name="dfm.MultiUser02">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.MultiUser02@3527942a]" started-at="2023-01-18T18:27:49 IST" name="setUp" finished-at="2023-01-18T18:27:50 IST" duration-ms="1602" status="PASS">
+    <test started-at="2023-01-24T17:30:39 IST" name="Test" finished-at="2023-01-24T17:31:52 IST" duration-ms="72588">
+      <class name="dfm.MultiUserWithTag01">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.MultiUserWithTag01@13e344d]" started-at="2023-01-24T17:30:39 IST" name="setUpReport" finished-at="2023-01-24T17:30:39 IST" duration-ms="342" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.MultiUserWithTag01@13e344d]" started-at="2023-01-24T17:30:39 IST" name="setUp" finished-at="2023-01-24T17:30:42 IST" duration-ms="2349" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="loginAction()[pri:1, instance:dfm.MultiUser02@3527942a]" started-at="2023-01-18T18:27:50 IST" name="loginAction" finished-at="2023-01-18T18:28:06 IST" duration-ms="15620" status="PASS">
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.MultiUserWithTag01@13e344d]" started-at="2023-01-24T17:30:42 IST" name="loginToApplication" finished-at="2023-01-24T17:31:08 IST" duration-ms="26416" status="PASS">
+          <reporter-output>
+            <line>
+              <![CDATA[Test Case for Add Tag]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- loginToApplication -->
+        <test-method signature="addTag()[pri:2, instance:dfm.MultiUserWithTag01@13e344d]" started-at="2023-01-24T17:31:25 IST" name="addTag" finished-at="2023-01-24T17:31:40 IST" duration-ms="15540" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginAction -->
-        <test-method signature="navigateToDiagram()[pri:2, instance:dfm.MultiUser02@3527942a]" started-at="2023-01-18T18:28:15 IST" name="navigateToDiagram" finished-at="2023-01-18T18:28:37 IST" duration-ms="21887" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- navigateToDiagram -->
-        <test-method signature="validateDiagram()[pri:3, instance:dfm.MultiUser02@3527942a]" started-at="2023-01-18T18:29:32 IST" name="validateDiagram" finished-at="2023-01-18T18:30:09 IST" duration-ms="36433" status="FAIL">
-          <exception class="org.openqa.selenium.NoSuchElementException">
-            <message>
-              <![CDATA[no such element: Unable to locate element: {"method":"css selector","selector":"div[class='ql-editor'] p"}
-  (Session info: chrome=108.0.5359.126)
-For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
-Build info: version: '4.4.0', revision: 'e5c75ed026a'
-System info: host: 'DESKTOP-T4JK67Q', ip: '192.168.1.62', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [70a1356991740ace46cb2c1e604d950b, findElement {using=css selector, value=div[class='ql-editor'] p}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.126, chrome: {chromedriverVersion: 107.0.5304.62 (1eec40d3a576..., userDataDir: C:\Users\Nitesh\AppData\Loc...}, goog:chromeOptions: {debuggerAddress: localhost:57984}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:57984/devtoo..., se:cdpVersion: 108.0.5359.126, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: 70a1356991740ace46cb2c1e604d950b]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"div[class='ql-editor'] p"}
-  (Session info: chrome=108.0.5359.126)
-For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
-Build info: version: '4.4.0', revision: 'e5c75ed026a'
-System info: host: 'DESKTOP-T4JK67Q', ip: '192.168.1.62', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [70a1356991740ace46cb2c1e604d950b, findElement {using=css selector, value=div[class='ql-editor'] p}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 108.0.5359.126, chrome: {chromedriverVersion: 107.0.5304.62 (1eec40d3a576..., userDataDir: C:\Users\Nitesh\AppData\Loc...}, goog:chromeOptions: {debuggerAddress: localhost:57984}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: WINDOWS, proxy: Proxy(), se:cdp: ws://localhost:57984/devtoo..., se:cdpVersion: 108.0.5359.126, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
-Session ID: 70a1356991740ace46cb2c1e604d950b
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:78)
-at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:200)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:133)
-at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:53)
-at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:184)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:167)
-at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:142)
-at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:547)
-at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:162)
-at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:60)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:365)
-at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:357)
-at dfm.MultiUser02.validateDiagram(MultiUser02.java:164)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:78)
-at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-at java.base/java.lang.reflect.Method.invoke(Method.java:567)
-at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:133)
-at org.testng.internal.TestInvoker.invokeMethod(TestInvoker.java:598)
-at org.testng.internal.TestInvoker.invokeTestMethod(TestInvoker.java:173)
-at org.testng.internal.MethodRunner.runInSequence(MethodRunner.java:46)
-at org.testng.internal.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:824)
-at org.testng.internal.TestInvoker.invokeTestMethods(TestInvoker.java:146)
-at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
-at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:128)
-at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-at org.testng.TestRunner.privateRun(TestRunner.java:794)
-at org.testng.TestRunner.run(TestRunner.java:596)
-at org.testng.SuiteRunner.runTest(SuiteRunner.java:377)
-at org.testng.SuiteRunner.access$000(SuiteRunner.java:28)
-at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:418)
-at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
-at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
-at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
-at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
-at java.base/java.lang.Thread.run(Thread.java:831)
-]]>
-            </full-stacktrace>
-          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- validateDiagram -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.MultiUser02@3527942a]" started-at="2023-01-18T18:30:09 IST" name="tearDown" finished-at="2023-01-18T18:30:09 IST" duration-ms="0" status="PASS">
+        </test-method> <!-- addTag -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.MultiUserWithTag01@13e344d]" started-at="2023-01-24T17:31:40 IST" name="tearDown" finished-at="2023-01-24T17:31:40 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- dfm.MultiUser02 -->
-      <class name="dfm.MultiUser01">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.MultiUser01@273e7444]" started-at="2023-01-18T18:27:33 IST" name="setUp" finished-at="2023-01-18T18:27:36 IST" duration-ms="2994" status="PASS">
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.MultiUserWithTag01@13e344d]" started-at="2023-01-24T17:31:52 IST" name="tearDownReport" finished-at="2023-01-24T17:31:54 IST" duration-ms="1819" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownReport -->
+      </class> <!-- dfm.MultiUserWithTag01 -->
+      <class name="dfm.MultiUserWithTag02">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.MultiUserWithTag02@1a6d8329]" started-at="2023-01-24T17:30:39 IST" name="setUpReport" finished-at="2023-01-24T17:30:39 IST" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.MultiUserWithTag02@1a6d8329]" started-at="2023-01-24T17:31:08 IST" name="setUp" finished-at="2023-01-24T17:31:09 IST" duration-ms="701" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="loginAction()[pri:1, instance:dfm.MultiUser01@273e7444]" started-at="2023-01-18T18:27:36 IST" name="loginAction" finished-at="2023-01-18T18:27:49 IST" duration-ms="13071" status="PASS">
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.MultiUserWithTag02@1a6d8329]" started-at="2023-01-24T17:31:09 IST" name="loginToApplication" finished-at="2023-01-24T17:31:25 IST" duration-ms="15827" status="PASS">
+          <reporter-output>
+            <line>
+              <![CDATA[Test Case for Add Tag]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- loginToApplication -->
+        <test-method signature="addTag()[pri:2, instance:dfm.MultiUserWithTag02@1a6d8329]" started-at="2023-01-24T17:31:40 IST" name="addTag" finished-at="2023-01-24T17:31:52 IST" duration-ms="11711" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- loginAction -->
-        <test-method signature="navigateToDiagram()[pri:2, instance:dfm.MultiUser01@273e7444]" started-at="2023-01-18T18:28:06 IST" name="navigateToDiagram" finished-at="2023-01-18T18:28:15 IST" duration-ms="9059" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- navigateToDiagram -->
-        <test-method signature="createDiagram()[pri:3, instance:dfm.MultiUser01@273e7444]" started-at="2023-01-18T18:28:37 IST" name="createDiagram" finished-at="2023-01-18T18:29:32 IST" duration-ms="55360" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- createDiagram -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.MultiUser01@273e7444]" started-at="2023-01-18T18:29:32 IST" name="tearDown" finished-at="2023-01-18T18:29:32 IST" duration-ms="0" status="PASS">
+        </test-method> <!-- addTag -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.MultiUserWithTag02@1a6d8329]" started-at="2023-01-24T17:31:52 IST" name="tearDown" finished-at="2023-01-24T17:31:52 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- dfm.MultiUser01 -->
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.MultiUserWithTag02@1a6d8329]" started-at="2023-01-24T17:31:54 IST" name="tearDownReport" finished-at="2023-01-24T17:31:54 IST" duration-ms="51" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownReport -->
+      </class> <!-- dfm.MultiUserWithTag02 -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

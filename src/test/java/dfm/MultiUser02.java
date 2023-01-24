@@ -56,7 +56,7 @@ public class MultiUser02 {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1289x602 |
 		//driver.manage().window().maximize();
-		driver.manage().window().setSize(new Dimension(1144, 602));
+		driver.manage().window().setSize(new Dimension(1689, 702));
 
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
