@@ -88,7 +88,7 @@ public class MultiuserWithProject01 {
 		
 		@Test (priority = 2)
 		public void addProject() throws InterruptedException, IOException {
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 
 		// 9 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
@@ -98,10 +98,10 @@ public class MultiuserWithProject01 {
 		Thread.sleep(2000);
 		// 11 | click | css=.eva-plus-circle-outline:nth-child(2) |
 		driver.findElement(By.cssSelector(".eva-plus-circle-outline:nth-child(2)")).click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		// 12 | click | css=.wj-listbox-item:nth-child(1) > div |
 		driver.findElement(By.cssSelector(".wj-listbox-item:nth-child(1) > div")).click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		// 13 | click | css=.rich-text-editor-focus p |
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']/quill-editor/div[2]/div/p"))
 				.click();

@@ -113,7 +113,7 @@ public class MultiuserWithProject02 {
 	}
 	
 	@Test (priority = 2)
-	public void validateCreatedTags() throws IOException, InterruptedException {
+	public void addProject() throws IOException, InterruptedException {
 		// Get the xpath and Project data form Excel Sheet
 				File src = new File("./Test Data/TestData.xlsx");
 				FileInputStream fis = new FileInputStream(src);
@@ -126,4 +126,39 @@ public class MultiuserWithProject02 {
 				driver.findElement(By.xpath("//input[@id='search-ip']"))
 						.sendKeys(projectName);
 	}
+	
+	@Test(priority = 3)
+	public void validateTag() throws InterruptedException, IOException {
+
+		Thread.sleep(18000);
+		// Get the xpath and Tag data form Excel Sheet
+		File src = new File("./Test Data/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+		XSSFSheet sheet = workbook.getSheet("AddProjectTest");
+
+		String projectName = sheet.getRow(1).getCell(0).getStringCellValue();
+		String xpathVerifyProject = sheet.getRow(1).getCell(3).getStringCellValue();
+
+		Thread.sleep(2000);
+
+		// Verify the Customer is present or not
+		driver.findElement(By.id("search-ip")).clear();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[1]/div/i")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("search-ip")).sendKeys(projectName);
+		Thread.sleep(2000);
+	
+
+		boolean element = driver.findElement(By.xpath(xpathVerifyProject)).isDisplayed();
+		if (element) {
+
+			System.out.println("The Project is Present...");
+		} else {
+
+			System.out.println("The Project is not Present...");
+		}
+}
 }

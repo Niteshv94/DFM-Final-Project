@@ -97,7 +97,7 @@ public class MultiUserWithTag02 {
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1183x602 |
-		//driver.manage().window().maximize();
+		// driver.manage().window().maximize();
 		driver.manage().window().setSize(new Dimension(989, 1002));
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
@@ -112,7 +112,7 @@ public class MultiUserWithTag02 {
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
 		extentTest.pass("Login Successfull");
-		//Thread.sleep(15000);
+		// Thread.sleep(15000);
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
@@ -180,30 +180,54 @@ public class MultiUserWithTag02 {
 				.click();
 	}
 
-//	@Test(priority = 3)
-//	public void validateTag() throws InterruptedException, IOException {
-//
-//		// Get the xpath and Tag data form Excel Sheet
-//		File src = new File("./Test Data/TestData.xlsx");
-//		FileInputStream fis = new FileInputStream(src);
-//		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-//
-//		XSSFSheet sheet = workbook.getSheet("AddTagTest");
-//		String verifyTag = sheet.getRow(1).getCell(2).getStringCellValue();
+	@Test(priority = 3)
+	public void validateTag() throws InterruptedException, IOException {
+
+		Thread.sleep(20000);
+		// Get the xpath and Tag data form Excel Sheet
+		File src = new File("./Test Data/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+		XSSFSheet sheet = workbook.getSheet("AddTagTest");
+		String verifyTag = sheet.getRow(1).getCell(2).getStringCellValue();
+		String xpathverifyTag = sheet.getRow(1).getCell(4).getStringCellValue();
+
+		Thread.sleep(2000);
+
+		// Verify the Customer is present or not
+		driver.findElement(By.id("search-ip")).clear();
+		driver.findElement(By.id("search-ip")).sendKeys(verifyTag);
+		Thread.sleep(2000);
 //		driver.findElement(By.xpath(
 //				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[2]/wj-tree-view/div/div[1]"))
 //				.click();
-//		Thread.sleep(2000);
+
+		// Verify the Customer is present or not
+//				List<WebElement> verify_tag_inList = driver.findElements(By.xpath(xpathverifyTag));
+//				if (verify_tag_inList.size() < 0) {
+//					System.out.println("The Tag is Present in the Project...");
 //
-//		// Verify the Customer is present or not
-//		driver.findElement(By.id("search-ip")).clear();
-//		driver.findElement(By.id("search-ip")).sendKeys(verifyTag);
-//		extentTest.pass("Entered Added Tag Name");
-//		extentTest.log(Status.INFO, "Test Completed");
+//				} else {
+//					System.out.println("The Tag is not Present in the Project...");
 //
-//		System.out.println("<<<<<Tag added and validated successfully>>>>>");
-//		workbook.close();
-//	}
+//				}	
+
+		boolean element = driver.findElement(By.xpath(xpathverifyTag)).isDisplayed();
+		if (element) {
+
+			System.out.println("The Tag is Present in the Project...");
+		} else {
+
+			System.out.println("The Tag is not Present in the Project...");
+		}
+
+		extentTest.pass("Entered Added Tag Name");
+		extentTest.log(Status.INFO, "Test Completed");
+
+		System.out.println("<<<<<Tag validated successfully>>>>>");
+		workbook.close();
+	}
 
 	@AfterSuite(alwaysRun = true)
 	public void tearDownReport() {

@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.MultiuserWithProject01">
+      <class name="dfm.MultiUserWithTag01">
         <methods>
-          <include name="tearDown"/>
+          <include name="addTag"/>
+          <include name="tearDownReport"/>
           <include name="setUp"/>
-          <include name="addProject"/>
+          <include name="setUpReport"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- dfm.MultiuserWithProject01 -->
+      </class> <!-- dfm.MultiUserWithTag01 -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
