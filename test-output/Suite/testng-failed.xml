@@ -3,24 +3,15 @@
 <suite parallel="tests" name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" parallel="tests" name="Test(failed)">
     <classes>
-      <class name="dfm.MultiUserWithTag02">
+      <class name="dfm.MultiUserDeleteTag02">
         <methods>
-          <include name="tearDown"/>
+          <include name="setUpReport"/>
           <include name="tearDownReport"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
           <include name="validateTag"/>
-          <include name="setUp"/>
-          <include name="setUpReport"/>
         </methods>
-      </class> <!-- dfm.MultiUserWithTag02 -->
-      <class name="dfm.MultiUserWithTag01">
-        <methods>
-          <include name="addTag"/>
-          <include name="tearDownReport"/>
-          <include name="setUp"/>
-          <include name="setUpReport"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- dfm.MultiUserWithTag01 -->
+      </class> <!-- dfm.MultiUserDeleteTag02 -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

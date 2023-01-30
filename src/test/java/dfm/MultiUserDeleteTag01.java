@@ -34,7 +34,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-public class MultiUserWithTag02 {
+public class MultiUserDeleteTag01 {
 	private WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
@@ -102,7 +102,7 @@ public class MultiUserWithTag02 {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("test5@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
 		extentTest.pass("Entered Email");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
@@ -143,89 +143,27 @@ public class MultiUserWithTag02 {
 		XSSFSheet sheet = workbook.getSheet("AddTagTest");
 
 		String searchProject = sheet.getRow(1).getCell(0).getStringCellValue();
-		String projectName = sheet.getRow(1).getCell(1).getStringCellValue();
-		String tagName = sheet.getRow(1).getCell(2).getStringCellValue();
-		String tagDescription = sheet.getRow(1).getCell(3).getStringCellValue();
+		String xpathUpdateTag = sheet.getRow(5).getCell(2).getStringCellValue();
+		String updateName = sheet.getRow(5).getCell(1).getStringCellValue();
 
 		// 11 | type | id=search-ip | dummy
 		driver.findElement(By.id("search-ip")).sendKeys(searchProject);
 		extentTest.pass("Project Searched");
 
-		// identify element
-//		WebElement l = driver.findElement(By.xpath(projectName));
-//		// Actions class with moveToElement() and contextClick()
-//		Actions a = new Actions(driver);
-//		a.moveToElement(l).contextClick().build().perform();
-//		Thread.sleep(2000);
-//
-//		// 13 | click | css=.rich-text-editor-focus p |
-//		driver.findElement(By.xpath("//div[contains(text(),'Add Tag')]")).click();
-//		extentTest.pass("Clicked on Add Tag button from side window");
-//
-//		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//div[@class='ql-editor ql-blank']"))
-//				.sendKeys(tagName);
-//		extentTest.pass("Entered Tag Name");
-//
-//		driver.findElement(
-//				By.xpath("//core-edit-multiple-lines-control[@id='description']//div[@class='ql-editor ql-blank']"))
-//				.sendKeys(tagDescription);
-//		extentTest.pass("Entered Tag Description");
-//
-//		// 17 | click | css=.btn-block |
-//		driver.findElement(By.xpath("//button[contains(.,'Add Tag')]")).click();
-//		extentTest.pass("Clicked on Add Tag button");
-		Thread.sleep(3000);
 		driver.findElement(By.xpath(
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[2]/wj-tree-view/div/div[1]"))
 				.click();
-	}
-
-	@Test(priority = 3)
-	public void validateTag() throws InterruptedException, IOException {
-
-		Thread.sleep(20000);
-		// Get the xpath and Tag data form Excel Sheet
-		File src = new File("./Test Data/TestData.xlsx");
-		FileInputStream fis = new FileInputStream(src);
-		XSSFWorkbook workbook = new XSSFWorkbook(fis);
-
-		XSSFSheet sheet = workbook.getSheet("AddTagTest");
-		String verifyTag = sheet.getRow(1).getCell(2).getStringCellValue();
-		String xpathverifyTag = sheet.getRow(1).getCell(4).getStringCellValue();
-
 		Thread.sleep(2000);
 
-		// Verify the Customer is present or not
-		driver.findElement(By.id("search-ip")).clear();
-		driver.findElement(By.id("search-ip")).sendKeys(verifyTag);
+		WebElement l = driver.findElement(By.xpath(xpathUpdateTag));
+		// Actions class with moveToElement() and contextClick()
+		Actions a = new Actions(driver);
+		a.moveToElement(l).contextClick().build().perform();
 		Thread.sleep(2000);
-//		driver.findElement(By.xpath(
-//				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-folders-tags-management-container/nb-card/div/div[1]/dfm-project-tree-view/div/div[2]/wj-tree-view/div/div[1]"))
-//				.click();
 
-		// Verify the Customer is present or not
-//				List<WebElement> verify_tag_inList = driver.findElements(By.xpath(xpathverifyTag));
-//				if (verify_tag_inList.size() < 0) {
-//					System.out.println("The Tag is Present in the Project...");
-//
-//				} else {
-//					System.out.println("The Tag is not Present in the Project...");
-//
-//				}	
+		driver.findElement(By.xpath("//div[contains(text(),'Delete Tag')]")).click();
+		Thread.sleep(2000);
 
-		boolean element = driver.findElement(By.xpath(xpathverifyTag)).isDisplayed();
-		if (element) {
-
-			System.out.println("The Tag is Present in the Project...");
-		} else {
-
-			System.out.println("The Tag is not Present in the Project...");
-		}
-
-		extentTest.pass("Entered Added Tag Name");
-		extentTest.log(Status.INFO, "Test Completed");
-
-		System.out.println("<<<<<Tag validated successfully>>>>>");
 		workbook.close();
 	}
 

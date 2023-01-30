@@ -34,7 +34,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
-public class MultiUserWithTag01 {
+public class MultiUserAddTag01 {
 	private WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
