@@ -29,7 +29,7 @@ import com.aventstack.extentreports.Status;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
 
-public class MultiUser02 {
+public class MultiUser04 {
 	static WebDriver driver;
 
 	@BeforeClass
@@ -47,7 +47,7 @@ public class MultiUser02 {
 	}
 
 	@Test(priority = 1)
-	public void loginAction2() throws InterruptedException, IOException {
+	public void loginAction4() throws InterruptedException, IOException {
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
@@ -61,7 +61,7 @@ public class MultiUser02 {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("test5@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("test6@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -76,7 +76,7 @@ public class MultiUser02 {
 	}
 
 	@Test(priority = 2)
-	public void navigateToDiagram2() throws InterruptedException {
+	public void navigateToDiagram4() throws InterruptedException {
 
 		Thread.sleep(2000);
 		driver.findElement(By.xpath(
@@ -208,9 +208,8 @@ public class MultiUser02 {
 		System.out.println("Value fetched after object placed is :- " + expected_value6);
 	}*/
 	
-	
 	@Test(priority = 3)
-	public void createDiagram3() throws IOException, InterruptedException {
+	public void createDiagram4() throws IOException, InterruptedException {
 
 		File file = new File("./Test Data/TestData.xlsx");
 		FileInputStream fileInputStream = new FileInputStream(file);
@@ -220,16 +219,16 @@ public class MultiUser02 {
 		// Cell data2 = sheet.getRow(0).getCell(1);
 		DataFormatter dataFormatter = new DataFormatter();
 
-		String value1 = dataFormatter.formatCellValue(sheet.getRow(1).getCell(0));
+		String value1 = dataFormatter.formatCellValue(sheet.getRow(1).getCell(2));
 		int number1 = Integer.parseInt(value1);
 
-		String value2 = dataFormatter.formatCellValue(sheet.getRow(1).getCell(1));
+		String value2 = dataFormatter.formatCellValue(sheet.getRow(1).getCell(3));
 		int number2 = Integer.parseInt(value2);
 
-		String value3 = dataFormatter.formatCellValue(sheet.getRow(3).getCell(0));
+		String value3 = dataFormatter.formatCellValue(sheet.getRow(5).getCell(0));
 		int number3 = Integer.parseInt(value3);
 
-		String value4 = dataFormatter.formatCellValue(sheet.getRow(3).getCell(1));
+		String value4 = dataFormatter.formatCellValue(sheet.getRow(5).getCell(1));
 		int number4 = Integer.parseInt(value4);
 
 		
@@ -254,16 +253,17 @@ public class MultiUser02 {
 		act.perform();
 		Thread.sleep(1000);
 		
-		act.moveToElement(target, 105, 105);
+		act.moveToElement(target, -1, -1);
 		act.click().build().perform();
 		Thread.sleep(1000);
 		
-		act.moveToElement(target, -125, -195);
+		act.moveToElement(target, -5, -45);
 		act.click().build().perform();
 		Thread.sleep(2000);
 		String expected_value1 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
 		System.out.println("Value fetched after object placed is :- " + expected_value1);
-
+		
+		workbook.close();
 	}
 
 }

@@ -41,7 +41,7 @@ public class MultiUser01 {
 	}
 
 	@Test(priority = 1)
-	public void loginAction() throws InterruptedException, IOException {
+	public void loginAction1() throws InterruptedException, IOException {
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
@@ -70,24 +70,24 @@ public class MultiUser01 {
 	}
 
 	@Test(priority = 2)
-	public void navigateToDiagram() throws InterruptedException {
+	public void navigateToDiagram1() throws InterruptedException {
 
 		driver.findElement(By.xpath(
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[1]/dfm-search-control/div/div[1]/input"))
 				.sendKeys("Test MultiUser Diagram");
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
 		driver.findElement(By.xpath(
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/span/span[2]"))
 				.click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
 		driver.findElement(By.xpath("//i[@class='eva eva-settings-2-outline']")).click();
-		Thread.sleep(4000);
+		Thread.sleep(2000);
 	}
 
 	@Test(priority = 3)
-	public void createDiagram() throws IOException, InterruptedException {
+	public void createDiagram1() throws IOException, InterruptedException {
 
 		File file = new File("./Test Data/TestData.xlsx");
 		FileInputStream fileInputStream = new FileInputStream(file);
@@ -182,22 +182,22 @@ public class MultiUser01 {
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[3]/dfm-go-js-existing-objects-palette/div/div/canvas"));
 
 		// Input Source data 1
-		act.moveToElement(src, number1, number2);
+		/*act.moveToElement(src, number1, number2);
 		act.clickAndHold().moveByOffset(number1, number2);
 		act.moveToElement(src, number3, number4);
 		act.moveToElement(target, number4, number4);
 		act.release();
 		act.perform();
-		Thread.sleep(8000);
+		Thread.sleep(8000);*/
 
 		// Knowledge data
-		act.moveToElement(src, number5, number6);
+		/*act.moveToElement(src, number5, number6);
 		act.clickAndHold().moveByOffset(number5, number6);
 		act.moveToElement(src, number7, number8);
 		act.moveToElement(target, number7, number8);
 		act.release();
 		act.perform();
-		Thread.sleep(12000);
+		Thread.sleep(8000);*/
 
 		// Decision Objects
 		act.moveToElement(src, number9, number10);
@@ -206,25 +206,25 @@ public class MultiUser01 {
 		act.moveToElement(target, number11, number12);
 		act.release();
 		act.perform();
-		Thread.sleep(8000);
+		Thread.sleep(1000);
 
 		// Group Item Objects
-		act.moveToElement(src, number13, number14);
+		/*act.moveToElement(src, number13, number14);
 		act.clickAndHold().moveByOffset(number13, number14);
 		act.moveToElement(src, number15, number16);
 		act.moveToElement(target, number15, number16);
 		act.release();
 		act.perform();
-		Thread.sleep(8000);
+		Thread.sleep(8000);*/
 
 		// Annotation Objects
-		act.moveToElement(src, number17, number18);
+		/*act.moveToElement(src, number17, number18);
 		act.clickAndHold().moveByOffset(number17, number18);
 		act.moveToElement(src, number19, number20);
 		act.moveToElement(target, number19, number20);
 		act.release();
 		act.perform();
-		Thread.sleep(8000);
+		Thread.sleep(8000);*/
 
 		// Decision re-used objects
 		act.moveToElement(reuse_objects, number21, number22);
@@ -233,7 +233,7 @@ public class MultiUser01 {
 		act.moveToElement(target, number23, number24);
 		act.release();
 		act.perform();
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 
 	}
 

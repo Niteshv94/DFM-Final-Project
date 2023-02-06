@@ -29,7 +29,7 @@ import com.aventstack.extentreports.Status;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
 
-public class MultiUser02 {
+public class MultiUser03 {
 	static WebDriver driver;
 
 	@BeforeClass
@@ -47,7 +47,7 @@ public class MultiUser02 {
 	}
 
 	@Test(priority = 1)
-	public void loginAction2() throws InterruptedException, IOException {
+	public void loginAction1() throws InterruptedException, IOException {
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
@@ -61,7 +61,7 @@ public class MultiUser02 {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("test5@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("test1@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -208,7 +208,6 @@ public class MultiUser02 {
 		System.out.println("Value fetched after object placed is :- " + expected_value6);
 	}*/
 	
-	
 	@Test(priority = 3)
 	public void createDiagram3() throws IOException, InterruptedException {
 
@@ -226,10 +225,10 @@ public class MultiUser02 {
 		String value2 = dataFormatter.formatCellValue(sheet.getRow(1).getCell(1));
 		int number2 = Integer.parseInt(value2);
 
-		String value3 = dataFormatter.formatCellValue(sheet.getRow(3).getCell(0));
+		String value3 = dataFormatter.formatCellValue(sheet.getRow(4).getCell(0));
 		int number3 = Integer.parseInt(value3);
 
-		String value4 = dataFormatter.formatCellValue(sheet.getRow(3).getCell(1));
+		String value4 = dataFormatter.formatCellValue(sheet.getRow(4).getCell(1));
 		int number4 = Integer.parseInt(value4);
 
 		
@@ -242,8 +241,8 @@ public class MultiUser02 {
 		WebElement target = driver.findElement(By.xpath(
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/div/dfm-go-js-display-diagram/div/div"));
 
-		WebElement reuse_objects = driver.findElement(By.xpath(
-				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[3]/dfm-go-js-existing-objects-palette/div/div/canvas"));
+		WebElement target_canvas = driver.findElement(By.xpath(
+				"//div[@class='diagramDiv']//canvas"));
 
 		// Input Source data 1
 		act.moveToElement(src, number1, number2);
@@ -254,15 +253,34 @@ public class MultiUser02 {
 		act.perform();
 		Thread.sleep(1000);
 		
-		act.moveToElement(target, 105, 105);
+		act.moveToElement(target, -1, -1);
 		act.click().build().perform();
 		Thread.sleep(1000);
 		
-		act.moveToElement(target, -125, -195);
+		act.moveToElement(target, 105, 105);
 		act.click().build().perform();
 		Thread.sleep(2000);
 		String expected_value1 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
 		System.out.println("Value fetched after object placed is :- " + expected_value1);
+		
+		// Input Source data 2
+				act.moveToElement(src, -56, 5);
+				act.clickAndHold().moveByOffset(-56, 5);
+				act.moveToElement(src, 100, 150);
+				act.moveToElement(target, 100, 150);
+				act.release();
+				act.perform();
+				Thread.sleep(1000);
+				
+				act.moveToElement(target, -1, -1);
+				act.click().build().perform();
+				Thread.sleep(1000);
+				
+				act.moveToElement(target, 105, 155);
+				act.click().build().perform();
+				Thread.sleep(2000);
+				String expected_value2 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
+				System.out.println("Value fetched after object placed is :- " + expected_value2);
 
 	}
 

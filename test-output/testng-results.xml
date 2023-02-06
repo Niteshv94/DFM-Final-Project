@@ -8,72 +8,72 @@
       <![CDATA[Test Case for Add Tag]]>
     </line>
   </reporter-output>
-  <suite started-at="2023-01-27T18:14:19 IST" name="Suite" finished-at="2023-01-27T18:16:37 IST" duration-ms="137895">
+  <suite started-at="2023-02-02T18:09:04 IST" name="Suite" finished-at="2023-02-02T18:10:36 IST" duration-ms="91738">
     <groups>
     </groups>
-    <test started-at="2023-01-27T18:14:19 IST" name="Test" finished-at="2023-01-27T18:16:37 IST" duration-ms="137895">
-      <class name="dfm.MultiUserDeleteTag02">
-        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.MultiUserDeleteTag02@1ffaf86]" started-at="2023-01-27T18:14:19 IST" name="setUpReport" finished-at="2023-01-27T18:14:19 IST" duration-ms="1" status="PASS">
+    <test started-at="2023-02-02T18:09:04 IST" name="Test" finished-at="2023-02-02T18:10:36 IST" duration-ms="91738">
+      <class name="dfm.MultiUserAddTag02">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.MultiUserAddTag02@1ffaf86]" started-at="2023-02-02T18:09:04 IST" name="setUpReport" finished-at="2023-02-02T18:09:04 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpReport -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.MultiUserDeleteTag02@1ffaf86]" started-at="2023-01-27T18:14:19 IST" name="setUp" finished-at="2023-01-27T18:14:23 IST" duration-ms="3623" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.MultiUserAddTag02@1ffaf86]" started-at="2023-02-02T18:09:04 IST" name="setUp" finished-at="2023-02-02T18:09:06 IST" duration-ms="2276" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="loginToApplication()[pri:1, instance:dfm.MultiUserDeleteTag02@1ffaf86]" started-at="2023-01-27T18:14:23 IST" name="loginToApplication" finished-at="2023-01-27T18:14:39 IST" duration-ms="16532" status="PASS">
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.MultiUserAddTag02@1ffaf86]" started-at="2023-02-02T18:09:06 IST" name="loginToApplication" finished-at="2023-02-02T18:09:21 IST" duration-ms="14661" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[Test Case for Add Tag]]>
             </line>
           </reporter-output>
         </test-method> <!-- loginToApplication -->
-        <test-method signature="addTag()[pri:2, instance:dfm.MultiUserDeleteTag02@1ffaf86]" started-at="2023-01-27T18:15:12 IST" name="addTag" finished-at="2023-01-27T18:15:27 IST" duration-ms="14189" status="PASS">
+        <test-method signature="addTag()[pri:2, instance:dfm.MultiUserAddTag02@1ffaf86]" started-at="2023-02-02T18:09:41 IST" name="addTag" finished-at="2023-02-02T18:09:55 IST" duration-ms="14125" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- addTag -->
-        <test-method signature="validateTag()[pri:3, instance:dfm.MultiUserDeleteTag02@1ffaf86]" started-at="2023-01-27T18:15:42 IST" name="validateTag" finished-at="2023-01-27T18:16:37 IST" duration-ms="54682" status="PASS">
+        <test-method signature="validateTag()[pri:3, instance:dfm.MultiUserAddTag02@1ffaf86]" started-at="2023-02-02T18:10:11 IST" name="validateTag" finished-at="2023-02-02T18:10:36 IST" duration-ms="24659" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateTag -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.MultiUserDeleteTag02@1ffaf86]" started-at="2023-01-27T18:16:37 IST" name="tearDown" finished-at="2023-01-27T18:16:37 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.MultiUserAddTag02@1ffaf86]" started-at="2023-02-02T18:10:36 IST" name="tearDown" finished-at="2023-02-02T18:10:36 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.MultiUserDeleteTag02@1ffaf86]" started-at="2023-01-27T18:16:38 IST" name="tearDownReport" finished-at="2023-01-27T18:16:38 IST" duration-ms="133" status="PASS">
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.MultiUserAddTag02@1ffaf86]" started-at="2023-02-02T18:10:38 IST" name="tearDownReport" finished-at="2023-02-02T18:10:38 IST" duration-ms="169" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownReport -->
-      </class> <!-- dfm.MultiUserDeleteTag02 -->
-      <class name="dfm.MultiUserDeleteTag01">
-        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.MultiUserDeleteTag01@1a942c18]" started-at="2023-01-27T18:14:19 IST" name="setUpReport" finished-at="2023-01-27T18:14:19 IST" duration-ms="452" status="PASS">
+      </class> <!-- dfm.MultiUserAddTag02 -->
+      <class name="dfm.MultiUserAddTag01">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.MultiUserAddTag01@1a942c18]" started-at="2023-02-02T18:09:04 IST" name="setUpReport" finished-at="2023-02-02T18:09:04 IST" duration-ms="331" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpReport -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.MultiUserDeleteTag01@1a942c18]" started-at="2023-01-27T18:14:39 IST" name="setUp" finished-at="2023-01-27T18:14:41 IST" duration-ms="1164" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.MultiUserAddTag01@1a942c18]" started-at="2023-02-02T18:09:21 IST" name="setUp" finished-at="2023-02-02T18:09:22 IST" duration-ms="1067" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="loginToApplication()[pri:1, instance:dfm.MultiUserDeleteTag01@1a942c18]" started-at="2023-01-27T18:14:41 IST" name="loginToApplication" finished-at="2023-01-27T18:15:12 IST" duration-ms="31796" status="PASS">
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.MultiUserAddTag01@1a942c18]" started-at="2023-02-02T18:09:22 IST" name="loginToApplication" finished-at="2023-02-02T18:09:41 IST" duration-ms="19098" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[Test Case for Add Tag]]>
             </line>
           </reporter-output>
         </test-method> <!-- loginToApplication -->
-        <test-method signature="addTag()[pri:2, instance:dfm.MultiUserDeleteTag01@1a942c18]" started-at="2023-01-27T18:15:27 IST" name="addTag" finished-at="2023-01-27T18:15:42 IST" duration-ms="15846" status="PASS">
+        <test-method signature="addTag()[pri:2, instance:dfm.MultiUserAddTag01@1a942c18]" started-at="2023-02-02T18:09:55 IST" name="addTag" finished-at="2023-02-02T18:10:11 IST" duration-ms="15801" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- addTag -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.MultiUserDeleteTag01@1a942c18]" started-at="2023-01-27T18:15:42 IST" name="tearDown" finished-at="2023-01-27T18:15:42 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.MultiUserAddTag01@1a942c18]" started-at="2023-02-02T18:10:11 IST" name="tearDown" finished-at="2023-02-02T18:10:11 IST" duration-ms="1" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.MultiUserDeleteTag01@1a942c18]" started-at="2023-01-27T18:16:37 IST" name="tearDownReport" finished-at="2023-01-27T18:16:38 IST" duration-ms="456" status="PASS">
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.MultiUserAddTag01@1a942c18]" started-at="2023-02-02T18:10:37 IST" name="tearDownReport" finished-at="2023-02-02T18:10:38 IST" duration-ms="666" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownReport -->
-      </class> <!-- dfm.MultiUserDeleteTag01 -->
+      </class> <!-- dfm.MultiUserAddTag01 -->
     </test> <!-- Test -->
   </suite> <!-- Suite -->
 </testng-results>

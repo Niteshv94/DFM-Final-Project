@@ -29,7 +29,7 @@ import com.aventstack.extentreports.Status;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
 
-public class MultiUser02 {
+public class MultiUser05 {
 	static WebDriver driver;
 
 	@BeforeClass
@@ -47,7 +47,7 @@ public class MultiUser02 {
 	}
 
 	@Test(priority = 1)
-	public void loginAction2() throws InterruptedException, IOException {
+	public void loginAction() throws InterruptedException, IOException {
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
@@ -61,7 +61,7 @@ public class MultiUser02 {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("test5@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("changepassword@rxw.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -76,24 +76,24 @@ public class MultiUser02 {
 	}
 
 	@Test(priority = 2)
-	public void navigateToDiagram2() throws InterruptedException {
+	public void navigateToDiagram() throws InterruptedException {
 
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		driver.findElement(By.xpath(
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[1]/dfm-search-control/div/div[1]/input"))
 				.sendKeys("Test MultiUser Diagram");
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 
 		driver.findElement(By.xpath(
 				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/span/span[2]"))
 				.click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 
 		driver.findElement(By.xpath("//i[@class='eva eva-settings-2-outline']")).click();
-		Thread.sleep(2000);
+		Thread.sleep(4000);
 	}
 
-	/*@Test(priority = 3)
+	@Test(priority = 3)
 	public void validateDiagram() throws InterruptedException, IOException {
 		
 		File file = new File("./Test Data/TestData.xlsx");
@@ -206,64 +206,6 @@ public class MultiUser02 {
 		Thread.sleep(2000);
 		String expected_value6 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
 		System.out.println("Value fetched after object placed is :- " + expected_value6);
-	}*/
-	
-	
-	@Test(priority = 3)
-	public void createDiagram3() throws IOException, InterruptedException {
-
-		File file = new File("./Test Data/TestData.xlsx");
-		FileInputStream fileInputStream = new FileInputStream(file);
-		XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
-		XSSFSheet sheet = workbook.getSheet("MultiUser");
-
-		// Cell data2 = sheet.getRow(0).getCell(1);
-		DataFormatter dataFormatter = new DataFormatter();
-
-		String value1 = dataFormatter.formatCellValue(sheet.getRow(1).getCell(0));
-		int number1 = Integer.parseInt(value1);
-
-		String value2 = dataFormatter.formatCellValue(sheet.getRow(1).getCell(1));
-		int number2 = Integer.parseInt(value2);
-
-		String value3 = dataFormatter.formatCellValue(sheet.getRow(3).getCell(0));
-		int number3 = Integer.parseInt(value3);
-
-		String value4 = dataFormatter.formatCellValue(sheet.getRow(3).getCell(1));
-		int number4 = Integer.parseInt(value4);
-
-		
-
-		Actions act = new Actions(driver);
-
-		WebElement src = driver.findElement(By.xpath(
-				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[2]/dfm-go-js-add-object-palette/div/div/canvas"));
-
-		WebElement target = driver.findElement(By.xpath(
-				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/div/dfm-go-js-display-diagram/div/div"));
-
-		WebElement reuse_objects = driver.findElement(By.xpath(
-				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/dfm-diagram-sidebar/div/div[1]/dfm-diagram-tabs-container/div/div[2]/dfm-palettes-diagram-container/div/div[3]/dfm-go-js-existing-objects-palette/div/div/canvas"));
-
-		// Input Source data 1
-		act.moveToElement(src, number1, number2);
-		act.clickAndHold().moveByOffset(number1, number2);
-		act.moveToElement(src, number3, number4);
-		act.moveToElement(target, number4, number4);
-		act.release();
-		act.perform();
-		Thread.sleep(1000);
-		
-		act.moveToElement(target, 105, 105);
-		act.click().build().perform();
-		Thread.sleep(1000);
-		
-		act.moveToElement(target, -125, -195);
-		act.click().build().perform();
-		Thread.sleep(2000);
-		String expected_value1 = driver.findElement(By.cssSelector("div[class='ql-editor'] p")).getText();
-		System.out.println("Value fetched after object placed is :- " + expected_value1);
-
 	}
 
 }
