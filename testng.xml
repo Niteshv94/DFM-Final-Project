@@ -3,8 +3,10 @@
 <suite name="Suite" parallel="tests">
 	<test thread-count="5" name="Test">
 		<classes>
-			<class name="dfm.MultiUserAddTag02" />
-			<class name="dfm.MultiUserAddTag01" />
+			<class name="dfm.MultiUser01" />
+			<class name="dfm.MultiUser02" />
+			<class name="dfm.MultiUser03" />
+			<class name="dfm.MultiUser04" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

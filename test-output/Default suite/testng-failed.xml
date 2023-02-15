@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.MultiUser03">
+      <class name="dfm.MovePojectTest">
         <methods>
+          <include name="validateMoveProject"/>
           <include name="setUp"/>
-          <include name="createDiagram3"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- dfm.MultiUser03 -->
+      </class> <!-- dfm.MovePojectTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
