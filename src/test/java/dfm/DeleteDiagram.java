@@ -64,15 +64,8 @@ public class DeleteDiagram {
 	}
 
 	public static void login() throws InterruptedException, IOException {
-		// Test name: Add Tag
-		// Step # | name | target | value
-
-		// For A Environment
-		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
+		
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
-
-		// For Openshift Environment
-		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		// 2 | setWindowSize | 1183x602 |
@@ -87,8 +80,6 @@ public class DeleteDiagram {
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
-		Thread.sleep(12000);
-		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
@@ -105,7 +96,7 @@ public class DeleteDiagram {
 		 * 
 		 * }
 		 */
-
+		Thread.sleep(3000);
 	}
 
 	public static void searchDiagram() throws InterruptedException, IOException {
@@ -124,6 +115,8 @@ public class DeleteDiagram {
 		driver.findElement(By.xpath(
 				"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForHomeSearc']//input[@placeholder='Search']"))
 				.sendKeys(searchDiagram);
+		
+		workbook.close();
 	}
 
 	public static void deleteSearchDiagram() throws InterruptedException, IOException {

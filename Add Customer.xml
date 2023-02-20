@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Functional Suite" thread-count="3">
+	<test name="Add Customer">
+		<classes>
+			<class name="dfm.AddCustomer" />
+		</classes>
+	</test>
+	<test name="Add User">
+		<classes>
+			<class name="dfm.AddUserModelerUI01Test" />
+		</classes>
+	</test>
+	<test name="Add Project">
+		<classes>
+			<class name="dfm.AddProjectTest" />
+		</classes>
+	</test>
+	<test name="Add Tag">
+		<classes>
+			<class name="dfm.AddTagTest" />
+		</classes>
+	</test>
+	<test name="Add Diagram">
+		<classes>
+			<class name="dfm.AddDiagram" />
+		</classes>
+	</test>
+</suite> 

@@ -63,7 +63,7 @@ public class DeleteUserModelerUI {
 
 	@AfterClass
 	public void tearDown() {
-		driver.quit();
+		//driver.quit();
 	}
 
 	@AfterSuite
@@ -101,7 +101,7 @@ public class DeleteUserModelerUI {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("admin@random.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -127,18 +127,7 @@ public class DeleteUserModelerUI {
 //
 //		}
 
-		// 9 | mouseOver | css=.btn |
-		{
-			WebElement element = driver.findElement(By.cssSelector(".btn"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).perform();
-		}
-		// 10 | mouseOut | css=.btn |
-		{
-			WebElement element = driver.findElement(By.tagName("body"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element, 0, 0).perform();
-		}
+		Thread.sleep(4000);
 		// 11 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
 		// 12 | click | css=.item:nth-child(10) > .item-text |
@@ -171,9 +160,18 @@ public class DeleteUserModelerUI {
 		Thread.sleep(1000);
 
 		driver.findElement(By.xpath("//div[normalize-space()='Delete User']")).click();
-		// Thread.sleep(4000);
-		String message = driver.findElement(By.xpath("//div[@class='message']")).getText();
-		System.out.println("Sucess message after deletion of user : " + message);
+		 Thread.sleep(2000);
+		 driver.findElement(By.xpath("//wj-popup[@class='wj-control wj-content wj-popup delete-confirmation-popup wj-state-focus wj-state-focused']//button[@class='btn btn-info popup-btn p-1'][normalize-space()='Delete']")).click();
+		
+		 {
+				WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+				String Message =	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='message']"))).getText();
+				System.out.println("Success message after deletion of user : " + Message);
+			}
+		 Thread.sleep(5000);
+		 
+		// String message = driver.findElement(By.xpath("//div[@class='message']")).getText();
+		//System.out.println("Sucess message after deletion of user : " + message);
 
 		driver.findElement(By.xpath("//i[@class='sidebar-control-button nb-menu sidebar-toggle icon-gray-color']"))
 				.click();

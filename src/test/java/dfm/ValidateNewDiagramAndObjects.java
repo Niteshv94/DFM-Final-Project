@@ -104,7 +104,7 @@ public class ValidateNewDiagramAndObjects {
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
-		Thread.sleep(15000);
+		//Thread.sleep(15000);
 
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
@@ -125,6 +125,7 @@ public class ValidateNewDiagramAndObjects {
 	@Test (priority = 2)
 	public static void addAndValidateProject() throws InterruptedException, IOException {
 
+		Thread.sleep(3000);
 		// 9 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
 		Thread.sleep(3000);

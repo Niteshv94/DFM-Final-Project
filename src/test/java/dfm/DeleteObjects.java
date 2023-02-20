@@ -126,14 +126,14 @@ public class DeleteObjects {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@random.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | css=.ng-untouched | defaultUserPass@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
-		Thread.sleep(12000);
+		//Thread.sleep(12000);
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
@@ -152,6 +152,7 @@ public class DeleteObjects {
 		 * }
 		 */
 		extentTest.pass("Login Successfull");
+		Thread.sleep(4000);
 
 	}
 
@@ -175,7 +176,7 @@ public class DeleteObjects {
 
 	public static void navigateToSearchDiagram() throws InterruptedException, IOException {
 
-		Thread.sleep(4000);
+		Thread.sleep(3000);
 		driver.findElement(By.xpath("//span[@class='item-name full-type-item-name']")).click();
 
 //		String delete_message = driver.findElement(By.xpath("//span[@class='title subtitle']")).getText();
@@ -190,24 +191,53 @@ public class DeleteObjects {
 
 	public static void deleteSearchDiagram() throws InterruptedException, IOException {
 
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 
 		WebElement target = driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/div/dfm-go-js-display-diagram/div/div"));
 
 		// Remove the diagram permanently
 		Actions act = new Actions(driver);
-		act.moveToElement(target);
-		act.click().build().perform();
-		act.keyDown(Keys.CONTROL).sendKeys("a");
-		act.keyUp(Keys.CONTROL).build().perform();
-		Thread.sleep(3000);
+//		act.moveToElement(target);
+//		act.click().build().perform();
+//		act.keyDown(Keys.CONTROL).sendKeys("a");
+//		act.keyUp(Keys.CONTROL).build().perform();
+//		Thread.sleep(3000);
 		extentTest.pass("Selected Diagram");
 
-		act.moveToElement(target, 5, 5);
+		//1st diagram
+		act.moveToElement(target, 255, 75);
 		act.contextClick().build().perform();
-		Thread.sleep(5000);
-
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
+		Thread.sleep(3000);
+		driver.navigate().refresh();
+		{
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='eva eva-settings-2-outline']")));
+		}
+		
+		// Click Outside
+//				act.moveToElement(target, -1, -1);
+//				act.click().build().perform();
+				Thread.sleep(2000);
+		
+		//2nd diagram
+		act.moveToElement(target, 155, 75);
+		act.contextClick().build().perform();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
+		Thread.sleep(3000);
+		// Click Outside
+		act.moveToElement(target, -1, -1);
+		act.click().build().perform();
+		Thread.sleep(2000);
+		
+		//3rd diagram
+		act.moveToElement(target, 305, -45);
+		act.contextClick().build().perform();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
+		Thread.sleep(3000);
 
 		extentTest.pass("Deleted Diagram");
 		extentTest.log(Status.INFO, "Test Completed");

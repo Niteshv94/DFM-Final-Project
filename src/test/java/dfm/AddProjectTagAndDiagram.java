@@ -4,26 +4,25 @@
 
 package dfm;
 
-import org.junit.Test;
 
-import org.junit.Before;
+
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.After;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -32,7 +31,7 @@ public class AddProjectTagAndDiagram {
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	@Before
+	@BeforeClass
 	public void setUp() {
 		System.setProperty("webdriver.chrome.driver", "./Driver/chromedriver.exe");
 		driver = new ChromeDriver();
@@ -41,7 +40,7 @@ public class AddProjectTagAndDiagram {
 //		driver = new EdgeDriver();
 	}
 
-	@After
+	@AfterClass
 	public void tearDown() {
 		// driver.quit();
 	}

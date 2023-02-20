@@ -3,13 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.MovePojectTest">
+      <class name="dfm.DeleteObjects">
         <methods>
-          <include name="validateMoveProject"/>
+          <include name="sarchDiagram"/>
+          <include name="tearDownReport"/>
           <include name="setUp"/>
           <include name="tearDown"/>
+          <include name="validateDiagram"/>
+          <include name="setUpReport"/>
+          <include name="deleteDiagram"/>
         </methods>
-      </class> <!-- dfm.MovePojectTest -->
+      </class> <!-- dfm.DeleteObjects -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -68,7 +68,7 @@ public class AddUserModelerUI01Test {
 	@AfterClass
 	public void tearDown() throws InterruptedException {
 		Thread.sleep(5000);
-		 driver.quit();
+		// driver.quit();
 	}
 
 	@Test(priority = 1)
@@ -99,7 +99,7 @@ public class AddUserModelerUI01Test {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("admin@random.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -109,33 +109,8 @@ public class AddUserModelerUI01Test {
 		extentTest.pass("Login Successfull");
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
-		}
-
-		/*
-		 * WebElement close_option_tab =
-		 * driver.findElement(By.xpath("//button[normalize-space()='CLOSE']")); if
-		 * (close_option_tab.isDisplayed()) { close_option_tab.click();
-		 * 
-		 * } else {
-		 * System.out.println("Wijmo Evaluation Version (5.20213.824) is not available"
-		 * );
-		 * 
-		 * }
-		 */
-
-		// 9 | mouseOver | css=.btn |
-		{
-			WebElement element = driver.findElement(By.cssSelector(".btn"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element).perform();
-		}
-		// 10 | mouseOut | css=.btn |
-		{
-			WebElement element = driver.findElement(By.tagName("body"));
-			Actions builder = new Actions(driver);
-			builder.moveToElement(element, 0, 0).perform();
 		}
 
 	}
@@ -143,6 +118,7 @@ public class AddUserModelerUI01Test {
 	@Test(priority = 2)
 	public void addUser() throws InterruptedException, IOException {
 		// 11 | click | css=.sidebar-control-button |
+		Thread.sleep(3000);
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
 		// 12 | click | css=.item:nth-child(10) > .item-text |
 		driver.findElement(By.cssSelector(".item:nth-child(10) > .item-text")).click();

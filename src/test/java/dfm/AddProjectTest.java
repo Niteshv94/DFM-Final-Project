@@ -4,8 +4,6 @@
 
 package dfm;
 
-
-
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -42,31 +40,31 @@ public class AddProjectTest {
 		// driver.quit();
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void addProject() throws InterruptedException, IOException {
 		// Test name: Add Project
 		// Step # | name | target | value
 
 		// QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
-		 driver.get("https://qa.modeler2.decisionsfirst.com/login");
+		driver.get("https://qa.modeler2.decisionsfirst.com/login");
 
 		// For Openshift Environment
-		//driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
+		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
 
 		// 2 | setWindowSize | 1126x602 |
 		driver.manage().window().maximize();
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@random.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
-		Thread.sleep(15000);
+		// Thread.sleep(15000);
 
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
@@ -82,6 +80,7 @@ public class AddProjectTest {
 //			System.out.println("Wijmo Evaluation Version (5.20213.824) is not available");
 //
 //		}
+		Thread.sleep(5000);
 
 		// 9 | click | css=.sidebar-control-button |
 		driver.findElement(By.cssSelector(".sidebar-control-button")).click();
@@ -126,11 +125,28 @@ public class AddProjectTest {
 		// 18 | click | xpath=//button[contains(.,'Add Project')] |
 		driver.findElement(By.xpath("//button[contains(.,\'Add Project\')]")).click();
 		// 19 | click | css=.sidebar-control-button |
-		//driver.findElement(By.cssSelector(".sidebar-control-button")).click();
+		// driver.findElement(By.cssSelector(".sidebar-control-button")).click();
 		// 20 | click | css=.logOut > .item-text |
 		Thread.sleep(2000);
-		//driver.findElement(By.cssSelector(".logOut > .item-text")).click();
+		// driver.findElement(By.cssSelector(".logOut > .item-text")).click();
 		System.out.println("<<<<<Project added successfully>>>>>");
+		workbook.close();
+	}
+
+	@Test(priority = 2)
+	public void validateProject() throws InterruptedException, IOException {
+
+		// Get the xpath and Project data form Excel Sheet
+		File src = new File("./Test Data/TestData.xlsx");
+		FileInputStream fis = new FileInputStream(src);
+		XSSFWorkbook workbook = new XSSFWorkbook(fis);
+
+		XSSFSheet sheet = workbook.getSheet("AddProjectTest");
+
+		String projectName = sheet.getRow(1).getCell(0).getStringCellValue();
+
+		driver.findElement(By.xpath("//div[@class='container-fluid']//input[@id='search-ip']")).sendKeys(projectName);
+
 		workbook.close();
 	}
 }
