@@ -1,53 +1,361 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="31" passed="31" failed="0" skipped="0">
   <reporter-output>
     <line>
-      <![CDATA[Test Case for Login]]>
+      <![CDATA[Test Case for Add User & Validate]]>
     </line>
     <line>
       <![CDATA[Test Case to Delete Customer]]>
     </line>
   </reporter-output>
-  <suite started-at="2023-02-17T18:25:36 IST" name="Default suite" finished-at="2023-02-17T18:26:10 IST" duration-ms="33764">
+  <suite started-at="2023-02-27T17:34:43 IST" name="Functional Suite" finished-at="2023-02-27T17:47:15 IST" duration-ms="751167">
     <groups>
     </groups>
-    <test started-at="2023-02-17T18:25:36 IST" name="Default test" finished-at="2023-02-17T18:26:10 IST" duration-ms="33764">
-      <class name="dfm.DeleteCustomer">
-        <test-method is-config="true" signature="setUpSuite()[pri:0, instance:dfm.DeleteCustomer@2892d68]" started-at="2023-02-17T18:25:35 IST" name="setUpSuite" finished-at="2023-02-17T18:25:35 IST" duration-ms="43" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUpSuite -->
-        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.DeleteCustomer@2892d68]" started-at="2023-02-17T18:25:35 IST" name="setUpReport" finished-at="2023-02-17T18:25:36 IST" depends-on-methods="com.base.BaseClass.setUpSuite" duration-ms="416" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUpReport -->
-        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.DeleteCustomer@2892d68]" started-at="2023-02-17T18:25:36 IST" name="setUp" finished-at="2023-02-17T18:25:39 IST" duration-ms="2822" status="PASS">
+    <test started-at="2023-02-27T17:34:43 IST" name="Add Customer" finished-at="2023-02-27T17:35:53 IST" duration-ms="69055">
+      <class name="dfm.AddCustomer">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.AddCustomer@36b0fcd5]" started-at="2023-02-27T17:34:44 IST" name="setUp" finished-at="2023-02-27T17:34:46 IST" duration-ms="2466" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="logInToApplication()[pri:0, instance:dfm.DeleteCustomer@2892d68]" started-at="2023-02-17T18:25:39 IST" name="logInToApplication" finished-at="2023-02-17T18:25:52 IST" duration-ms="13336" status="PASS">
+        <test-method signature="AddCustomerModeler()[pri:1, instance:dfm.AddCustomer@36b0fcd5]" started-at="2023-02-27T17:34:46 IST" name="AddCustomerModeler" finished-at="2023-02-27T17:35:34 IST" duration-ms="48411" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- AddCustomerModeler -->
+        <test-method signature="validateCustomer()[pri:2, instance:dfm.AddCustomer@36b0fcd5]" started-at="2023-02-27T17:35:34 IST" name="validateCustomer" finished-at="2023-02-27T17:35:48 IST" duration-ms="14044" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateCustomer -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.AddCustomer@36b0fcd5]" started-at="2023-02-27T17:35:48 IST" name="tearDown" finished-at="2023-02-27T17:35:53 IST" duration-ms="4086" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.AddCustomer -->
+    </test> <!-- Add Customer -->
+    <test started-at="2023-02-27T17:35:53 IST" name="Add User" finished-at="2023-02-27T17:36:41 IST" duration-ms="47859">
+      <class name="dfm.AddUserModelerUI01Test">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.AddUserModelerUI01Test@79e18e38]" started-at="2023-02-27T17:35:53 IST" name="setUp" finished-at="2023-02-27T17:35:54 IST" duration-ms="901" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="loginAction()[pri:1, instance:dfm.AddUserModelerUI01Test@79e18e38]" started-at="2023-02-27T17:35:54 IST" name="loginAction" finished-at="2023-02-27T17:36:17 IST" duration-ms="23604" status="PASS">
           <reporter-output>
             <line>
-              <![CDATA[Test Case for Login]]>
+              <![CDATA[Test Case for Add User & Validate]]>
             </line>
           </reporter-output>
+        </test-method> <!-- loginAction -->
+        <test-method signature="addUser()[pri:2, instance:dfm.AddUserModelerUI01Test@79e18e38]" started-at="2023-02-27T17:36:17 IST" name="addUser" finished-at="2023-02-27T17:36:26 IST" duration-ms="8629" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addUser -->
+        <test-method signature="validateAddedUser()[pri:3, instance:dfm.AddUserModelerUI01Test@79e18e38]" started-at="2023-02-27T17:36:26 IST" name="validateAddedUser" finished-at="2023-02-27T17:36:37 IST" duration-ms="10783" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateAddedUser -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.AddUserModelerUI01Test@79e18e38]" started-at="2023-02-27T17:36:37 IST" name="tearDown" finished-at="2023-02-27T17:36:41 IST" duration-ms="3936" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.AddUserModelerUI01Test -->
+    </test> <!-- Add User -->
+    <test started-at="2023-02-27T17:36:41 IST" name="Add Project" finished-at="2023-02-27T17:37:23 IST" duration-ms="42470">
+      <class name="dfm.AddProjectTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.AddProjectTest@89ff02e]" started-at="2023-02-27T17:36:41 IST" name="setUp" finished-at="2023-02-27T17:36:42 IST" duration-ms="987" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="addProject()[pri:1, instance:dfm.AddProjectTest@89ff02e]" started-at="2023-02-27T17:36:42 IST" name="addProject" finished-at="2023-02-27T17:37:19 IST" duration-ms="37047" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addProject -->
+        <test-method signature="validateProject()[pri:2, instance:dfm.AddProjectTest@89ff02e]" started-at="2023-02-27T17:37:19 IST" name="validateProject" finished-at="2023-02-27T17:37:19 IST" duration-ms="440" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateProject -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.AddProjectTest@89ff02e]" started-at="2023-02-27T17:37:19 IST" name="tearDown" finished-at="2023-02-27T17:37:23 IST" duration-ms="3994" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.AddProjectTest -->
+    </test> <!-- Add Project -->
+    <test started-at="2023-02-27T17:37:23 IST" name="Create Branch" finished-at="2023-02-27T17:38:28 IST" duration-ms="64532">
+      <class name="dfm.CreateBranch">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.CreateBranch@1e044120]" started-at="2023-02-27T17:37:23 IST" name="setUp" finished-at="2023-02-27T17:37:24 IST" duration-ms="850" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="loginAction()[pri:1, instance:dfm.CreateBranch@1e044120]" started-at="2023-02-27T17:37:24 IST" name="loginAction" finished-at="2023-02-27T17:37:53 IST" duration-ms="28833" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginAction -->
+        <test-method signature="createBranch()[pri:2, instance:dfm.CreateBranch@1e044120]" started-at="2023-02-27T17:37:53 IST" name="createBranch" finished-at="2023-02-27T17:38:18 IST" duration-ms="24854" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createBranch -->
+        <test-method signature="validateBranch()[pri:3, instance:dfm.CreateBranch@1e044120]" started-at="2023-02-27T17:38:18 IST" name="validateBranch" finished-at="2023-02-27T17:38:28 IST" duration-ms="9993" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateBranch -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.CreateBranch@1e044120]" started-at="2023-02-27T17:38:28 IST" name="tearDown" finished-at="2023-02-27T17:38:28 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.CreateBranch -->
+    </test> <!-- Create Branch -->
+    <test started-at="2023-02-27T17:38:28 IST" name="Add Tag" finished-at="2023-02-27T17:39:15 IST" duration-ms="47129">
+      <class name="dfm.AddTagTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.AddTagTest@464649c]" started-at="2023-02-27T17:38:28 IST" name="setUp" finished-at="2023-02-27T17:38:29 IST" duration-ms="1028" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.AddTagTest@464649c]" started-at="2023-02-27T17:38:29 IST" name="loginToApplication" finished-at="2023-02-27T17:38:51 IST" duration-ms="22410" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginToApplication -->
+        <test-method signature="addTag()[pri:2, instance:dfm.AddTagTest@464649c]" started-at="2023-02-27T17:38:51 IST" name="addTag" finished-at="2023-02-27T17:39:09 IST" duration-ms="17421" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addTag -->
+        <test-method signature="validateTag()[pri:3, instance:dfm.AddTagTest@464649c]" started-at="2023-02-27T17:39:09 IST" name="validateTag" finished-at="2023-02-27T17:39:11 IST" duration-ms="2418" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateTag -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.AddTagTest@464649c]" started-at="2023-02-27T17:39:11 IST" name="tearDown" finished-at="2023-02-27T17:39:15 IST" duration-ms="3847" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.AddTagTest -->
+    </test> <!-- Add Tag -->
+    <test started-at="2023-02-27T17:39:15 IST" name="Add Diagram" finished-at="2023-02-27T17:41:22 IST" duration-ms="126752">
+      <class name="dfm.AddDiagram">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.AddDiagram@495083a0]" started-at="2023-02-27T17:39:15 IST" name="setUp" finished-at="2023-02-27T17:39:16 IST" duration-ms="906" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="addProject()[pri:1, instance:dfm.AddDiagram@495083a0]" started-at="2023-02-27T17:39:16 IST" name="addProject" finished-at="2023-02-27T17:39:47 IST" duration-ms="30793" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addProject -->
+        <test-method signature="addDiagramAndValidate()[pri:2, instance:dfm.AddDiagram@495083a0]" started-at="2023-02-27T17:39:47 IST" name="addDiagramAndValidate" finished-at="2023-02-27T17:41:18 IST" duration-ms="90926" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- addDiagramAndValidate -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.AddDiagram@495083a0]" started-at="2023-02-27T17:41:18 IST" name="tearDown" finished-at="2023-02-27T17:41:22 IST" duration-ms="4120" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.AddDiagram -->
+    </test> <!-- Add Diagram -->
+    <test started-at="2023-02-27T17:41:22 IST" name="Delete Diagram From Canvas" finished-at="2023-02-27T17:42:13 IST" duration-ms="50777">
+      <class name="dfm.DeleteObjects">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.DeleteObjects@4fcee388]" started-at="2023-02-27T17:41:22 IST" name="setUp" finished-at="2023-02-27T17:41:23 IST" duration-ms="836" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.DeleteObjects@4fcee388]" started-at="2023-02-27T17:41:23 IST" name="loginToApplication" finished-at="2023-02-27T17:41:40 IST" duration-ms="17892" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginToApplication -->
+        <test-method signature="validateDiagram()[pri:2, instance:dfm.DeleteObjects@4fcee388]" started-at="2023-02-27T17:41:40 IST" name="validateDiagram" finished-at="2023-02-27T17:41:54 IST" duration-ms="13493" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateDiagram -->
+        <test-method signature="deleteDiagram()[pri:3, instance:dfm.DeleteObjects@4fcee388]" started-at="2023-02-27T17:41:54 IST" name="deleteDiagram" finished-at="2023-02-27T17:42:09 IST" duration-ms="14622" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteDiagram -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.DeleteObjects@4fcee388]" started-at="2023-02-27T17:42:09 IST" name="tearDown" finished-at="2023-02-27T17:42:13 IST" duration-ms="3930" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.DeleteObjects -->
+    </test> <!-- Delete Diagram From Canvas -->
+    <test started-at="2023-02-27T17:42:13 IST" name="Delete Objects" finished-at="2023-02-27T17:43:32 IST" duration-ms="78989">
+      <class name="dfm.DeleteObjectsAndDiagramUsingSearch">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.DeleteObjectsAndDiagramUsingSearch@10c8f62]" started-at="2023-02-27T17:42:13 IST" name="setUp" finished-at="2023-02-27T17:42:13 IST" duration-ms="874" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.DeleteObjectsAndDiagramUsingSearch@10c8f62]" started-at="2023-02-27T17:42:13 IST" name="loginToApplication" finished-at="2023-02-27T17:42:31 IST" duration-ms="17657" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginToApplication -->
+        <test-method signature="printListOfElements()[pri:2, instance:dfm.DeleteObjectsAndDiagramUsingSearch@10c8f62]" started-at="2023-02-27T17:42:31 IST" name="printListOfElements" finished-at="2023-02-27T17:43:28 IST" duration-ms="56430" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- printListOfElements -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.DeleteObjectsAndDiagramUsingSearch@10c8f62]" started-at="2023-02-27T17:43:28 IST" name="tearDown" finished-at="2023-02-27T17:43:32 IST" duration-ms="4020" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.DeleteObjectsAndDiagramUsingSearch -->
+    </test> <!-- Delete Objects -->
+    <test started-at="2023-02-27T17:43:32 IST" name="Delete Diagram" finished-at="2023-02-27T17:44:31 IST" duration-ms="59496">
+      <class name="dfm.DeleteDiagram">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.DeleteDiagram@61861a29]" started-at="2023-02-27T17:43:32 IST" name="setUp" finished-at="2023-02-27T17:43:33 IST" duration-ms="846" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.DeleteDiagram@61861a29]" started-at="2023-02-27T17:43:33 IST" name="loginToApplication" finished-at="2023-02-27T17:43:50 IST" duration-ms="17832" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginToApplication -->
+        <test-method signature="deleteDiagram()[pri:2, instance:dfm.DeleteDiagram@61861a29]" started-at="2023-02-27T17:43:50 IST" name="deleteDiagram" finished-at="2023-02-27T17:44:10 IST" duration-ms="19466" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteDiagram -->
+        <test-method signature="validateDiagram()[pri:3, instance:dfm.DeleteDiagram@61861a29]" started-at="2023-02-27T17:44:10 IST" name="validateDiagram" finished-at="2023-02-27T17:44:27 IST" duration-ms="17458" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateDiagram -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.DeleteDiagram@61861a29]" started-at="2023-02-27T17:44:27 IST" name="tearDown" finished-at="2023-02-27T17:44:31 IST" duration-ms="3891" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.DeleteDiagram -->
+    </test> <!-- Delete Diagram -->
+    <test started-at="2023-02-27T17:44:31 IST" name="Delete Tag" finished-at="2023-02-27T17:45:37 IST" duration-ms="65993">
+      <class name="dfm.DeleteTag">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.DeleteTag@6fff253c]" started-at="2023-02-27T17:44:31 IST" name="setUp" finished-at="2023-02-27T17:44:32 IST" duration-ms="909" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="loginToApplication()[pri:1, instance:dfm.DeleteTag@6fff253c]" started-at="2023-02-27T17:44:32 IST" name="loginToApplication" finished-at="2023-02-27T17:45:05 IST" duration-ms="32909" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginToApplication -->
+        <test-method signature="deleteTag()[pri:2, instance:dfm.DeleteTag@6fff253c]" started-at="2023-02-27T17:45:05 IST" name="deleteTag" finished-at="2023-02-27T17:45:08 IST" duration-ms="2498" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteTag -->
+        <test-method signature="validateDeleteTag()[pri:3, instance:dfm.DeleteTag@6fff253c]" started-at="2023-02-27T17:45:08 IST" name="validateDeleteTag" finished-at="2023-02-27T17:45:33 IST" duration-ms="25797" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateDeleteTag -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.DeleteTag@6fff253c]" started-at="2023-02-27T17:45:33 IST" name="tearDown" finished-at="2023-02-27T17:45:37 IST" duration-ms="3877" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.DeleteTag -->
+    </test> <!-- Delete Tag -->
+    <test started-at="2023-02-27T17:45:37 IST" name="Delete User" finished-at="2023-02-27T17:46:38 IST" duration-ms="60876">
+      <class name="dfm.DeleteUserModelerUI">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.DeleteUserModelerUI@493dfb8e]" started-at="2023-02-27T17:45:37 IST" name="setUp" finished-at="2023-02-27T17:45:38 IST" duration-ms="970" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="loginAction()[pri:0, instance:dfm.DeleteUserModelerUI@493dfb8e]" started-at="2023-02-27T17:45:38 IST" name="loginAction" finished-at="2023-02-27T17:46:06 IST" duration-ms="27903" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginAction -->
+        <test-method signature="navigateUserSection()[pri:1, instance:dfm.DeleteUserModelerUI@493dfb8e]" started-at="2023-02-27T17:46:06 IST" name="navigateUserSection" finished-at="2023-02-27T17:46:13 IST" duration-ms="7185" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- navigateUserSection -->
+        <test-method signature="deleteUserAndValidate()[pri:2, instance:dfm.DeleteUserModelerUI@493dfb8e]" started-at="2023-02-27T17:46:13 IST" name="deleteUserAndValidate" finished-at="2023-02-27T17:46:34 IST" duration-ms="20817" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- deleteUserAndValidate -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.DeleteUserModelerUI@493dfb8e]" started-at="2023-02-27T17:46:34 IST" name="tearDown" finished-at="2023-02-27T17:46:38 IST" duration-ms="3997" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- dfm.DeleteUserModelerUI -->
+    </test> <!-- Delete User -->
+    <test started-at="2023-02-27T17:46:38 IST" name="Delete Customer" finished-at="2023-02-27T17:47:15 IST" duration-ms="36469">
+      <class name="dfm.AddTagTest">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.AddTagTest@464649c]" started-at="2023-02-27T17:34:43 IST" name="setUpReport" finished-at="2023-02-27T17:34:43 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.AddTagTest@464649c]" started-at="2023-02-27T17:47:15 IST" name="tearDownReport" finished-at="2023-02-27T17:47:15 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownReport -->
+      </class> <!-- dfm.AddTagTest -->
+      <class name="dfm.DeleteCustomer">
+        <test-method is-config="true" signature="setUpSuite()[pri:0, instance:dfm.DeleteCustomer@5118388b]" started-at="2023-02-27T17:34:43 IST" name="setUpSuite" finished-at="2023-02-27T17:34:43 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpSuite -->
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.DeleteCustomer@5118388b]" started-at="2023-02-27T17:34:43 IST" name="setUpReport" finished-at="2023-02-27T17:34:43 IST" depends-on-methods="com.base.BaseClass.setUpSuite" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="setUp()[pri:0, instance:dfm.DeleteCustomer@5118388b]" started-at="2023-02-27T17:46:38 IST" name="setUp" finished-at="2023-02-27T17:46:39 IST" duration-ms="865" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="logInToApplication()[pri:0, instance:dfm.DeleteCustomer@5118388b]" started-at="2023-02-27T17:46:39 IST" name="logInToApplication" finished-at="2023-02-27T17:46:54 IST" duration-ms="15265" status="PASS">
+          <reporter-output>
+          </reporter-output>
         </test-method> <!-- logInToApplication -->
-        <test-method signature="deleteCustomer()[pri:1, instance:dfm.DeleteCustomer@2892d68]" started-at="2023-02-17T18:25:52 IST" name="deleteCustomer" finished-at="2023-02-17T18:26:10 IST" duration-ms="17561" status="PASS">
+        <test-method signature="deleteCustomer()[pri:1, instance:dfm.DeleteCustomer@5118388b]" started-at="2023-02-27T17:46:54 IST" name="deleteCustomer" finished-at="2023-02-27T17:47:11 IST" duration-ms="16507" status="PASS">
           <reporter-output>
             <line>
               <![CDATA[Test Case to Delete Customer]]>
             </line>
           </reporter-output>
         </test-method> <!-- deleteCustomer -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.DeleteCustomer@2892d68]" started-at="2023-02-17T18:26:10 IST" name="tearDown" finished-at="2023-02-17T18:26:10 IST" duration-ms="0" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:dfm.DeleteCustomer@5118388b]" started-at="2023-02-27T17:47:11 IST" name="tearDown" finished-at="2023-02-27T17:47:15 IST" duration-ms="3828" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method is-config="true" signature="tearDownReoport()[pri:0, instance:dfm.DeleteCustomer@2892d68]" started-at="2023-02-17T18:26:10 IST" name="tearDownReoport" finished-at="2023-02-17T18:26:10 IST" duration-ms="287" status="PASS">
+        <test-method is-config="true" signature="tearDownReoport()[pri:0, instance:dfm.DeleteCustomer@5118388b]" started-at="2023-02-27T17:47:15 IST" name="tearDownReoport" finished-at="2023-02-27T17:47:15 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownReoport -->
       </class> <!-- dfm.DeleteCustomer -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+      <class name="dfm.DeleteTag">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.DeleteTag@6fff253c]" started-at="2023-02-27T17:34:43 IST" name="setUpReport" finished-at="2023-02-27T17:34:43 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.DeleteTag@6fff253c]" started-at="2023-02-27T17:47:15 IST" name="tearDownReport" finished-at="2023-02-27T17:47:15 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownReport -->
+      </class> <!-- dfm.DeleteTag -->
+      <class name="dfm.AddUserModelerUI01Test">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.AddUserModelerUI01Test@79e18e38]" started-at="2023-02-27T17:34:43 IST" name="setUpReport" finished-at="2023-02-27T17:34:43 IST" duration-ms="6" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.AddUserModelerUI01Test@79e18e38]" started-at="2023-02-27T17:47:15 IST" name="tearDownReport" finished-at="2023-02-27T17:47:15 IST" duration-ms="165" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownReport -->
+      </class> <!-- dfm.AddUserModelerUI01Test -->
+      <class name="dfm.DeleteObjects">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.DeleteObjects@4fcee388]" started-at="2023-02-27T17:34:43 IST" name="setUpReport" finished-at="2023-02-27T17:34:43 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.DeleteObjects@4fcee388]" started-at="2023-02-27T17:47:15 IST" name="tearDownReport" finished-at="2023-02-27T17:47:15 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownReport -->
+      </class> <!-- dfm.DeleteObjects -->
+      <class name="dfm.AddCustomer">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.AddCustomer@36b0fcd5]" started-at="2023-02-27T17:34:43 IST" name="setUpReport" finished-at="2023-02-27T17:34:43 IST" duration-ms="12" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="tearDownReport()[pri:0, instance:dfm.AddCustomer@36b0fcd5]" started-at="2023-02-27T17:47:15 IST" name="tearDownReport" finished-at="2023-02-27T17:47:15 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownReport -->
+      </class> <!-- dfm.AddCustomer -->
+      <class name="dfm.DeleteUserModelerUI">
+        <test-method is-config="true" signature="setUpReport()[pri:0, instance:dfm.DeleteUserModelerUI@493dfb8e]" started-at="2023-02-27T17:34:43 IST" name="setUpReport" finished-at="2023-02-27T17:34:43 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpReport -->
+        <test-method is-config="true" signature="tearDownReoport()[pri:0, instance:dfm.DeleteUserModelerUI@493dfb8e]" started-at="2023-02-27T17:47:15 IST" name="tearDownReoport" finished-at="2023-02-27T17:47:15 IST" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownReoport -->
+      </class> <!-- dfm.DeleteUserModelerUI -->
+    </test> <!-- Delete Customer -->
+  </suite> <!-- Functional Suite -->
 </testng-results>

@@ -56,14 +56,14 @@ public class CreateBranch {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@random.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
-		Thread.sleep(15000);
+		
 
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
@@ -85,6 +85,7 @@ public class CreateBranch {
 		String tagName = sheet.getRow(1).getCell(1).getStringCellValue();
 		String branchName = sheet.getRow(1).getCell(2).getStringCellValue();
 		String description = sheet.getRow(1).getCell(3).getStringCellValue();
+		Thread.sleep(3000);
     
     driver.findElement(By.cssSelector(".sidebar-control-button")).click();
     driver.findElement(By.cssSelector(".item:nth-child(8) > .item-text")).click();
@@ -119,6 +120,8 @@ public class CreateBranch {
 			String Message =	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//nb-toast[@class='ng-tns-c194-0 ng-trigger ng-trigger-fadeIn status-success destroy-by-click has-icon custom-icon ng-star-inserted']"))).getText();
 			System.out.println("Message after creating the branch is : " + Message);
 		}
+ 		
+ 		workbook.close();
   
   }
   
@@ -138,6 +141,14 @@ public class CreateBranch {
 	    
 	   Thread.sleep(3000);
 	   driver.findElement(By.xpath(branchXpath)).click();
+	   Thread.sleep(2000);
+	   WebElement l = driver.findElement(By.xpath(branchXpath));
+		// Actions class with moveToElement() and contextClick()
+		Actions actions = new Actions(driver);
+		actions.moveToElement(l).contextClick().build().perform();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//div[contains(text(),'Set as active branch')]")).click();
+	   
 	   Thread.sleep(2000);
 	   String branchvalidated = driver.findElement(By.xpath("//div[@class='content-bar']")).getText();
 	   System.out.println("Message after validation of branch : " + branchvalidated);

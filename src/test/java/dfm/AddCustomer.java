@@ -40,22 +40,19 @@ public class AddCustomer {
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	ExtentSparkReporter sparkReporter;
+	/*ExtentSparkReporter sparkReporter;
 	ExtentReports reports;
 	ExtentTest extentTest;
 
-	Reporter report = new Reporter();
+	Reporter report = new Reporter();*/
 
 	@BeforeSuite
 	public void setUpReport() {
 
-		// start reporters
-		// sparkReporter = new
-		// ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
-		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+		/*sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
 				+ "./Reports/Customer/DFM_AddCustomer_" + Helper.getCurrentDateTime() + ".html"));
 		reports = new ExtentReports();
-		reports.attachReporter(sparkReporter);
+		reports.attachReporter(sparkReporter);*/
 	}
 
 	@BeforeClass
@@ -68,23 +65,26 @@ public class AddCustomer {
 	}
 
 	@AfterClass
-	public void tearDown() {
-		// driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 	}
 
 	@Test(priority = 1)
 	public void AddCustomerModeler() throws InterruptedException, IOException, Exception {
 
-		Reporter.log("Test Case for Add Customer");
-		extentTest = reports.createTest("Login", "Login to DFM Application");
+		//Reporter.log("Test Case for Add Customer");
+		//extentTest = reports.createTest("Login", "Login to DFM Application");
 
-		extentTest.addScreenCaptureFromPath("screenshot.png");
+		//extentTest.addScreenCaptureFromPath("screenshot.png");
 
 		// log(Status, details)
-		extentTest.log(Status.INFO, "Starting Test Case");
+		//extentTest.log(Status.INFO, "Starting Test Case");
+		
 		// For QA environment
 		driver.get("https://qa.admin.decisionsfirst.com/login");
-		extentTest.pass("Navigates to DFM URL");
+		//extentTest.pass("Navigates to DFM URL");
+		
 		// For Openshift
 		// driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com");
 
@@ -95,7 +95,7 @@ public class AddCustomer {
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("dms@123");
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(8000);
-		extentTest.pass("Login Successfull");
+		//extentTest.pass("Login Successfull");
 
 		{
 			WebElement element = driver.findElement(By.cssSelector(".btn"));
@@ -150,7 +150,7 @@ public class AddCustomer {
 		driver.findElement(By.id("domains")).sendKeys(domains);
 		driver.findElement(By.cssSelector(".btn:nth-child(5)")).click();
 		Thread.sleep(5000);
-		extentTest.pass("Customer Added");
+		//extentTest.pass("Customer Added");
 
 		driver.findElement(By.cssSelector(".form-control")).click();
 		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys("Test Random");
@@ -179,7 +179,7 @@ public class AddCustomer {
 		}
 		driver.findElement(By.cssSelector(".btn:nth-child(5)")).click();
 		driver.findElement(By.xpath("//button[@type='button'][normalize-space()='Add User']")).click();
-		extentTest.pass("Added User One");
+		//extentTest.pass("Added User One");
 
 		Thread.sleep(5000);
 		// Get all the User1 data from Excel Sheet
@@ -203,7 +203,7 @@ public class AddCustomer {
 		driver.findElement(By.cssSelector(".btn:nth-child(5)")).click();
 		driver.findElement(By.xpath("//button[@type='button'][normalize-space()='Add User']")).click();
 		Thread.sleep(5000);
-		extentTest.pass("Added User Two");
+		//extentTest.pass("Added User Two");
 		driver.navigate().refresh();
 		Thread.sleep(5000);
 
@@ -249,18 +249,19 @@ public class AddCustomer {
 		Thread.sleep(8000);
 		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(customerName1);
 		Thread.sleep(4000);
-		extentTest.pass("Customer added and validated successfully");
+		//extentTest.pass("Customer added and validated successfully");
 
-		extentTest.log(Status.INFO, "Test Completed");
+		//extentTest.log(Status.INFO, "Test Completed");
 
 		// extentTest.pass("Customer deleted successfully");
 
+		workbook.close();
 	}
 
 	@AfterSuite
 	public void tearDownReport() {
 
 		// calling flush writes everything to the log file
-		reports.flush();
+		//reports.flush();
 	}
 }

@@ -36,19 +36,20 @@ public class DeleteUserModelerUI {
 	private static WebDriver driver;
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
-	ExtentSparkReporter sparkReporter;
+	
+	/*ExtentSparkReporter sparkReporter;
 	ExtentReports reports;
 	ExtentTest extentTest;
-	Reporter report = new Reporter();
+	Reporter report = new Reporter();*/
 
 	@BeforeSuite
 	public void setUpReport() {
 
 		// start reporters
-		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+		/*sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
 				+ "./Reports/Delete/DFM_DeleteUser" + Helper.getCurrentDateTime() + ".html"));
 		reports = new ExtentReports();
-		reports.attachReporter(sparkReporter);
+		reports.attachReporter(sparkReporter);*/
 
 	}
 
@@ -62,30 +63,29 @@ public class DeleteUserModelerUI {
 	}
 
 	@AfterClass
-	public void tearDown() {
-		//driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 	}
 
 	@AfterSuite
 	public void tearDownReoport() {
 
 		// calling flush writes everything to the log file
-		reports.flush();
+		//reports.flush();
 	}
 
 	@Test(priority = 0)
 	public void loginAction() throws InterruptedException, IOException {
 
-		Reporter.log("Test Case for Delete User");
-		extentTest = reports.createTest("Delete User", "Login to DFM Application");
-		// log with snapshot
-//		extentTest.pass("Details",
-//				MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		//Reporter.log("Test Case for Delete User");
+		//extentTest = reports.createTest("Delete User", "Login to DFM Application");
+
 		// test with snapshot
-		extentTest.addScreenCaptureFromPath("screenshot.png");
+		//extentTest.addScreenCaptureFromPath("screenshot.png");
 
 		// log(Status, details)
-		extentTest.log(Status.INFO, "Starting Test Case");
+		//extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For QA Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
@@ -199,7 +199,7 @@ public class DeleteUserModelerUI {
 //
 //			System.out.println("The User is able to login successfully");
 //		}
-		extentTest.log(Status.INFO, "Test Completed");
+		//extentTest.log(Status.INFO, "Test Completed");
 
 		workbook.close();
 	}

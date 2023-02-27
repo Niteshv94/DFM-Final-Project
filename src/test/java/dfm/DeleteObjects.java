@@ -40,11 +40,11 @@ public class DeleteObjects {
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	ExtentSparkReporter sparkReporter;
+	/*ExtentSparkReporter sparkReporter;
 	public static ExtentReports reports;
 	static ExtentTest extentTest;
 
-	Reporter report = new Reporter();
+	Reporter report = new Reporter();*/
 
 	@BeforeClass
 	public void setUp() {
@@ -58,64 +58,59 @@ public class DeleteObjects {
 	@BeforeSuite(alwaysRun = true)
 	public void setUpReport() {
 
-		// start reporters
-		// sparkReporter = new
-		// ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
-		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+		/*sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
 				+ "./Reports/Delete/DFM_DeleteObjects_" + Helper.getCurrentDateTime() + ".html"));
 		reports = new ExtentReports();
-		reports.attachReporter(sparkReporter);
+		reports.attachReporter(sparkReporter);*/
 
 	}
 
 	@AfterClass
-	public void tearDown() {
-		// driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 		// workbook.close();
 	}
 
 	@Test(priority = 1)
 	public void loginToApplication() throws InterruptedException, IOException {
 		login();
-		searchDiagram();
+		searchDiagramUsingSearchBox();
 	}
 
-	@Test(priority = 2)
-	public void sarchDiagram() throws InterruptedException, IOException {
+	/*@Test(priority = 2)
+	public void searchDiagram() throws InterruptedException, IOException {
 
 		deleteSearchDiagram();
-	}
+	}*/
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	public void validateDiagram() throws InterruptedException, IOException {
 		navigateToSearchDiagram();
 		Thread.sleep(5000);
 		// searchDiagram();
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 3)
 	public void deleteDiagram() throws InterruptedException, IOException {
 		deleteSearchDiagram();
 	}
 
 	public static void login() throws InterruptedException, IOException {
 
-		// reports.createTest("Login");
-		Reporter.log("Test Case for Delete Objects");
-		extentTest = reports.createTest("Login", "Login to DFM Application");
-		// log with snapshot
-//				extentTest.pass("Details",
-//						MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		//Reporter.log("Test Case for Delete Objects");
+		//extentTest = reports.createTest("Login", "Login to DFM Application");
+		
 		// test with snapshot
-		extentTest.addScreenCaptureFromPath("screenshot.png");
+		//extentTest.addScreenCaptureFromPath("screenshot.png");
 
 		// log(Status, details)
-		extentTest.log(Status.INFO, "Starting Test Case");
+		//extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For A Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
-		extentTest.pass("Navigates to DFM URL");
+		//extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift Environment
 		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
@@ -151,12 +146,12 @@ public class DeleteObjects {
 		 * 
 		 * }
 		 */
-		extentTest.pass("Login Successfull");
+		//extentTest.pass("Login Successfull");
 		Thread.sleep(4000);
 
 	}
 
-	public static void searchDiagram() throws InterruptedException, IOException {
+	public static void searchDiagramUsingSearchBox() throws InterruptedException, IOException {
 
 		// Get the xpath and Tag data form Excel Sheet
 		File src = new File("./Test Data/TestData.xlsx");
@@ -171,7 +166,7 @@ public class DeleteObjects {
 		driver.findElement(By.xpath(
 				"//dfm-search-control[@ng-reflect-search-action='class UpdateSearchForHomeSearc']//input[@placeholder='Search']"))
 				.sendKeys(searchDiagram);
-		extentTest.pass("Entered Search Diagram");
+		//extentTest.pass("Entered Search Diagram");
 	}
 
 	public static void navigateToSearchDiagram() throws InterruptedException, IOException {
@@ -185,36 +180,50 @@ public class DeleteObjects {
 		driver.findElement(By.xpath(
 				"//dfm-diagram-sidebar[@ng-reflect-diagram='[object Object]']//i[@class='eva eva-settings-2-outline']"))
 				.click();
-		extentTest.pass("Navigate to Canvas Successfull");
+		//extentTest.pass("Navigate to Canvas Successfull");
 
 	}
 
 	public static void deleteSearchDiagram() throws InterruptedException, IOException {
 
-		Thread.sleep(3000);
+		Thread.sleep(7000);
+		
+		
+		
+//		{
+//			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/div/dfm-go-js-display-diagram/div/div")));
+//		}
 
-		WebElement target = driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/div/dfm-go-js-display-diagram/div/div"));
+		WebElement target = driver.findElement(By.xpath(
+				"/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-view-diagram-container/div/div/dfm-go-js-display-diagram/div/div"));
 
+		
 		// Remove the diagram permanently
 		Actions act = new Actions(driver);
-//		act.moveToElement(target);
-//		act.click().build().perform();
-//		act.keyDown(Keys.CONTROL).sendKeys("a");
-//		act.keyUp(Keys.CONTROL).build().perform();
-//		Thread.sleep(3000);
-		extentTest.pass("Selected Diagram");
+		try {
+			act.moveToElement(target);
+			act.click().build().perform();
+			act.keyDown(Keys.CONTROL).sendKeys("a");
+			act.keyUp(Keys.CONTROL).build().perform();
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			
+			System.out.println(e.getMessage());
+		}
+		//extentTest.pass("Selected Diagram");
 
 		//1st diagram
 		act.moveToElement(target, 255, 75);
 		act.contextClick().build().perform();
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
-		Thread.sleep(3000);
-		driver.navigate().refresh();
-		{
-			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='eva eva-settings-2-outline']")));
-		}
+		//Thread.sleep(3000);
+		//driver.navigate().refresh();
+//		{
+//			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+//			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class='eva eva-settings-2-outline']")));
+//		}
 		
 		// Click Outside
 //				act.moveToElement(target, -1, -1);
@@ -222,25 +231,25 @@ public class DeleteObjects {
 				Thread.sleep(2000);
 		
 		//2nd diagram
-		act.moveToElement(target, 155, 75);
-		act.contextClick().build().perform();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
-		Thread.sleep(3000);
+//		act.moveToElement(target, 155, 75);
+//		act.contextClick().build().perform();
+//		Thread.sleep(2000);
+//		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
+//		Thread.sleep(3000);
 		// Click Outside
-		act.moveToElement(target, -1, -1);
-		act.click().build().perform();
-		Thread.sleep(2000);
+//		act.moveToElement(target, -1, -1);
+//		act.click().build().perform();
+//		Thread.sleep(2000);
 		
 		//3rd diagram
-		act.moveToElement(target, 305, -45);
-		act.contextClick().build().perform();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
-		Thread.sleep(3000);
+//		act.moveToElement(target, 305, -45);
+//		act.contextClick().build().perform();
+//		Thread.sleep(2000);
+//		driver.findElement(By.xpath("//span[contains(text(),'Remove Permanently')]")).click();
+//		Thread.sleep(3000);
 
-		extentTest.pass("Deleted Diagram");
-		extentTest.log(Status.INFO, "Test Completed");
+		//extentTest.pass("Deleted Diagram");
+		//extentTest.log(Status.INFO, "Test Completed");
 
 	}
 
@@ -248,7 +257,7 @@ public class DeleteObjects {
 	public void tearDownReport() {
 
 		// calling flush writes everything to the log file
-		reports.flush();
+		//reports.flush();
 	}
 
 }

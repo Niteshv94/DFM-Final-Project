@@ -41,8 +41,9 @@ public class AddDiagram {
 	}
 
 	@AfterClass
-	public void tearDown() {
-		// driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 	}
 
 	@Test (priority = 1)
@@ -363,8 +364,11 @@ public class AddDiagram {
 		driver.findElement(By.xpath("//*[@id='name']/quill-editor/div[2]/div[1]")).sendKeys(decisionName);
 		Thread.sleep(2000);
 
-		act.moveToElement(LINKS, -14, 120);
-		act.contextClick().perform();
+//		act.moveToElement(LINKS, -14, 120);
+//		act.contextClick().perform();
+		act.moveToElement(target, -1, -1);
+		act.click().build().perform();
+		Thread.sleep(2000);
 
 		System.out.println("<<<Diagram created>>>");
 		workbook.close();

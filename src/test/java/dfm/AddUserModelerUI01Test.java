@@ -67,8 +67,8 @@ public class AddUserModelerUI01Test {
 
 	@AfterClass
 	public void tearDown() throws InterruptedException {
-		Thread.sleep(5000);
-		// driver.quit();
+		Thread.sleep(3000);
+		driver.quit();
 	}
 
 	@Test(priority = 1)
@@ -99,7 +99,7 @@ public class AddUserModelerUI01Test {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | nitesh@rxw.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("admin@random.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@random.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123

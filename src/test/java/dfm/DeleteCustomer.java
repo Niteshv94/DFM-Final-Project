@@ -41,19 +41,19 @@ public class DeleteCustomer extends BaseClass {
 	JavascriptExecutor js;
 	FileInputStream fis;
 	
-	ExtentSparkReporter sparkReporter;
+	/*ExtentSparkReporter sparkReporter;
 	ExtentReports reports;
 	ExtentTest extentTest;
-	Reporter report = new Reporter();
+	Reporter report = new Reporter();*/
 
 	
 	@BeforeSuite
 	public void setUpReport() {
 
 		// start reporters
-		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")+"./Reports/Delete/DFM_DeleteCustomer_"+Helper.getCurrentDateTime()+".html"));
+		/*sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")+"./Reports/Delete/DFM_DeleteCustomer_"+Helper.getCurrentDateTime()+".html"));
 		reports = new ExtentReports();
-		reports.attachReporter(sparkReporter);
+		reports.attachReporter(sparkReporter);*/
 
 	}
 
@@ -67,33 +67,32 @@ public class DeleteCustomer extends BaseClass {
 	}
 
 	@AfterClass
-	public void tearDown() {
-		//driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 	}
 	
 	@AfterSuite
 	public void tearDownReoport() {
 
 		// calling flush writes everything to the log file
-		reports.flush();
+		//reports.flush();
 	}
 
 	@Test(priority =0)
 	public void logInToApplication() throws InterruptedException, IOException, Exception {
 
-		Reporter.log("Test Case for Login");
-		extentTest = reports.createTest("Delete Customer", "Login to Application");
-		// log with snapshot
-//		extentTest.pass("Details",
-//				MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		//Reporter.log("Test Case for Login");
+		//extentTest = reports.createTest("Delete Customer", "Login to Application");
+	
 		// test with snapshot
-		extentTest.addScreenCaptureFromPath("screenshot.png");
+		//extentTest.addScreenCaptureFromPath("screenshot.png");
 
 		// log(Status, details)
-		extentTest.log(Status.INFO, "Starting Test Case");
+		//extentTest.log(Status.INFO, "Starting Test Case");
 		// For QA environment
 		driver.get("https://qa.admin.decisionsfirst.com/login");
-		extentTest.pass("Navigates to DFM URL");
+		//extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift
 		// driver.get("https://admin-dfm-dms.apps.oc-prod.decisionsfirst.com");
@@ -105,7 +104,7 @@ public class DeleteCustomer extends BaseClass {
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("dms@123");
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(8000);
-		extentTest.pass("Login Successfull");
+		//extentTest.pass("Login Successfull");
 
 	}
 	@Test (priority =1)
@@ -142,7 +141,7 @@ public class DeleteCustomer extends BaseClass {
 		driver.navigate().refresh();
 		Thread.sleep(5000);
 		driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys(customerName);
-		extentTest.pass("Customer deleted successfully");
+		//extentTest.pass("Customer deleted successfully");
 		
 
 		//Verify the Customer is present or not
@@ -154,7 +153,7 @@ public class DeleteCustomer extends BaseClass {
 			System.out.println("Congratulations, The Customer is deleted from the Account...");
 
 		}
-		extentTest.log(Status.INFO, "Test Completed");
+		//extentTest.log(Status.INFO, "Test Completed");
 
 		workbook.close();
 

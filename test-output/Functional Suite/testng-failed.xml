@@ -1,59 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite thread-count="3" name="Failed suite [Functional Suite]" guice-stage="DEVELOPMENT">
+  <listeners>
+    <listener class-name="com.dfm.utility.Listeners"/>
+  </listeners>
   <test thread-count="3" name="Delete Objects(failed)">
     <classes>
-      <class name="dfm.DeleteObjects">
+      <class name="dfm.DeleteObjectsAndDiagramUsingSearch">
         <methods>
-          <include name="sarchDiagram"/>
-          <include name="tearDownReport"/>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="setUpReport"/>
+          <include name="printListOfElements"/>
         </methods>
-      </class> <!-- dfm.DeleteObjects -->
+      </class> <!-- dfm.DeleteObjectsAndDiagramUsingSearch -->
     </classes>
   </test> <!-- Delete Objects(failed) -->
-  <test thread-count="3" name="Delete Tag(failed)">
-    <classes>
-      <class name="dfm.DeleteTag">
-        <methods>
-          <include name="setUpReport"/>
-          <include name="tearDown"/>
-          <include name="tearDownReport"/>
-          <include name="setUp"/>
-          <include name="validateDeleteTag"/>
-        </methods>
-      </class> <!-- dfm.DeleteTag -->
-    </classes>
-  </test> <!-- Delete Tag(failed) -->
-  <test thread-count="3" name="Delete User(failed)">
-    <classes>
-      <class name="dfm.DeleteUserModelerUI">
-        <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="navigateUserSection"/>
-          <include name="setUpReport"/>
-          <include name="tearDownReoport"/>
-          <include name="loginAction"/>
-          <include name="deleteUserAndValidate"/>
-        </methods>
-      </class> <!-- dfm.DeleteUserModelerUI -->
-    </classes>
-  </test> <!-- Delete User(failed) -->
-  <test thread-count="3" name="Delete Customer(failed)">
-    <classes>
-      <class name="dfm.DeleteCustomer">
-        <methods>
-          <include name="tearDown"/>
-          <include name="setUpSuite"/>
-          <include name="setUpReport"/>
-          <include name="tearDownReoport"/>
-          <include name="setUp"/>
-          <include name="deleteCustomer"/>
-        </methods>
-      </class> <!-- dfm.DeleteCustomer -->
-    </classes>
-  </test> <!-- Delete Customer(failed) -->
 </suite> <!-- Failed suite [Functional Suite] -->

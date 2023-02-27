@@ -24,5 +24,7 @@ public class BaseClass {
 	{
 		ExtentSparkReporter sparkReporter = new ExtentSparkReporter("");
 	}
+	
+	
 
 }

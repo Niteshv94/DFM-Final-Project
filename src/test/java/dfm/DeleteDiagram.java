@@ -38,8 +38,9 @@ public class DeleteDiagram {
 	}
 
 	@AfterClass
-	public void tearDown() {
-		// driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 		// workbook.close();
 	}
 
@@ -73,7 +74,7 @@ public class DeleteDiagram {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@random.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | css=.ng-untouched | defaultUserPass@123
@@ -121,8 +122,21 @@ public class DeleteDiagram {
 
 	public static void deleteSearchDiagram() throws InterruptedException, IOException {
 
+		String deleteButton ="/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div/dfm-home-container/nb-card/div/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/button";
 		
-		driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/button")).click();
+		//driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div[1]/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[1]/dfm-home-container/nb-card/div/div[2]/dfm-infinite-search-list/nb-list/nb-list-item/dfm-preview-container/div/dfm-search-list-item/div/div/button")).click();
+		
+		//driver.findElement(By.xpath("/html/body/dfm-root/dfm-main-container/nb-layout/div/div/div/div/div/nb-layout-column/dfm-tabs-container/div/div/div[2]/dfm-search-container/nb-card/div/div[1]/dfm-search-filter/div/div/div[2]/wj-tree-view/div/div[1]/input")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath(deleteButton)).click();
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//wj-popup[@class='wj-control wj-content wj-popup delete-confirmation-popup wj-state-focus wj-state-focused']//button[@class='btn btn-info popup-btn p-1'][normalize-space()='Delete']")).click();
+		{
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+			String Message =	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//nb-toast[@class='ng-tns-c194-0 ng-trigger ng-trigger-fadeIn status-success destroy-by-click has-icon custom-icon ng-star-inserted']"))).getText();
+			System.out.println("Message after deleting the Objects is : " + Message);
+		}
+		
 		
 //		String delete_message = driver.findElement(By.xpath("//span[@class='title subtitle']")).getText();
 //		System.out.println("Message after deletion of diagram is : " + delete_message);

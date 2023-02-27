@@ -36,8 +36,9 @@ public class AddProjectTest {
 	}
 
 	@AfterClass
-	public void tearDown() {
-		// driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 	}
 
 	@Test(priority = 1)

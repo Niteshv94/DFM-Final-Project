@@ -38,22 +38,19 @@ public class DeleteTag {
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	ExtentSparkReporter sparkReporter;
+	/*ExtentSparkReporter sparkReporter;
 	public static ExtentReports reports;
 	static ExtentTest extentTest;
 
-	Reporter report = new Reporter();
+	Reporter report = new Reporter();*/
 
 	@BeforeSuite(alwaysRun = true)
 	public void setUpReport() {
 
-		// start reporters
-		// sparkReporter = new
-		// ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
-		sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
+		/*sparkReporter = new ExtentSparkReporter(new File(System.getProperty("user.dir")
 				+ "./Reports/Delete/DFM_DeleteTag_" + Helper.getCurrentDateTime() + ".html"));
 		reports = new ExtentReports();
-		reports.attachReporter(sparkReporter);
+		reports.attachReporter(sparkReporter);*/
 
 	}
 
@@ -61,7 +58,7 @@ public class DeleteTag {
 	public void tearDownReport() {
 
 		// calling flush writes everything to the log file
-		reports.flush();
+		//reports.flush();
 	}
 
 	@BeforeClass
@@ -74,8 +71,9 @@ public class DeleteTag {
 	}
 
 	@AfterClass
-	public void tearDown() {
-		// driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 
 	}
 
@@ -104,21 +102,19 @@ public class DeleteTag {
 
 	public static void login() throws InterruptedException, IOException {
 		// reports.createTest("Login");
-		Reporter.log("Test Case for Delete Tag");
-		extentTest = reports.createTest("Login", "Login to DFM Application");
-		// log with snapshot
-//				extentTest.pass("Details",
-//						MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+		//Reporter.log("Test Case for Delete Tag");
+		//extentTest = reports.createTest("Login", "Login to DFM Application");
+		
 		// test with snapshot
-		extentTest.addScreenCaptureFromPath("screenshot.png");
+		//extentTest.addScreenCaptureFromPath("screenshot.png");
 
 		// log(Status, details)
-		extentTest.log(Status.INFO, "Starting Test Case");
+		//extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For A Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
-		extentTest.pass("Navigates to DFM URL");
+		//extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift Environment
 		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
@@ -130,12 +126,12 @@ public class DeleteTag {
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | test_claim2@gmail.com
 		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@random.com");
-		extentTest.pass("Entered Email Id");
+		//extentTest.pass("Entered Email Id");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | css=.ng-untouched | defaultUserPass@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
-		extentTest.pass("Entered Password");
+		//extentTest.pass("Entered Password");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
 		Thread.sleep(12000);
@@ -145,7 +141,7 @@ public class DeleteTag {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sidebar-control-button")));
 		}
 
-		extentTest.pass("Login Successfull");
+		//extentTest.pass("Login Successfull");
 
 		/*
 		 * WebElement close_option_tab =
@@ -165,7 +161,7 @@ public class DeleteTag {
 		Thread.sleep(3000);
 		// 10 | click | xpath=//span[contains(.,'Tag Explorer')] |
 		driver.findElement(By.xpath("//span[@class='item-text'][normalize-space()='Tag Explorer']")).click();
-		extentTest.pass("Clicked on Tag Explorer from side panel");
+		//extentTest.pass("Clicked on Tag Explorer from side panel");
 		Thread.sleep(5000);
 
 	}
@@ -186,7 +182,7 @@ public class DeleteTag {
 
 		// 11 | type | id=search-ip | dummy
 		driver.findElement(By.id("search-ip")).sendKeys(tagName);
-		extentTest.pass("Entered Tag Name into search box");
+		//extentTest.pass("Entered Tag Name into search box");
 	}
 
 	public static void deleteSearchTag() throws InterruptedException, IOException {
@@ -218,8 +214,8 @@ public class DeleteTag {
 		}
 
 		// driver.findElement(By.xpath("//div[contains(text(),'Delete Tag')]")).click();
-		extentTest.pass("Clicked Delete Tag button");
-		extentTest.log(Status.INFO, "Test Completed");
+		//extentTest.pass("Clicked Delete Tag button");
+		//extentTest.log(Status.INFO, "Test Completed");
 		workbook.close();
 
 	}

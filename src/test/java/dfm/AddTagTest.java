@@ -38,22 +38,19 @@ public class AddTagTest {
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	ExtentSparkReporter sparkReporter;
+	/*ExtentSparkReporter sparkReporter;
 	public static ExtentReports reports;
 	ExtentTest extentTest;
 
-	Reporter report = new Reporter();
+	Reporter report = new Reporter();*/
 
 	@BeforeSuite(alwaysRun = true)
 	public void setUpReport() {
 
-		// start reporters
-		// sparkReporter = new
-		// ExtentSparkReporter("./Reports/login_DD-MM-YYYY_HH-MM-SS.html");
-		sparkReporter = new ExtentSparkReporter(new File(
+		/*sparkReporter = new ExtentSparkReporter(new File(
 				System.getProperty("user.dir") + "./Reports/Tags/DFM_AddTag_" + Helper.getCurrentDateTime() + ".html"));
 		reports = new ExtentReports();
-		reports.attachReporter(sparkReporter);
+		reports.attachReporter(sparkReporter);*/
 
 	}
 
@@ -67,29 +64,27 @@ public class AddTagTest {
 	}
 
 	@AfterClass
-	public void tearDown() {
-		// driver.quit();
+	public void tearDown() throws InterruptedException {
+		Thread.sleep(3000);
+		driver.quit();
 	}
 
 	@Test(priority = 1)
 	public void loginToApplication() throws InterruptedException, IOException {
 
-		// reports.createTest("Login");
-		Reporter.log("Test Case for Add Tag");
-		extentTest = reports.createTest("Login", "Login to DFM Application");
-		// log with snapshot
-//				extentTest.pass("Details",
-//						MediaEntityBuilder.createScreenCaptureFromPath("./Screenshots/screenshot.png").build());
+	
+		//Reporter.log("Test Case for Add Tag");
+		//extentTest = reports.createTest("Login", "Login to DFM Application");
 		// test with snapshot
-		extentTest.addScreenCaptureFromPath("screenshot.png");
+		//extentTest.addScreenCaptureFromPath("screenshot.png");
 
 		// log(Status, details)
-		extentTest.log(Status.INFO, "Starting Test Case");
+		//extentTest.log(Status.INFO, "Starting Test Case");
 
 		// For A Environment
 		// 1 | open | https://qa.modeler2.decisionsfirst.com/login |
 		driver.get("https://qa.modeler2.decisionsfirst.com/login");
-		extentTest.pass("Navigates to DFM URL");
+		//extentTest.pass("Navigates to DFM URL");
 
 		// For Openshift Environment
 		// driver.get("https://modeler2-dfm-dms.apps.oc-prod.decisionsfirst.com/login");
@@ -101,15 +96,15 @@ public class AddTagTest {
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | css=.ng-valid | test_claim2@gmail.com
 		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@random.com");
-		extentTest.pass("Entered Email");
+		//extentTest.pass("Entered Email");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | css=.ng-untouched | defaultUserPass@123
 		driver.findElement(By.xpath("//input[@type=\'password\']")).sendKeys("defaultUserPass@123");
-		extentTest.pass("Entered Password");
+		//extentTest.pass("Entered Password");
 		// 7 | click | css=.btn |
 		driver.findElement(By.cssSelector(".btn")).click();
-		extentTest.pass("Login Successfull");
+		//extentTest.pass("Login Successfull");
 		Thread.sleep(15000);
 		// 8 | waitForElementVisible | css=.sidebar-control-button | 30000
 		{
@@ -139,7 +134,7 @@ public class AddTagTest {
 		Thread.sleep(3000);
 		// 10 | click | xpath=//span[contains(.,'Tag Explorer')] |
 		driver.findElement(By.xpath("//span[@class='item-text'][normalize-space()='Tag Explorer']")).click();
-		extentTest.pass("Clicked on Tag Explorer");
+		//extentTest.pass("Clicked on Tag Explorer");
 		Thread.sleep(5000);
 
 		// 10 | click | id=search-ip |
@@ -159,7 +154,7 @@ public class AddTagTest {
 
 		// 11 | type | id=search-ip | dummy
 		driver.findElement(By.id("search-ip")).sendKeys(searchProject);
-		extentTest.pass("Project Searched");
+		//extentTest.pass("Project Searched");
 
 		// identify element
 		WebElement l = driver.findElement(By.xpath(projectName));
@@ -170,20 +165,20 @@ public class AddTagTest {
 
 		// 13 | click | css=.rich-text-editor-focus p |
 		driver.findElement(By.xpath("//div[contains(text(),'Add Tag')]")).click();
-		extentTest.pass("Clicked on Add Tag button from side window");
+		//extentTest.pass("Clicked on Add Tag button from side window");
 
 		driver.findElement(By.xpath("//core-edit-multiple-lines-control[@id='name']//div[@class='ql-editor ql-blank']"))
 				.sendKeys(tagName);
-		extentTest.pass("Entered Tag Name");
+		//extentTest.pass("Entered Tag Name");
 
 		driver.findElement(
 				By.xpath("//core-edit-multiple-lines-control[@id='description']//div[@class='ql-editor ql-blank']"))
 				.sendKeys(tagDescription);
-		extentTest.pass("Entered Tag Description");
+		//extentTest.pass("Entered Tag Description");
 
 		// 17 | click | css=.btn-block |
 		driver.findElement(By.xpath("//button[contains(.,'Add Tag')]")).click();
-		extentTest.pass("Clicked on Add Tag button");
+		//extentTest.pass("Clicked on Add Tag button");
 		Thread.sleep(3000);
 	}
 
@@ -205,8 +200,8 @@ public class AddTagTest {
 		// Verify the Customer is present or not
 		driver.findElement(By.id("search-ip")).clear();
 		driver.findElement(By.id("search-ip")).sendKeys(verifyTag);
-		extentTest.pass("Entered Added Tag Name");
-		extentTest.log(Status.INFO, "Test Completed");
+		//extentTest.pass("Entered Added Tag Name");
+		//extentTest.log(Status.INFO, "Test Completed");
 
 		System.out.println("<<<<<Tag added and validated successfully>>>>>");
 		workbook.close();
@@ -216,6 +211,6 @@ public class AddTagTest {
 	public void tearDownReport() {
 
 		// calling flush writes everything to the log file
-		reports.flush();
+		//reports.flush();
 	}
 }
