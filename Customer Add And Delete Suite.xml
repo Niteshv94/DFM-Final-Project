@@ -37,9 +37,8 @@
 			<class name="dfm.AddDiagram" />
 		</classes>
 	</test>
-	
-	
-		<test name="Delete Diagram From Canvas">
+
+	<test name="Delete Diagram From Canvas">
 		<classes>
 			<class name="dfm.DeleteObjects" />
 		</classes>
@@ -62,6 +61,12 @@
 		</classes>
 	</test>
 
+	<test name="Delete Branch">
+		<classes>
+			<class name="dfm.DeleteBranch" />
+		</classes>
+	</test>
+
 	<test name="Delete User">
 		<classes>
 			<class name="dfm.DeleteUserModelerUI" />
@@ -73,5 +78,5 @@
 			<class name="dfm.DeleteCustomer" />
 		</classes>
 	</test>
-	
+
 </suite> 

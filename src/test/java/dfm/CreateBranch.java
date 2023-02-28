@@ -37,7 +37,7 @@ public class CreateBranch {
   }
   @AfterClass
   public void tearDown() {
-   // driver.quit();
+   driver.quit();
   }
   @Test(priority = 1)
 	public static void loginAction() throws InterruptedException, IOException {

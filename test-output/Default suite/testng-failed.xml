@@ -3,16 +3,17 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dfm.AddCustomer">
+      <class name="dfm.AddUserModelerUI01Test">
         <methods>
-          <include name="tearDownReport"/>
-          <include name="setUp"/>
-          <include name="validateCustomer"/>
+          <include name="loginAction"/>
           <include name="setUpReport"/>
-          <include name="AddCustomerModeler"/>
           <include name="tearDown"/>
+          <include name="tearDownReport"/>
+          <include name="validateAddedUser"/>
+          <include name="addUser"/>
+          <include name="setUp"/>
         </methods>
-      </class> <!-- dfm.AddCustomer -->
+      </class> <!-- dfm.AddUserModelerUI01Test -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

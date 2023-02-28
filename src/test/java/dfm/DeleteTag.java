@@ -204,11 +204,11 @@ public class DeleteTag {
 		for (WebElement deleteTag : delete_option) {
 			if (((WebElement) deleteTag).isDisplayed()) {
 				((WebElement) deleteTag).click();
-				System.out.println("Delete Tag is not available");
+				System.out.println("Deleted Tag is not available");
 				break;
 
 			} else {
-				System.out.println("Delete Tag is available");
+				System.out.println("Deleted Tag is available");
 
 			}
 		}

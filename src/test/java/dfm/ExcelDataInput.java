@@ -97,6 +97,7 @@ public class ExcelDataInput {
 		Thread.sleep(3000);
 
 		System.out.println("Data passed from excel");
+		workbook.close();
 
 	}
 

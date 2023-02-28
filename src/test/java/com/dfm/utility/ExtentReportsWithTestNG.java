@@ -19,7 +19,7 @@ public class ExtentReportsWithTestNG {
 	
 	public static ExtentReports extentReportGenertaor() {
 		
-	String path =	System.getProperty("user.dir")+"\\reports\\index.html";
+	String path =	System.getProperty("user.dir")+"./Reports/Suite Report/Final_Report.html";
 	ExtentSparkReporter reporter = new ExtentSparkReporter(path);
 	reporter.config().setReportName("Creation of Customer till Diagram");
 	reporter.config().setDocumentTitle("DFM Test Reports");

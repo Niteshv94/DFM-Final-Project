@@ -4,15 +4,28 @@
   <listeners>
     <listener class-name="com.dfm.utility.Listeners"/>
   </listeners>
-  <test thread-count="3" name="Delete Objects(failed)">
+  <test thread-count="3" name="Add Tag(failed)">
     <classes>
-      <class name="dfm.DeleteObjectsAndDiagramUsingSearch">
+      <class name="dfm.AddTagTest">
+        <methods>
+          <include name="setUpReport"/>
+          <include name="setUp"/>
+          <include name="tearDownReport"/>
+          <include name="addTag"/>
+          <include name="tearDown"/>
+        </methods>
+      </class> <!-- dfm.AddTagTest -->
+    </classes>
+  </test> <!-- Add Tag(failed) -->
+  <test thread-count="3" name="Add Diagram(failed)">
+    <classes>
+      <class name="dfm.AddDiagram">
         <methods>
           <include name="setUp"/>
+          <include name="addDiagramAndValidate"/>
           <include name="tearDown"/>
-          <include name="printListOfElements"/>
         </methods>
-      </class> <!-- dfm.DeleteObjectsAndDiagramUsingSearch -->
+      </class> <!-- dfm.AddDiagram -->
     </classes>
-  </test> <!-- Delete Objects(failed) -->
+  </test> <!-- Add Diagram(failed) -->
 </suite> <!-- Failed suite [Functional Suite] -->

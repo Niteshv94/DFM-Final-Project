@@ -40,7 +40,7 @@ public class DeleteBranch {
 
 	@AfterClass
 	public void tearDown() {
-		// driver.quit();
+		driver.quit();
 	}
 
 	@Test(priority = 1)
@@ -60,7 +60,7 @@ public class DeleteBranch {
 		// 3 | click | css=.form-group:nth-child(2) > .form-control |
 		driver.findElement(By.cssSelector(".form-group:nth-child(2) > .form-control")).click();
 		// 4 | type | xpath=//input[@type='text'] | test_claim2@gmail.com
-		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("nitesh@rxw.com");
+		driver.findElement(By.xpath("//input[@type=\'text\']")).sendKeys("Admin@random.com");
 		// 5 | click | css=.ng-untouched |
 		driver.findElement(By.cssSelector(".ng-untouched")).click();
 		// 6 | type | xpath=//input[@type='password'] | defaultUserPass@123
@@ -112,6 +112,7 @@ public class DeleteBranch {
 				"//wj-popup[@class='wj-control wj-content wj-popup delete-confirmation-popup wj-state-focus wj-state-focused']//button[@class='btn btn-info popup-btn p-1'][normalize-space()='Delete']"))
 				.click();
 		Thread.sleep(5000);
+		workbook.close();
 	}
 
 	@Test(priority = 3)
